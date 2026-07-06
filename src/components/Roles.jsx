@@ -1,7 +1,19 @@
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { roles } from "../data/content.js";
+import { people } from "../data/people.js";
+import { AccountingIcon, CodeIcon, SalesIcon, AdminIcon } from "./icons.jsx";
+import Reveal from "./motion/Reveal.jsx";
+
+// Maps each role title to an icon, in the same order roles are authored
+// in content.js. Kept here (not in content.js) since it's presentational,
+// not copy.
+const roleIcons = [AccountingIcon, CodeIcon, SalesIcon, AdminIcon];
 
 // SECTION 4 — Roles we place
 export default function Roles() {
+  const [openIndex, setOpenIndex] = useState(null);
+
   return (
     <section className="section" id="roles">
       <div className="container">
@@ -14,18 +26,53 @@ export default function Roles() {
             These are the roles we staff every day inside our own operations — so
             we know exactly what "great" looks like.
           </p>
+          <Reveal delay={0.1}>
+            <div className="photo-stack">
+              {people.map((photo) => (
+                <img key={photo} src={photo} alt="" className="photo-stack-item" />
+              ))}
+              <span className="photo-stack-caption">The caliber of talent you'll meet</span>
+            </div>
+          </Reveal>
         </div>
 
         <div className="role-grid">
-          {roles.map((role) => (
-            <div className="role-card" key={role.title}>
-              <h3>{role.title}</h3>
-              <p>{role.desc}</p>
-              <div className="best-for">
-                <strong>Best for:</strong> {role.bestFor}
-              </div>
-            </div>
-          ))}
+          {roles.map((role, i) => {
+            const Icon = roleIcons[i % roleIcons.length];
+            const isOpen = openIndex === i;
+            return (
+              <Reveal key={role.title} delay={i * 0.05}>
+                <motion.div
+                  layout
+                  className="role-card"
+                  onMouseEnter={() => setOpenIndex(i)}
+                  onMouseLeave={() => setOpenIndex((cur) => (cur === i ? null : cur))}
+                  onClick={() => setOpenIndex((cur) => (cur === i ? null : i))}
+                >
+                  <div className="role-card-icon">
+                    <Icon />
+                  </div>
+                  <h3>{role.title}</h3>
+                  <p>{role.desc}</p>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        className="best-for"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <div className="best-for-inner">
+                          <strong>Best for:</strong> {role.bestFor}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              </Reveal>
+            );
+          })}
         </div>
 
         <p className="roles-note">

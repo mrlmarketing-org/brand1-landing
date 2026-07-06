@@ -8,14 +8,14 @@
 // -- SETTING 1: your brand name ------------------------------
 // Replace this with your real business name. It appears in the
 // navbar, headings, and footer automatically.
-export const BRAND = "BRAND 1";
+export const BRAND = "StaffingFixed";
 
 // -- SETTING 2: your booking link ----------------------------
 // Every "Book a call" button uses this. Paste your scheduling
 // link here (e.g. your Calendly URL). While it's left empty,
 // the buttons instead scroll down to the contact form at the
 // bottom of the page, so nothing breaks in the meantime.
-export const BOOKING_URL = ""; // e.g. "https://calendly.com/yourname/15min"
+export const BOOKING_URL = "https://calendly.com/iruoma-jennifer-onyia/discovery-call"; // e.g. "https://calendly.com/yourname/15min"
 
 // -- SECTION 4: roles we place -------------------------------
 export const roles = [
@@ -77,20 +77,24 @@ export const pricing = [
   { role: "Development & Automation", fee: "$4,800" },
 ];
 
+// -- Countries our talent network is based in (see WhyUs pillar 2,
+// the FAQ, and the hero map) -----------------------------------
+export const locations = ["Philippines", "India", "Nigeria"];
+
 // -- SECTION 8: why us (three pillars) -----------------------
 export const pillars = [
   {
     title: "We run our own companies on this model",
-    body: "was built by a team that has hired, tested, and managed remote professionals to build real, profitable businesses. We're not guessing what a great remote hire looks like — we depend on ours every day.",
+    body: "was built by operators who've hired, tested, and managed remote professionals to run real, profitable businesses. We depend on ours every day — we're not guessing.",
     leadWithBrand: true,
   },
   {
     title: "A vetted network, not an open marketplace",
-    body: "Our candidates come from a private talent network we've developed across our operations — professionals in the Philippines, India, and Nigeria who've already proven themselves on real work. You're hiring from a bench, not fishing in a sea of unknown profiles.",
+    body: "Our candidates come from a private network across our own operations in the Philippines, India, and Nigeria — people who've already proven themselves on real work. You're hiring from a bench, not a stranger pool.",
   },
   {
     title: "We screen for what actually matters",
-    body: "Skills tests. Structured interviews. English and communication screening. And we calibrate every search to your definition of great — not a generic one — before a single candidate reaches you.",
+    body: "Skills tests. Structured interviews. English and communication screening. We calibrate every search to your definition of great before a single candidate reaches you.",
   },
 ];
 

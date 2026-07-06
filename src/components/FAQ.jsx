@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { faqs } from "../data/content.js";
 import { Chevron } from "./icons.jsx";
+import Reveal from "./motion/Reveal.jsx";
 
 // SECTION 9 — FAQ. Click a question to expand its answer (accordion).
 export default function FAQ() {
@@ -20,28 +22,40 @@ export default function FAQ() {
           {faqs.map((item, i) => {
             const isOpen = openIndex === i;
             return (
-              <div className="faq-item" key={item.q}>
-                <button
-                  className="faq-q"
-                  aria-expanded={isOpen}
-                  onClick={() => toggle(i)}
-                >
-                  {item.q}
-                  <Chevron />
-                </button>
-                {isOpen && (
-                  <div className="faq-a">
-                    {item.a}
-                    {/* These answers were drafted from the document's notes
-                        and should be confirmed before going live. */}
-                    {item.draft && (
-                      <div>
-                        <span className="draft-tag">Draft — confirm before publishing</span>
-                      </div>
+              <Reveal key={item.q} delay={Math.min(i * 0.03, 0.2)}>
+                <div className="faq-item">
+                  <button
+                    className="faq-q"
+                    aria-expanded={isOpen}
+                    onClick={() => toggle(i)}
+                  >
+                    {item.q}
+                    <Chevron />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ overflow: "hidden" }}
+                      >
+                        <div className="faq-a">
+                          {item.a}
+                          {/* These answers were drafted from the document's notes
+                              and should be confirmed before going live. */}
+                          {item.draft && (
+                            <div>
+                              <span className="draft-tag">Draft — confirm before publishing</span>
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
                     )}
-                  </div>
-                )}
-              </div>
+                  </AnimatePresence>
+                </div>
+              </Reveal>
             );
           })}
         </div>

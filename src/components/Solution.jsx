@@ -1,4 +1,6 @@
 import { BRAND } from "../data/content.js";
+import Reveal from "./motion/Reveal.jsx";
+import AgencyComparison from "./AgencyComparison.jsx";
 
 // SECTION 3 — The solution
 export default function Solution() {
@@ -13,23 +15,21 @@ export default function Solution() {
 
         <div className="prose">
           <p>
-            {BRAND} sources candidates from a private network we've built and
-            tested across our own companies. We run the skills tests, the
-            interviews, and the English and communication screening. We hand you
-            a shortlist of people who've already cleared the bar.
+            {BRAND} sources from a private network we've built and tested across
+            our own companies — skills tests, interviews, English and
+            communication screening included. You get a shortlist of people
+            who've already cleared the bar.
           </p>
           <p>
-            You pick who fits. From that point on, they're yours: you hire them
-            directly, you pay them directly, you manage them like any other
-            member of your team. We charge one flat placement fee for the work of
-            finding and vetting them — and that's the last you'll hear from our
-            billing.
-          </p>
-          <p>
-            No monthly subscription. No cut of their wage. No agency sitting
-            between you and your own employee.
+            You pick who fits. From there, they're yours: hired directly, paid
+            directly, managed like any other member of your team. One flat
+            placement fee, and that's the last you'll hear from our billing.
           </p>
         </div>
+
+        <Reveal>
+          <AgencyComparison />
+        </Reveal>
 
         <div className="callout">
           <h4>What makes this different</h4>

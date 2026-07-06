@@ -3,12 +3,10 @@ import { roles } from "../data/content.js";
 import BookButton from "./BookButton.jsx";
 
 // ============================================================
-// To make this form email you, sign up at https://formspree.io
-// (free), create a form, and paste the URL it gives you here.
-// Until then the form still works for previewing.
+// Submissions post to /api/contact, handled by server/index.js,
+// which emails CONTACT_TO_EMAIL via Resend. Set RESEND_API_KEY and
+// CONTACT_TO_EMAIL in .env (see .env.example) to make it live.
 // ============================================================
-const FORM_ENDPOINT = ""; // e.g. "https://formspree.io/f/abcdwxyz"
-
 const emptyForm = { name: "", email: "", role: "", details: "" };
 
 // SECTION 10 — Final CTA. The id="book" here is where every
@@ -24,15 +22,10 @@ export default function FinalCTA() {
     e.preventDefault();
     setStatus("sending");
 
-    if (!FORM_ENDPOINT) {
-      console.log("Role details (no endpoint set yet):", form);
-      setStatus("success");
-      return;
-    }
     try {
-      const res = await fetch(FORM_ENDPOINT, {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { Accept: "application/json", "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
       if (res.ok) {

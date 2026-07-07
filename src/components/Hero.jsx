@@ -66,9 +66,11 @@ export default function Hero() {
           ))}
         </div>
 
-        <Reveal delay={0.1}>
-          <HiringFlowAnimation />
-        </Reveal>
+        {/* Not Reveal-wrapped: its card resizes every couple of seconds as
+            its internal demo cycles through stages, which fought with
+            whileInView's viewport re-checks and made it look like it was
+            constantly popping/resizing. */}
+        <HiringFlowAnimation />
       </div>
     </header>
   );

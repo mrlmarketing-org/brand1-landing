@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { animate, useInView, useReducedMotion } from "framer-motion";
 
-// Animates a number from 0 to `value` once it scrolls into view.
+// Animates a number from 0 to `value` each time it scrolls into view
+// (and re-counts from 0 again on the next pass — not just once).
 // Formats with commas and optional prefix/suffix, e.g. prefix="$" suffix="+".
 export default function CountUp({ value, prefix = "", suffix = "", duration = 1.4 }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const inView = useInView(ref, { once: false, amount: 0.6 });
   const reduceMotion = useReducedMotion();
   const [display, setDisplay] = useState(reduceMotion ? value : 0);
 

@@ -310,13 +310,10 @@ h2.section-title {
    together; the remaining two each get their own full-width row and
    animate in afterward (see Hero.jsx's Reveal delays/trust-row-solo). */
 .trust-strip {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   max-width: 420px;
-}
-.trust-row-solo {
-  grid-column: 1 / -1;
 }
 .trust-item {
   display: flex;
@@ -1581,8 +1578,7 @@ h2.section-title {
     margin-top: 48px;
   }
   .trust-strip {
-    grid-template-columns: 1fr;
-    justify-items: center;
+    align-items: center;
     text-align: center;
     margin: 0 auto;
   }

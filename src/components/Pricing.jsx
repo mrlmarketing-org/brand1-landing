@@ -27,7 +27,7 @@ export default function Pricing() {
               key={row.role}
               initial={reduceMotion ? false : { opacity: 0, x: -24 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.6 }}
+              viewport={{ once: false, amount: 0.6 }}
               transition={{ duration: 0.45, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
             >
               <span className="role-name">{row.role}</span>
@@ -44,7 +44,7 @@ export default function Pricing() {
         </p>
 
         <div className="pricing-cta">
-          <BookButton label="Book a call to scope your role" />
+          <BookButton label="Book a call and find great talent" />
         </div>
       </div>
     </section>

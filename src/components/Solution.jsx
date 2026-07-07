@@ -10,7 +10,7 @@ export default function Solution() {
       <div className="container">
         <div className="section-head">
           <h2 className="section-title">
-            We find your person. You keep everything after that.
+            We find your person. You own the relationship.
           </h2>
         </div>
 
@@ -23,8 +23,8 @@ export default function Solution() {
           </p>
           <p>
             You pick who fits. From there, they're yours: hired directly, paid
-            directly, managed like any other member of your team. One flat
-            placement fee, and that's the last you'll hear from our billing.
+            directly, managed like any other member of your team. You pay them
+            an agreed-upon rate, and you pay us once for finding them — that's it.
           </p>
         </div>
 

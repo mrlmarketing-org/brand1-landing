@@ -60,7 +60,7 @@ function CostCard({ value, label, color, photo, alt, delay }) {
               style={{ background: color }}
               initial={reduceMotion ? false : { width: 0 }}
               whileInView={{ width: `${percent}%` }}
-              viewport={{ once: true, amount: 0.6 }}
+              viewport={{ once: false, amount: 0.6 }}
               transition={{ duration: 0.9, delay: delay + 0.1, ease: [0.22, 1, 0.36, 1] }}
             />
           </div>

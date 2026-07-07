@@ -25,7 +25,7 @@ export default function HowItWorks() {
         <div className="section-head">
           <span className="eyebrow">How it works</span>
           <h2 className="section-title">
-            From "I need someone" to "they're hired" in days, not months.
+            From "I need someone" to "I've got someone!" in days, not months.
           </h2>
         </div>
 
@@ -40,7 +40,7 @@ export default function HowItWorks() {
                 y2="0.5"
                 initial={{ pathLength: 0 }}
                 whileInView={{ pathLength: 1 }}
-                viewport={{ once: true, amount: 0.6 }}
+                viewport={{ once: false, amount: 0.6 }}
                 transition={{ duration: 1, ease: "easeInOut" }}
               />
             </svg>

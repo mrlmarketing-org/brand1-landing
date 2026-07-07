@@ -61,48 +61,37 @@ export function PersonIcon({ size = 18 }) {
   );
 }
 
-export function AccountingIcon({ size = 22 }) {
+export function MailIcon({ size = 18 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="4" y="3" width="16" height="18" rx="1.5" />
-      <path d="M8 8h8M8 12h8M8 16h5" />
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M4 6.5l8 6 8-6" />
     </svg>
   );
 }
 
-export function CodeIcon({ size = 22 }) {
+export function PhoneIcon({ size = 18 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="8 6 3 12 8 18" />
-      <polyline points="16 6 21 12 16 18" />
+      <path d="M4 4.5c0 8.5 7 15.5 15.5 15.5l1.2-3.6a1.5 1.5 0 0 0-1-1.9l-3.4-1a1.5 1.5 0 0 0-1.6.5l-1 1.3a11.3 11.3 0 0 1-5-5l1.3-1a1.5 1.5 0 0 0 .5-1.6l-1-3.4a1.5 1.5 0 0 0-1.9-1H4z" />
     </svg>
   );
 }
 
-export function SalesIcon({ size = 22 }) {
+export function LinkedInIcon({ size = 18 }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 17l6-6 4 4 7-8" />
-      <path d="M14 6h6v6" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M6.94 8.5H3.56V20.4h3.38V8.5zM5.25 3.6a1.96 1.96 0 1 0 0 3.92 1.96 1.96 0 0 0 0-3.92zM20.4 20.4h-3.37v-6.24c0-1.49-.03-3.4-2.07-3.4-2.08 0-2.4 1.62-2.4 3.3v6.34H9.2V8.5h3.24v1.63h.05c.45-.86 1.56-1.77 3.21-1.77 3.43 0 4.7 2.26 4.7 5.5v6.54z" />
     </svg>
   );
 }
 
-export function AdminIcon({ size = 22 }) {
+export function InstagramIcon({ size = 18 }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="5" width="18" height="14" rx="1.5" />
-      <path d="M3 9h18M8 13h3" />
-    </svg>
-  );
-}
-
-export function DollarStackIcon({ size = 26 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <ellipse cx="12" cy="18" rx="8" ry="2.5" />
-      <ellipse cx="12" cy="13" rx="8" ry="2.5" />
-      <ellipse cx="12" cy="8" rx="8" ry="2.5" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
     </svg>
   );
 }

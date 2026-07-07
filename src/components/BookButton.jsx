@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { BOOKING_URL } from "../data/content.js";
 import { ArrowRight } from "./icons.jsx";
 
@@ -28,8 +29,8 @@ export default function BookButton({ label = "Book a 15-minute call", large = fa
   }
 
   return (
-    <a href="#book" className={className}>
+    <Link to="/#book" className={className}>
       {label} <ArrowRight />
-    </a>
+    </Link>
   );
 }

@@ -15,7 +15,23 @@ export const BRAND = "StaffingFixed";
 // link here (e.g. your Calendly URL). While it's left empty,
 // the buttons instead scroll down to the contact form at the
 // bottom of the page, so nothing breaks in the meantime.
-export const BOOKING_URL = "https://calendly.com/iruoma-jennifer-onyia/discovery-call"; // e.g. "https://calendly.com/yourname/15min"
+export const BOOKING_URL = "https://calendly.com/iruoma-jennifer-onyia"; // e.g. "https://calendly.com/yourname/15min"
+
+// -- SETTING 3: contact details -------------------------------
+// [CONFIRM] Dummy placeholders — replace with your real address,
+// phone, and email before publishing. Used on the Contact page and
+// in the footer.
+export const CONTACT_EMAIL = "hello@staffingfixed.com";
+export const CONTACT_PHONE = "+1 (555) 010-2938";
+export const CONTACT_PHONE_HREF = "+15550102938";
+export const CONTACT_ADDRESS = "228 Park Ave S, Suite 91024, New York, NY 10003";
+
+// -- SETTING 4: social links ----------------------------------
+// [CONFIRM] Dummy placeholders — point these at your real profiles.
+export const SOCIAL_LINKS = {
+  linkedin: "https://www.linkedin.com/company/staffingfixed",
+  instagram: "https://www.instagram.com/staffingfixed",
+};
 
 // -- SECTION 4: roles we place -------------------------------
 export const roles = [
@@ -78,7 +94,7 @@ export const pricing = [
 ];
 
 // -- Countries our talent network is based in (see WhyUs pillar 2,
-// the FAQ, and the hero map) -----------------------------------
+// the FAQ, and the hero globe) ----------------------------------
 export const locations = ["Philippines", "India", "Nigeria"];
 
 // -- SECTION 8: why us (three pillars) -----------------------

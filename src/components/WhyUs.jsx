@@ -13,7 +13,7 @@ export default function WhyUs() {
     <section className="section section-alt">
       <div className="container">
         <div className="section-head">
-          <span className="eyebrow">Why {BRAND}</span>
+          <span className="eyebrow">Why Us</span>
           <h2 className="section-title">
             We're not a job board. We're operators who hire this way ourselves.
           </h2>
@@ -46,7 +46,7 @@ export default function WhyUs() {
 
         <div className="pillars">
           {pillars.map((pillar, i) => (
-            <Reveal key={pillar.title} delay={i * 0.05}>
+            <Reveal key={pillar.title} delay={i * 0.35} duration={0.7}>
               <div className="pillar">
                 <div className="marker" />
                 <h3>{pillar.title}</h3>

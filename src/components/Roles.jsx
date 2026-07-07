@@ -2,13 +2,21 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { roles } from "../data/content.js";
 import { people } from "../data/people.js";
-import { AccountingIcon, CodeIcon, SalesIcon, AdminIcon } from "./icons.jsx";
 import Reveal from "./motion/Reveal.jsx";
+import bookkeepingPhoto from "../assets/photos/bookkeeping-desk.jpg";
+import developerPhoto from "../assets/photos/developer-code-screen.jpg";
+import salesPhoto from "../assets/photos/sales-outreach-call.jpg";
+import adminPhoto from "../assets/photos/admin-planner-desk.jpg";
 
-// Maps each role title to an icon, in the same order roles are authored
+// Maps each role title to a photo, in the same order roles are authored
 // in content.js. Kept here (not in content.js) since it's presentational,
 // not copy.
-const roleIcons = [AccountingIcon, CodeIcon, SalesIcon, AdminIcon];
+const rolePhotos = [
+  { src: bookkeepingPhoto, alt: "A bookkeeper's desk with a calculator and paperwork" },
+  { src: developerPhoto, alt: "A laptop screen showing program code" },
+  { src: salesPhoto, alt: "A sales rep wearing a headset at his computer" },
+  { src: adminPhoto, alt: "A weekly planner and phone on a desk" },
+];
 
 // SECTION 4 — Roles we place
 export default function Roles() {
@@ -38,7 +46,7 @@ export default function Roles() {
 
         <div className="role-grid">
           {roles.map((role, i) => {
-            const Icon = roleIcons[i % roleIcons.length];
+            const photo = rolePhotos[i % rolePhotos.length];
             const isOpen = openIndex === i;
             return (
               <Reveal key={role.title} delay={i * 0.05}>
@@ -49,26 +57,28 @@ export default function Roles() {
                   onMouseLeave={() => setOpenIndex((cur) => (cur === i ? null : cur))}
                   onClick={() => setOpenIndex((cur) => (cur === i ? null : i))}
                 >
-                  <div className="role-card-icon">
-                    <Icon />
+                  <div className="role-card-photo">
+                    <img src={photo.src} alt={photo.alt} />
                   </div>
-                  <h3>{role.title}</h3>
-                  <p>{role.desc}</p>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        className="best-for"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                      >
-                        <div className="best-for-inner">
-                          <strong>Best for:</strong> {role.bestFor}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  <div className="role-card-body">
+                    <h3>{role.title}</h3>
+                    <p>{role.desc}</p>
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          className="best-for"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                          <div className="best-for-inner">
+                            <strong>Best for:</strong> {role.bestFor}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </motion.div>
               </Reveal>
             );

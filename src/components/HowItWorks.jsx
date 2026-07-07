@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { steps } from "../data/content.js";
 import Reveal from "./motion/Reveal.jsx";
 
+const STEP_MS = 3200;
+
 // SECTION 5 — How it works
 export default function HowItWorks() {
   const [active, setActive] = useState(0);
+
+  // Auto-advances through the steps (1 -> 5 -> back to 1) on a loop,
+  // instead of relying on the visitor to click each node. Clicking a
+  // node still jumps there directly; the loop just continues from it.
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActive((a) => (a + 1) % steps.length);
+    }, STEP_MS);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <section className="section section-alt" id="how">

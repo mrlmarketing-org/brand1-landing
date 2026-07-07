@@ -1,6 +1,7 @@
 import { BRAND } from "../data/content.js";
 import Reveal from "./motion/Reveal.jsx";
-import AgencyComparison from "./AgencyComparison.jsx";
+import teamPhoto from "../assets/photos/team-analytics-2.jpg";
+import calloutPhoto from "../assets/photos/team-analytics-1.jpg";
 
 // SECTION 3 — The solution
 export default function Solution() {
@@ -28,17 +29,20 @@ export default function Solution() {
         </div>
 
         <Reveal>
-          <AgencyComparison />
+          <div className="solution-photo">
+            <img src={teamPhoto} alt="Workers reviewing an upward-trending analytics chart together" />
+          </div>
         </Reveal>
 
-        <div className="callout">
-          <h4>What makes this different</h4>
-          <p>
-            Most staffing agencies mark up your worker's wage 3–5x, forever. We
-            don't touch their wage at all. You pay them what they earn, and you
-            pay us once for finding them. That's it.
-          </p>
-        </div>
+        <Reveal x={-48} y={0}>
+          <div className="callout" style={{ backgroundImage: `url(${calloutPhoto})` }}>
+            <p>
+              Most staffing agencies mark up your worker's wage 3–5x, forever. We
+              don't touch their wage at all. You pay them what they earn, and you
+              pay us once for finding them. That's it.
+            </p>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

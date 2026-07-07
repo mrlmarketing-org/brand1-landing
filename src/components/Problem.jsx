@@ -1,7 +1,9 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Reveal from "./motion/Reveal.jsx";
 import CountUp from "./motion/CountUp.jsx";
-import { DollarStackIcon } from "./icons.jsx";
+import bookkeepingPhoto from "../assets/photos/bookkeeping-desk.jpg";
+import customerServicePhoto from "../assets/photos/customer-service-agent.jpg";
+import developerPhoto from "../assets/photos/developer-code-screen.jpg";
 
 // The paragraph this used to be — "Where do you find people? How do you know
 // they can actually do the job? What if their English isn't what the profile
@@ -14,34 +16,54 @@ const questions = [
 
 const MAX = 120000;
 const costs = [
-  { value: 55000, label: "A US bookkeeper's cost", color: "var(--accent)" },
-  { value: 40000, label: "A customer-service rep, before benefits", color: "var(--accent-blue)" },
-  { value: 120000, label: "A developer's cost", color: "var(--ink)" },
+  {
+    value: 55000,
+    label: "A US bookkeeper's cost",
+    color: "var(--accent)",
+    photo: bookkeepingPhoto,
+    alt: "A bookkeeper's desk with a calculator and paperwork",
+  },
+  {
+    value: 40000,
+    label: "A customer-service rep, before benefits",
+    color: "var(--accent-blue)",
+    photo: customerServicePhoto,
+    alt: "A customer-service agent wearing a headset",
+  },
+  {
+    value: 120000,
+    label: "A developer's cost",
+    color: "var(--muted)",
+    photo: developerPhoto,
+    alt: "A laptop screen showing program code",
+  },
 ];
 
-function CostCard({ value, label, color, delay }) {
+function CostCard({ value, label, color, photo, alt, delay }) {
   const reduceMotion = useReducedMotion();
   const percent = Math.round((value / MAX) * 100);
 
   return (
     <Reveal delay={delay}>
       <div className="cost-card">
-        <div className="cost-card-icon" style={{ background: color }}>
-          <DollarStackIcon size={20} />
+        <div className="cost-card-photo">
+          <img src={photo} alt={alt} />
         </div>
-        <div className="amount">
-          <CountUp value={value} prefix="$" suffix="+" />
-        </div>
-        <div className="label">{label}</div>
-        <div className="cost-bar-track">
-          <motion.div
-            className="cost-bar"
-            style={{ background: color }}
-            initial={reduceMotion ? false : { width: 0 }}
-            whileInView={{ width: `${percent}%` }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.9, delay: delay + 0.1, ease: [0.22, 1, 0.36, 1] }}
-          />
+        <div className="cost-card-body">
+          <div className="amount">
+            <CountUp value={value} prefix="$" suffix="+" />
+          </div>
+          <div className="label">{label}</div>
+          <div className="cost-bar-track">
+            <motion.div
+              className="cost-bar"
+              style={{ background: color }}
+              initial={reduceMotion ? false : { width: 0 }}
+              whileInView={{ width: `${percent}%` }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.9, delay: delay + 0.1, ease: [0.22, 1, 0.36, 1] }}
+            />
+          </div>
         </div>
       </div>
     </Reveal>

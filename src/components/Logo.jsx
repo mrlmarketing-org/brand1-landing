@@ -1,14 +1,10 @@
 import { BRAND } from "../data/content.js";
 
-// Brand mark: a rounded square with an abstract checkmark, plus a
-// two-tone wordmark ("Staffing" in ink, "Fixed" in accent teal). Splits
-// on capitalized word boundaries, so it works whether BRAND in
-// content.js is written as "StaffingFixed" or "Staffing Fixed".
+// Brand mark: the outline of an employee access card, with an upward
+// analytics line zigzagging across the front of it — staffing the
+// right people, and the efficiency/growth that follows. Colors are
+// hardcoded (not theme vars) so this matches /public/favicon.svg exactly.
 export default function Logo({ size = 30 }) {
-  const words = BRAND.match(/[A-Z][a-z]*/g) || [BRAND];
-  const first = words[0];
-  const second = words.slice(1).join("");
-
   return (
     <span className="brand">
       <svg
@@ -18,26 +14,38 @@ export default function Logo({ size = 30 }) {
         viewBox="0 0 32 32"
         fill="none"
       >
-        <defs>
-          <linearGradient id="logoGradient" x1="0" y1="0" x2="32" y2="32">
-            <stop offset="0" stopColor="var(--accent)" />
-            <stop offset="1" stopColor="var(--accent-dark)" />
-          </linearGradient>
-        </defs>
-        <rect width="32" height="32" rx="9" fill="url(#logoGradient)" />
+        <rect width="32" height="32" rx="9" fill="#071b24" />
+
+        {/* Access card outline */}
+        <rect x="5" y="9" width="17" height="16" rx="2.6" stroke="#eef2f0" strokeWidth="1.5" />
+        <rect x="11.5" y="6.6" width="7" height="3" rx="1.2" fill="#071b24" stroke="#eef2f0" strokeWidth="1.4" />
+        <circle cx="10" cy="14.6" r="2" stroke="#eef2f0" strokeWidth="1.3" />
         <path
-          d="M9 17.5l4.5 4.5L23 11"
-          stroke="#fff"
+          d="M7.4 19.4c0-1.9 1.5-2.8 2.6-2.8s2.6 0.9 2.6 2.8"
+          stroke="#eef2f0"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+        />
+        <path d="M15 12.6h5.4M15 15.4h5.4" stroke="#eef2f0" strokeWidth="1.1" strokeLinecap="round" opacity="0.55" />
+        <rect x="15" y="18.6" width="3.4" height="2.6" rx="0.6" stroke="#eef2f0" strokeWidth="1.1" opacity="0.55" />
+
+        {/* Upward analytics line, layered in front of the card */}
+        <polyline
+          points="4.5,25.5 10,19.5 14,22.5 19,14.5 24.5,8"
+          stroke="#d3ed05"
           strokeWidth="2.6"
           strokeLinecap="round"
           strokeLinejoin="round"
-          fill="none"
+        />
+        <path
+          d="M20.6 8h3.9v3.9"
+          stroke="#d3ed05"
+          strokeWidth="2.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
-      <span>
-        {first}
-        {second && <span className="brand-word-fixed">{second}</span>}
-      </span>
+      <span className="brand-word">{BRAND}</span>
     </span>
   );
 }

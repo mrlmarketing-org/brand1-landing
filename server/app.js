@@ -32,7 +32,7 @@ app.post("/api/contact", async (req, res) => {
 
   try {
     const { error } = await getResend().emails.send({
-      from: process.env.RESEND_FROM_EMAIL || "StaffingFixed <onboarding@resend.dev>",
+      from: process.env.RESEND_FROM_EMAIL || "StaffBrigade <onboarding@resend.dev>",
       to: process.env.CONTACT_TO_EMAIL,
       replyTo: email,
       subject: `New role inquiry: ${role}`,

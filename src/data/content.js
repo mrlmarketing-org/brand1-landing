@@ -8,7 +8,7 @@
 // -- SETTING 1: your brand name ------------------------------
 // Replace this with your real business name. It appears in the
 // navbar, headings, and footer automatically.
-export const BRAND = "StaffingFixed";
+export const BRAND = "StaffBrigade";
 
 // -- SETTING 2: your booking link ----------------------------
 // Every "Book a call" button uses this. Paste your scheduling
@@ -21,7 +21,7 @@ export const BOOKING_URL = "https://calendly.com/iruoma-jennifer-onyia"; // e.g.
 // [CONFIRM] Dummy placeholders — replace with your real address,
 // phone, and email before publishing. Used on the Contact page and
 // in the footer.
-export const CONTACT_EMAIL = "hello@staffingfixed.com";
+export const CONTACT_EMAIL = "hello@staffbrigade.com";
 export const CONTACT_PHONE = "+1 (555) 010-2938";
 export const CONTACT_PHONE_HREF = "+15550102938";
 export const CONTACT_ADDRESS = "228 Park Ave S, Suite 91024, New York, NY 10003";
@@ -29,8 +29,8 @@ export const CONTACT_ADDRESS = "228 Park Ave S, Suite 91024, New York, NY 10003"
 // -- SETTING 4: social links ----------------------------------
 // [CONFIRM] Dummy placeholders — point these at your real profiles.
 export const SOCIAL_LINKS = {
-  linkedin: "https://www.linkedin.com/company/staffingfixed",
-  instagram: "https://www.instagram.com/staffingfixed",
+  linkedin: "https://www.linkedin.com/company/staffbrigade",
+  instagram: "https://www.instagram.com/staffbrigade",
 };
 
 // -- SECTION 4: roles we place -------------------------------

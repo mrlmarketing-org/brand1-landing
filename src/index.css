@@ -373,7 +373,7 @@ h2.section-title {
 }
 .hero-globe {
   width: 100%;
-  max-width: 360px;
+  max-width: 480px;
   height: auto;
   filter: drop-shadow(0 0 44px rgba(117, 205, 37, 0.22));
 }
@@ -1562,7 +1562,7 @@ h2.section-title {
     text-align: center;
   }
   .hero-globe {
-    max-width: 320px;
+    max-width: 400px;
   }
   .hero .subhead {
     margin-left: auto;

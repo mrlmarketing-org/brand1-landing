@@ -45,18 +45,18 @@ export const roles = [
     title: "Development & Automation",
     desc: "Developers and automation specialists who build the workflows, integrations, and tools that eliminate manual work.",
     bestFor:
-      "Businesses drowning in repetitive processes that should be automated.",
+      "Businesses with repetitive processes that should be automated.",
   },
   {
     title: "Sales & Outreach",
     desc: "Cold-email outreach, lead-pipeline generation, and sales support that keeps your funnel full.",
     bestFor:
-      "Real estate management, trades, and services businesses that live or die by pipeline.",
+      "Businesses with outbound sales needs who want to expand their pipeline.",
   },
   {
     title: "General Admin & Support",
     desc: "Inbox and calendar management, data entry, customer service, and the day-to-day work that eats your team's hours.",
-    bestFor: "Owners and small teams buried in operational busywork.",
+    bestFor: "Businesses looking to improve their organizational systems.",
   },
 ];
 

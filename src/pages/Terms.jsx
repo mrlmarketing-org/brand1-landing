@@ -2,42 +2,116 @@ import SEO from "../components/SEO.jsx";
 import Reveal from "../components/motion/Reveal.jsx";
 import { BRAND, CONTACT_EMAIL } from "../data/content.js";
 
-// Placeholder legal copy — structurally complete, but have counsel
-// review the actual terms (fee/refund/non-circumvention language
-// especially) before this goes live. Mirrors the draft-tag convention
-// already used for unconfirmed FAQ answers.
+const LAST_UPDATED = "July 9, 2026";
+
+// Sourced from the client-provided Terms of Service draft. Several
+// clauses still carry bracketed placeholders in that source doc
+// (fee trigger/timeline, late-payment interest rate, replacement
+// guarantee window, non-circumvention duration, governing-law state,
+// dispute-resolution method) — those are preserved verbatim below and
+// need a real value before publishing.
+const preamble = `These Terms of Service ("Terms") govern your access to and use of the website located at ${BRAND.toLowerCase()}.com (the "Site") and the placement services offered by ${BRAND} ("${BRAND}," "we," "us," or "our"). By accessing the Site or engaging our services, you ("Client," "you," or "your") agree to be bound by these Terms. If you do not agree, do not use the Site or our services.`;
+
 const sections = [
   {
-    heading: "1. Acceptance of these terms",
-    body: `By booking a call, submitting the contact form, or otherwise engaging ${BRAND} to source and vet a professional, you agree to these terms.`,
+    heading: "1. Description of Services",
+    body: [
+      `${BRAND} identifies, sources, and vets remote professionals ("Candidates") on behalf of businesses seeking to hire ("Placement Services"). We connect you with Candidates whom you may choose to engage directly.`,
+      `Important: ${BRAND} is a placement and sourcing service only. We do not employ, contract with, supervise, or manage Candidates once introduced to you. Any employment, contractor, or working relationship formed between you and a Candidate is solely between you and that Candidate.`,
+    ],
   },
   {
-    heading: "2. What we provide",
-    body: `${BRAND} sources, tests, and vets remote professionals and introduces a shortlist of candidates. You interview and choose who to hire. Once hired, that person works directly for you — they are not our employee or contractor, and we are not a party to your working relationship with them.`,
+    heading: "2. No Employment Relationship",
+    body: `${BRAND} is not the employer, co-employer, or contracting party of any Candidate. We do not:`,
+    list: [
+      "Set Candidate wages, hours, or working conditions",
+      "Process payroll or payments between you and a Candidate",
+      "Supervise, direct, or control the work performed by a Candidate",
+      "Provide benefits, tax withholding, or other employer-related services",
+    ],
+    footer:
+      "You are solely responsible for determining the appropriate legal classification (employee vs. independent contractor), for compliance with applicable labor, tax, immigration, and employment laws, and for any agreements, payments, and working relationship terms you establish directly with a Candidate.",
   },
   {
-    heading: "3. Placement fees",
-    body: "Our fee is a single, flat placement charge based on the role, due once you hire a candidate we introduced. We do not take a percentage of, or markup on, the wage you pay your hire.",
+    heading: "3. Fees and Payment",
+    body: [
+      `Flat Placement Fee. In exchange for Placement Services, Client agrees to pay ${BRAND} a one-time, flat placement fee ("Fee") as quoted at the time of engagement. The Fee is not a recurring charge, subscription, or wage markup.`,
+      "Payment Terms. The Fee is due [upon Candidate acceptance of an offer / within X days of Candidate start date — specify your actual trigger and timeline]. Payment must be made via the method(s) specified by " +
+        BRAND +
+        ".",
+      "No Refunds Except as Stated. Except as set forth in the Replacement Guarantee (Section 4), all Fees are non-refundable once earned.",
+      "Late Payment. Fees not received by the due date may accrue interest at [X%] per month or the maximum rate permitted by law, whichever is lower, and may result in suspension of ongoing services.",
+    ],
   },
   {
-    heading: "4. Money-back guarantee",
-    body: "If a placement isn't the right fit within the first two weeks, we'll refund the placement fee in full, provided you stop engaging the candidate. This guarantee protects against a bad fit — it is not a way to retain the hire for free.",
+    heading: "4. Replacement Guarantee",
+    body: `If a placed Candidate's engagement ends (voluntarily or involuntarily) within [30/60/90] days of their start date, ${BRAND} will source a replacement Candidate at no additional Fee, provided:`,
+    list: [
+      `Client notifies ${BRAND} in writing within [X] days of the engagement ending`,
+      "Client has paid all Fees due",
+      `The reason for the engagement ending is not attributable to Client's failure to provide agreed compensation, reasonable working conditions, or is not due to circumstances outside ${BRAND}'s control (e.g., Client's business closure, role elimination)`,
+    ],
+    footer:
+      "The Replacement Guarantee is the sole and exclusive remedy for a Candidate placement that does not work out.",
   },
   {
-    heading: "5. Non-circumvention",
-    body: "Any candidate we introduce to you is covered by a standard non-circumvention clause: the placement fee is owed if you hire them, whether directly or through another arrangement, within the covered period.",
+    heading: "5. Candidate Vetting Disclaimer",
+    body: `${BRAND} conducts a vetting process that may include resume review, skills assessment, and/or interviews. However:`,
+    list: [
+      "We do not guarantee the accuracy of information Candidates provide (including credentials, work history, or eligibility to work)",
+      "We do not guarantee Candidate job performance, conduct, reliability, or fit",
+      "Client is responsible for conducting its own due diligence, including background checks, reference checks, and verification of work eligibility, as it deems necessary before engaging any Candidate",
+    ],
   },
   {
-    heading: "6. Limitation of liability",
-    body: `${BRAND} is not liable for the actions, performance, or conduct of any candidate after they are hired. Our responsibility ends at sourcing, vetting, and introduction.`,
+    heading: "6. Client Responsibilities",
+    body: "Client agrees to:",
+    list: [
+      "Provide accurate information about the role, compensation, and requirements",
+      "Engage with Candidates in good faith and in compliance with applicable law",
+      "Not misrepresent the nature of the engagement to a Candidate",
+      "Pay Candidates directly and in accordance with whatever agreement Client and Candidate establish",
+    ],
   },
   {
-    heading: "7. Changes to these terms",
-    body: "We may update these terms from time to time. Continued use of our services after a change constitutes acceptance of the updated terms.",
+    heading: "7. Non-Circumvention",
+    body: `For [12] months following an introduction to a Candidate, Client agrees not to engage that Candidate through an alternate channel or arrangement designed to avoid payment of the Fee. Any such engagement will obligate Client to pay the applicable Fee to ${BRAND}.`,
   },
   {
-    heading: "8. Contact",
-    body: `Questions about these terms can be sent to ${CONTACT_EMAIL}.`,
+    heading: "8. Intellectual Property",
+    body: `The Site, including its content, design, and underlying technology, is owned by ${BRAND} and protected by applicable intellectual property laws. You may not copy, reproduce, or create derivative works from the Site without our written permission.`,
+  },
+  {
+    heading: "9. Confidentiality",
+    body: "Each party agrees to keep confidential any non-public business, financial, or candidate information disclosed by the other party in connection with the services, and to use such information solely for purposes of the engagement.",
+  },
+  {
+    heading: "10. Disclaimer of Warranties",
+    body: `The Site and Services are provided "as is" and "as available," without warranties of any kind, whether express or implied, including warranties of merchantability, fitness for a particular purpose, or non-infringement. ${BRAND} does not warrant that any Candidate will meet Client's expectations or that the Services will be uninterrupted or error-free.`,
+  },
+  {
+    heading: "11. Limitation of Liability",
+    body: `To the maximum extent permitted by law, ${BRAND}'s total liability arising out of or related to these Terms or the Services shall not exceed the Fees paid by Client to ${BRAND} in the [12] months preceding the claim. ${BRAND} shall not be liable for any indirect, incidental, consequential, special, or punitive damages, including lost profits, arising from Client's engagement of any Candidate.`,
+  },
+  {
+    heading: "12. Indemnification",
+    body: `Client agrees to indemnify and hold harmless ${BRAND} from any claims, damages, or liabilities arising from Client's engagement, employment, or treatment of a Candidate, including claims related to wage and hour law, discrimination, wrongful termination, or misclassification.`,
+  },
+  {
+    heading: "13. Termination",
+    body: `${BRAND} may suspend or terminate access to the Site or Services at any time for violation of these Terms. Client may discontinue use of the Services at any time; outstanding Fees remain due.`,
+  },
+  {
+    heading: "14. Governing Law and Dispute Resolution",
+    body: "These Terms are governed by the laws of the State of [Illinois / your chosen state], without regard to conflict of law principles. Any dispute arising under these Terms shall be resolved through [binding arbitration in [City, State] / the courts of [County, State] — choose one].",
+  },
+  {
+    heading: "15. Changes to These Terms",
+    body: "We may update these Terms from time to time. Continued use of the Site or Services after changes are posted constitutes acceptance of the revised Terms.",
+  },
+  {
+    heading: "16. Contact",
+    body: `Questions about these Terms can be directed to ${CONTACT_EMAIL}.`,
   },
 ];
 
@@ -51,24 +125,34 @@ export default function Terms() {
           <Reveal>
             <span className="eyebrow eyebrow-shine">Legal</span>
             <h1>Terms &amp; Conditions</h1>
-            <p className="subhead">Last updated: [CONFIRM date before publishing]</p>
+            <p className="subhead">
+              Effective date: {LAST_UPDATED} &middot; Last updated: {LAST_UPDATED}
+            </p>
           </Reveal>
         </div>
       </header>
 
       <section className="section">
         <div className="container">
-          <Reveal>
-            <div className="draft-tag legal-draft-tag">
-              Placeholder legal text — have counsel review before publishing.
-            </div>
-          </Reveal>
-
           <div className="legal-body">
+            <Reveal>
+              <p>{preamble}</p>
+            </Reveal>
+
             {sections.map((s) => (
               <Reveal key={s.heading}>
                 <h3>{s.heading}</h3>
-                <p>{s.body}</p>
+                {(Array.isArray(s.body) ? s.body : [s.body]).map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+                {s.list && (
+                  <ul>
+                    {s.list.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+                {s.footer && <p>{s.footer}</p>}
               </Reveal>
             ))}
           </div>

@@ -77,7 +77,7 @@ export default function Problem() {
       <div className="container">
         <div className="section-head">
           <h2 className="section-title">
-            Hiring locally is slow and expensive. Hiring remote is a minefield.
+            Hiring locally is slow and expensive. Hiring remote is time consuming and difficult.
           </h2>
         </div>
 

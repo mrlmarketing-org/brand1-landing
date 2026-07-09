@@ -1,5 +1,7 @@
 import express from "express";
 import { Resend } from "resend";
+import { BRAND } from "../src/data/content.js";
+import { notificationEmail, confirmationEmail } from "./emailTemplates.js";
 
 // Lazily constructed so it always reads RESEND_API_KEY after env vars
 // are loaded, regardless of which entry point (local server vs. the
@@ -14,10 +16,11 @@ const app = express();
 app.use(express.json());
 
 // The role-details form on the landing page posts here. Sends the
-// submission to CONTACT_TO_EMAIL via Resend, with the visitor's own
-// address set as reply-to so you can just hit "reply". Shared as-is
-// between the local server (server/index.js) and the Vercel function
-// wrapper (api/[...all].js) — same code, two ways to run it.
+// submission to CONTACT_TO_EMAIL via Resend (with the visitor's own
+// address set as reply-to), and a confirmation email back to the
+// visitor. Shared as-is between the local server (server/index.js) and
+// the Vercel function wrapper (api/[...all].js) — same code, two ways
+// to run it.
 app.post("/api/contact", async (req, res) => {
   const { name, email, role, details } = req.body || {};
 
@@ -30,20 +33,18 @@ app.post("/api/contact", async (req, res) => {
     return res.status(500).json({ error: "Email is not configured yet." });
   }
 
+  const from = process.env.RESEND_FROM_EMAIL || `${BRAND} <onboarding@resend.dev>`;
+  const notification = notificationEmail({ name, email, role, details });
+  const confirmation = confirmationEmail({ name, role });
+
   try {
     const { error } = await getResend().emails.send({
-      from: process.env.RESEND_FROM_EMAIL || "StaffBrigade <onboarding@resend.dev>",
+      from,
       to: process.env.CONTACT_TO_EMAIL,
       replyTo: email,
-      subject: `New role inquiry: ${role}`,
-      text: [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Role: ${role}`,
-        "",
-        "Details:",
-        details || "(none provided)",
-      ].join("\n"),
+      subject: notification.subject,
+      html: notification.html,
+      text: notification.text,
     });
 
     if (error) {
@@ -54,7 +55,22 @@ app.post("/api/contact", async (req, res) => {
     res.json({ ok: true });
   } catch (err) {
     console.error("Resend request failed:", err);
-    res.status(500).json({ error: "Failed to send email." });
+    return res.status(500).json({ error: "Failed to send email." });
+  }
+
+  // Best-effort: the visitor's confirmation isn't the part the caller
+  // is waiting on, so a failure here is logged, not surfaced to them.
+  try {
+    const { error } = await getResend().emails.send({
+      from,
+      to: email,
+      subject: confirmation.subject,
+      html: confirmation.html,
+      text: confirmation.text,
+    });
+    if (error) console.error("Resend confirmation email error:", error);
+  } catch (err) {
+    console.error("Resend confirmation email request failed:", err);
   }
 });
 

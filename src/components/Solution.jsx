@@ -38,7 +38,7 @@ export default function Solution() {
           <div className="callout" style={{ backgroundImage: `url(${calloutPhoto})` }}>
             <p>
               Most staffing agencies mark up your worker's wage 3–5x, forever. We
-              don't touch their wage at all. You pay them what they earn, and you
+              don't touch their wage at all. You pay them directly, and you
               pay us once for finding them. That's it.
             </p>
           </div>

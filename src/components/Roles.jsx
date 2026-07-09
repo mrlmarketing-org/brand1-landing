@@ -32,7 +32,7 @@ export default function Roles() {
           </h2>
           <p style={{ color: "var(--muted)", fontSize: 17, marginTop: 12 }}>
             These are the roles we staff every day inside our own operations — so
-            we know exactly what "great" looks like.
+            we know exactly what great looks like.
           </p>
           <Reveal delay={0.1}>
             <div className="photo-stack">
@@ -87,7 +87,7 @@ export default function Roles() {
 
         <p className="roles-note">
           Don't see your role? If it can be done remotely, we can likely place
-          it. Ask on your call.
+          it. Ask on your call!
         </p>
       </div>
     </section>

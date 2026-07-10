@@ -2,15 +2,13 @@ import SEO from "../components/SEO.jsx";
 import Reveal from "../components/motion/Reveal.jsx";
 import { BRAND, CONTACT_EMAIL } from "../data/content.js";
 
+const EFFECTIVE_DATE = "July 10, 2026";
 const LAST_UPDATED = "July 9, 2026";
 
-// Sourced from the client-provided Terms of Service draft. Several
-// clauses still carry bracketed placeholders in that source doc
-// (fee trigger/timeline, late-payment interest rate, replacement
-// guarantee window, non-circumvention duration, governing-law state,
-// dispute-resolution method) — those are preserved verbatim below and
-// need a real value before publishing.
-const preamble = `These Terms of Service ("Terms") govern your access to and use of the website located at ${BRAND.toLowerCase()}.com (the "Site") and the placement services offered by ${BRAND} ("${BRAND}," "we," "us," or "our"). By accessing the Site or engaging our services, you ("Client," "you," or "your") agree to be bound by these Terms. If you do not agree, do not use the Site or our services.`;
+// Sourced from the client-provided, finalized Terms of Service doc
+// (TOS- STAFFBRIGADE.pdf) — all fee/timeline/governing-law terms are
+// now filled in, no bracketed placeholders left.
+const preamble = `These Terms of Service ("Terms") govern your access to, and use of the website located at ${BRAND.toLowerCase()}.com (the "Site") and the placement services offered by ${BRAND} ("${BRAND}," "we," "us," or "our"). By accessing the Site or engaging our services, you ("Client," "you," or "your") agree to be bound by these Terms. If you do not agree, do not use the Site or our services.`;
 
 const sections = [
   {
@@ -36,20 +34,18 @@ const sections = [
     heading: "3. Fees and Payment",
     body: [
       `Flat Placement Fee. In exchange for Placement Services, Client agrees to pay ${BRAND} a one-time, flat placement fee ("Fee") as quoted at the time of engagement. The Fee is not a recurring charge, subscription, or wage markup.`,
-      "Payment Terms. The Fee is due [upon Candidate acceptance of an offer / within X days of Candidate start date — specify your actual trigger and timeline]. Payment must be made via the method(s) specified by " +
-        BRAND +
-        ".",
+      `Payment Terms. The Fee is due within seven (7) days of the Candidate's start date. Payment must be made via the method(s) specified by ${BRAND}.`,
       "No Refunds Except as Stated. Except as set forth in the Replacement Guarantee (Section 4), all Fees are non-refundable once earned.",
-      "Late Payment. Fees not received by the due date may accrue interest at [X%] per month or the maximum rate permitted by law, whichever is lower, and may result in suspension of ongoing services.",
+      "Late Payment. Fees not received by the due date may accrue interest at 1.5% per month or the maximum rate permitted by law, whichever is lower, and may result in suspension of ongoing services.",
     ],
   },
   {
     heading: "4. Replacement Guarantee",
-    body: `If a placed Candidate's engagement ends (voluntarily or involuntarily) within [30/60/90] days of their start date, ${BRAND} will source a replacement Candidate at no additional Fee, provided:`,
+    body: `If a placed Candidate's engagement ends (voluntarily or involuntarily) within sixty (60) days of their start date, ${BRAND} will source a replacement Candidate at no additional Fee, provided:`,
     list: [
-      `Client notifies ${BRAND} in writing within [X] days of the engagement ending`,
+      `Client notifies ${BRAND} in writing within ten (10) days of the engagement ending`,
       "Client has paid all Fees due",
-      `The reason for the engagement ending is not attributable to Client's failure to provide agreed compensation, reasonable working conditions, or is not due to circumstances outside ${BRAND}'s control (e.g., Client's business closure, role elimination)`,
+      `The reason for the engagement ending is not attributable to Client's failure to provide agreed compensation or reasonable working conditions, and is not due to circumstances outside ${BRAND}'s control (e.g., Client's business closure, role elimination)`,
     ],
     footer:
       "The Replacement Guarantee is the sole and exclusive remedy for a Candidate placement that does not work out.",
@@ -75,7 +71,7 @@ const sections = [
   },
   {
     heading: "7. Non-Circumvention",
-    body: `For [12] months following an introduction to a Candidate, Client agrees not to engage that Candidate through an alternate channel or arrangement designed to avoid payment of the Fee. Any such engagement will obligate Client to pay the applicable Fee to ${BRAND}.`,
+    body: `For twelve (12) months following an introduction to a Candidate, Client agrees not to engage that Candidate through an alternate channel or arrangement designed to avoid payment of the Fee. Any such engagement will obligate Client to pay the applicable Fee to ${BRAND}.`,
   },
   {
     heading: "8. Intellectual Property",
@@ -91,7 +87,7 @@ const sections = [
   },
   {
     heading: "11. Limitation of Liability",
-    body: `To the maximum extent permitted by law, ${BRAND}'s total liability arising out of or related to these Terms or the Services shall not exceed the Fees paid by Client to ${BRAND} in the [12] months preceding the claim. ${BRAND} shall not be liable for any indirect, incidental, consequential, special, or punitive damages, including lost profits, arising from Client's engagement of any Candidate.`,
+    body: `To the maximum extent permitted by law, ${BRAND}'s total liability arising out of or related to these Terms or the Services shall not exceed the Fees paid by Client to ${BRAND} in the 12 months preceding the claim. ${BRAND} shall not be liable for any indirect, incidental, consequential, special, or punitive damages, including lost profits, arising from Client's engagement of any Candidate.`,
   },
   {
     heading: "12. Indemnification",
@@ -103,7 +99,7 @@ const sections = [
   },
   {
     heading: "14. Governing Law and Dispute Resolution",
-    body: "These Terms are governed by the laws of the State of [Illinois / your chosen state], without regard to conflict of law principles. Any dispute arising under these Terms shall be resolved through [binding arbitration in [City, State] / the courts of [County, State] — choose one].",
+    body: "These Terms are governed by the laws of the State of Illinois, without regard to conflict-of-law principles. Any dispute arising out of or relating to these Terms or the Services shall be resolved by binding arbitration administered by the American Arbitration Association (AAA) under its Commercial Arbitration Rules, seated in Chicago, Illinois, except that either party may bring an individual claim in small-claims court. Claims must be brought in an individual capacity, and not as part of any class, collective, or representative action.",
   },
   {
     heading: "15. Changes to These Terms",
@@ -126,7 +122,7 @@ export default function Terms() {
             <span className="eyebrow eyebrow-shine">Legal</span>
             <h1>Terms &amp; Conditions</h1>
             <p className="subhead">
-              Effective date: {LAST_UPDATED} &middot; Last updated: {LAST_UPDATED}
+              Effective date: {EFFECTIVE_DATE} &middot; Last updated: {LAST_UPDATED}
             </p>
           </Reveal>
         </div>

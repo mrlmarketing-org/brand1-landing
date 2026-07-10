@@ -19,7 +19,7 @@ export default function Navbar() {
           <Link to="/blog">Blog</Link>
           <Link to="/contact">Contact</Link>
         </div>
-        <BookButton label="Book a call" />
+        <BookButton />
       </div>
     </nav>
   );

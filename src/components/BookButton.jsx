@@ -7,7 +7,7 @@ import { ArrowRight } from "./icons.jsx";
 // it opens Calendly as an in-page popup (via the widget script loaded
 // in index.html) instead of navigating away. If not, it scrolls down
 // to the role-details form at the bottom of the page.
-export default function BookButton({ label = "Book a 15-minute call", large = false }) {
+export default function BookButton({ label = "Book a call", large = false }) {
   const className = large ? "btn btn-primary btn-lg" : "btn btn-primary";
 
   if (BOOKING_URL) {

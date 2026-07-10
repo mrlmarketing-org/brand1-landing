@@ -39,7 +39,7 @@ export default function Hero() {
         </div>
 
         <div className="hero-side">
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} className="hero-globe-wrap">
             <Globe className="hero-globe" />
           </Reveal>
 

@@ -1474,12 +1474,6 @@ h2.section-title {
 /* ============================================================
    LEGAL (Terms / Privacy)
    ============================================================ */
-.legal-draft-tag {
-  display: block;
-  margin: 0 auto 40px;
-  max-width: 640px;
-  text-align: center;
-}
 .legal-body {
   max-width: 720px;
   margin: 0 auto;
@@ -1487,6 +1481,13 @@ h2.section-title {
 .legal-body h3 {
   font-size: 18px;
   margin: 40px 0 12px;
+}
+.legal-body h4 {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 22px 0 8px;
 }
 .legal-body p {
   font-size: 16px;

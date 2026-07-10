@@ -136,7 +136,7 @@ export default function Terms() {
             </Reveal>
 
             {sections.map((s) => (
-              <Reveal key={s.heading}>
+              <Reveal key={s.heading} once amount={0.05}>
                 <h3>{s.heading}</h3>
                 {(Array.isArray(s.body) ? s.body : [s.body]).map((p, i) => (
                   <p key={i}>{p}</p>

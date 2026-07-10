@@ -112,8 +112,6 @@ export const pillars = [
 ];
 
 // -- SECTION 9: FAQ ------------------------------------------
-// Items marked `draft: true` are placeholder answers written from
-// the document's notes. Review and confirm these before publishing.
 export const faqs = [
   {
     q: "Where are your professionals based?",
@@ -145,12 +143,10 @@ export const faqs = [
   },
   {
     q: "What hours will they work?",
-    a: "We match to your required hours, including US-hours coverage where needed. Back-office roles like bookkeeping, admin, and development are flexible; live roles such as customer service and sales calls are staffed to overlap with your working day.",
-    draft: true,
+    a: "We source professionals who can work the hours you need, including US-hours coverage. Back-office roles like bookkeeping, admin, and development tend to be flexible, while live roles such as customer service and sales are staffed to overlap with your working day. You set the final schedule directly with the professional, and we match you with people who fit it.",
   },
   {
     q: "Is my data safe?",
-    a: "Every professional signs an NDA before they begin, and for sensitive roles like accounting and customer service we'll align with you on access controls and data-handling practices. We'll cover your specific requirements on the call.",
-    draft: true,
+    a: "Data security matters, especially for roles that touch financial or customer information. As part of onboarding, professionals sign a confidentiality agreement covering your business information, and we vet for trustworthiness and relevant experience. For sensitive roles like accounting or customer service, we'll walk through access controls and data-handling practices with you — you decide what systems and information the professional can access, and we help you put sensible guardrails in place. We'll cover your specific requirements on the call.",
   },
 ];

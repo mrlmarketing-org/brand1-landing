@@ -9,7 +9,7 @@ const LAST_UPDATED = "July 9, 2026";
 // StaffBrigade.pdf). Several data-retention periods and the rights-
 // request response window still carry bracketed placeholder values in
 // that source doc — preserved verbatim below, need real numbers before
-// publishing (see the draft-tag banner).
+// publishing.
 const preamble = `This Privacy Policy explains how ${BRAND} ("${BRAND}," "we," "us," or "our") collects, uses, and shares personal information in connection with the website at ${BRAND.toLowerCase()}.com (the "Site") and our remote talent placement services (the "Services"). It applies to three groups: visitors to the Site, businesses that use us to hire ("Clients"), and the remote professionals we source and vet ("Candidates"). This Policy is separate from, and complements, our Terms of Service.`;
 
 const sections = [

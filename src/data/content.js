@@ -24,6 +24,7 @@ export const CONTACT_PHONE = "+1 313-230-4252";
 export const CONTACT_PHONE_HREF = "+13132304252";
 export const CONTACT_ADDRESS = "1000 Brickell Plaza, Unit 2708, Miami, FL 33130";
 
+
 // -- SETTING 4: social links ----------------------------------
 export const SOCIAL_LINKS = {
   facebook: "https://www.facebook.com/profile.php?id=61591536492693",

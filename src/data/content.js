@@ -19,7 +19,7 @@ export const BOOKING_URL = "https://calendly.com/admin-staffbrigade"; // e.g. "h
 
 // -- SETTING 3: contact details -------------------------------
 // Used on the Contact page and in the footer.
-export const CONTACT_EMAIL = "Admin@staffbrigade.com";
+export const CONTACT_EMAIL = "admin@staffbrigade.com";
 export const CONTACT_PHONE = "+1 313-230-4252";
 export const CONTACT_PHONE_HREF = "+13132304252";
 export const CONTACT_ADDRESS = "1000 Brickell Plaza, Unit 2708, Miami, FL 33130";

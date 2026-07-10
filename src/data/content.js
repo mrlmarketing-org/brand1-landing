@@ -18,18 +18,15 @@ export const BRAND = "StaffBrigade";
 export const BOOKING_URL = "https://calendly.com/iruoma-jennifer-onyia"; // e.g. "https://calendly.com/yourname/15min"
 
 // -- SETTING 3: contact details -------------------------------
-// [CONFIRM] Dummy placeholders — replace with your real address,
-// phone, and email before publishing. Used on the Contact page and
-// in the footer.
-export const CONTACT_EMAIL = "hello@staffbrigade.com";
-export const CONTACT_PHONE = "+1 (555) 010-2938";
-export const CONTACT_PHONE_HREF = "+15550102938";
-export const CONTACT_ADDRESS = "228 Park Ave S, Suite 91024, New York, NY 10003";
+// Used on the Contact page and in the footer.
+export const CONTACT_EMAIL = "Admin@staffbrigade.com";
+export const CONTACT_PHONE = "+1 313-230-4252";
+export const CONTACT_PHONE_HREF = "+13132304252";
+export const CONTACT_ADDRESS = "1000 Brickell Plaza, Unit 2708, Miami, FL 33130";
 
 // -- SETTING 4: social links ----------------------------------
-// [CONFIRM] Dummy placeholders — point these at your real profiles.
 export const SOCIAL_LINKS = {
-  linkedin: "https://www.linkedin.com/company/staffbrigade",
+  facebook: "https://www.facebook.com/profile.php?id=61591536492693",
   instagram: "https://www.instagram.com/staffbrigade",
 };
 

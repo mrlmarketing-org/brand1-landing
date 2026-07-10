@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { BRAND, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_HREF, CONTACT_ADDRESS, SOCIAL_LINKS } from "../data/content.js";
 import Logo from "./Logo.jsx";
-import { LinkedInIcon, InstagramIcon } from "./icons.jsx";
+import { FacebookIcon, InstagramIcon } from "./icons.jsx";
 
 // Adapted from secuby.framer.website's footer: brand blurb + social,
 // a couple of link columns, and a contact block, used on every page.
@@ -17,8 +17,8 @@ export default function Footer() {
           </Link>
           <p>Vetted remote professionals, one flat fee, once.</p>
           <div className="footer-social">
-            <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${BRAND} on LinkedIn`}>
-              <LinkedInIcon />
+            <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" aria-label={`${BRAND} on Facebook`}>
+              <FacebookIcon />
             </a>
             <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label={`${BRAND} on Instagram`}>
               <InstagramIcon />

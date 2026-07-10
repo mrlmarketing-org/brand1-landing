@@ -15,7 +15,7 @@ export const BRAND = "StaffBrigade";
 // link here (e.g. your Calendly URL). While it's left empty,
 // the buttons instead scroll down to the contact form at the
 // bottom of the page, so nothing breaks in the meantime.
-export const BOOKING_URL = "https://calendly.com/iruoma-jennifer-onyia"; // e.g. "https://calendly.com/yourname/15min"
+export const BOOKING_URL = "https://calendly.com/admin-staffbrigade"; // e.g. "https://calendly.com/yourname/15min"
 
 // -- SETTING 3: contact details -------------------------------
 // Used on the Contact page and in the footer.

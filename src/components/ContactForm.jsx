@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { roles } from "../data/content.js";
+import { pushEvent } from "../lib/analytics.js";
 
 const emptyForm = { name: "", email: "", role: "", details: "" };
 
@@ -35,6 +36,7 @@ export default function ContactForm({
       if (res.ok) {
         setStatus("success");
         setForm(emptyForm);
+        pushEvent("contact_form_submit", { form_variant: variant });
       } else {
         setStatus("error");
       }

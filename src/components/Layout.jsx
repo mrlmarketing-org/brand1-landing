@@ -2,6 +2,43 @@ import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
+import { pushEvent } from "../lib/analytics.js";
+
+// GTM's built-in triggers don't see React Router navigations (no real
+// page load happens), so each route change is pushed as a custom
+// "page_view" event. In GTM this feeds a GA4 event tag rather than the
+// GA4 config tag's automatic page_view, since that only fires once on
+// the initial script load.
+function useDataLayerPageview() {
+  const { pathname, search } = useLocation();
+
+  useEffect(() => {
+    pushEvent("page_view", {
+      page_path: pathname + search,
+      page_location: window.location.href,
+    });
+  }, [pathname, search]);
+}
+
+// Calendly's popup widget (loaded in index.html, opened from
+// BookButton.jsx) posts a message to the parent window when someone
+// actually completes a booking — as opposed to just opening the
+// popup. That's the real conversion moment. Listening once here
+// (Layout mounts once for the whole app) covers every BookButton on
+// every page.
+function useCalendlyConversion() {
+  useEffect(() => {
+    function handleMessage(e) {
+      if (e.origin !== "https://calendly.com") return;
+      if (e.data?.event === "calendly.event_scheduled") {
+        pushEvent("calendly_booking_scheduled");
+      }
+    }
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
+}
 
 // React Router doesn't scroll for you on navigation. This jumps to a
 // #hash target when one's present and otherwise resets to the top of
@@ -50,6 +87,8 @@ function useScrollOnNavigate() {
 
 export default function Layout() {
   useScrollOnNavigate();
+  useDataLayerPageview();
+  useCalendlyConversion();
 
   return (
     <>

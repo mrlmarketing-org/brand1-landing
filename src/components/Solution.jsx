@@ -1,7 +1,28 @@
 import { BRAND } from "../data/content.js";
 import Reveal from "./motion/Reveal.jsx";
+import { ShieldIcon, ListCheckIcon, HeartIcon } from "./icons.jsx";
 import teamPhoto from "../assets/photos/team-analytics-2.jpg";
-import calloutPhoto from "../assets/photos/team-analytics-1.jpg";
+
+const steps = [
+  {
+    num: "01",
+    icon: ShieldIcon,
+    title: "We vet them",
+    body: `Sourced from a private network ${BRAND} has built and tested across our own companies.`,
+  },
+  {
+    num: "02",
+    icon: ListCheckIcon,
+    title: "You pick who fits",
+    body: "You get a shortlist of people who've already cleared the bar. Choose your person.",
+  },
+  {
+    num: "03",
+    icon: HeartIcon,
+    title: "You own it",
+    body: "Hired, paid, and managed directly — like anyone on your team. No middleman, no leash back to us.",
+  },
+];
 
 // SECTION 3 — The solution
 export default function Solution() {
@@ -12,35 +33,32 @@ export default function Solution() {
           <h2 className="section-title">
             We find your person. You own the relationship.
           </h2>
+          <p className="solution-subhead">
+            Every candidate clears skills tests, interviews, and communication screening before you
+            ever see them.
+          </p>
         </div>
 
-        <div className="prose">
-          <p>
-            {BRAND} sources from a private network we've built and tested across
-            our own companies — skills tests, interviews, English and
-            communication screening included. You get a shortlist of people
-            who've already cleared the bar.
-          </p>
-          <p>
-            You pick who fits. From there, they're yours: hired directly, paid
-            directly, managed like any other member of your team. You pay them
-            an agreed-upon rate, and you pay us once for finding them — that's it.
-          </p>
+        <div className="solution-grid">
+          {steps.map((s, i) => (
+            <Reveal key={s.title} delay={i * 0.1}>
+              <div className="solution-card">
+                <div className="solution-card-head">
+                  <span className="solution-card-num">{s.num}</span>
+                  <div className="solution-card-icon">
+                    <s.icon size={20} />
+                  </div>
+                </div>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
 
         <Reveal>
           <div className="solution-photo">
             <img src={teamPhoto} alt="Workers reviewing an upward-trending analytics chart together" />
-          </div>
-        </Reveal>
-
-        <Reveal x={-48} y={0}>
-          <div className="callout" style={{ backgroundImage: `url(${calloutPhoto})` }}>
-            <p>
-              Most staffing agencies mark up your worker's wage 3–5x, forever. We
-              don't touch their wage at all. You pay them directly, and you
-              pay us once for finding them. That's it.
-            </p>
           </div>
         </Reveal>
       </div>

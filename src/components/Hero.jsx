@@ -7,12 +7,18 @@ import Reveal from "./motion/Reveal.jsx";
 const trustPoints = [
   "Flat one-time fee",
   "Fluent, skills-tested talent",
-  "2-week money-back guarantee",
+  "You own the relationship",
   "Built by operators who staff their own companies this way",
 ];
 
 // Each point lands on its own line, one after another.
 const trustDelays = [0, 0.2, 0.45, 0.65];
+
+const heroStats = [
+  { value: "2 weeks", label: "money-back window", color: "var(--accent)" },
+  { value: "$0", label: "monthly markup", color: "var(--accent-blue)" },
+  { value: "100%", label: "pre-vetted talent", color: "var(--accent)" },
+];
 
 // SECTION 1 — Hero
 export default function Hero() {
@@ -21,7 +27,7 @@ export default function Hero() {
       <div className="container hero-grid">
         <div className="hero-copy">
           <Reveal>
-            <span className="eyebrow eyebrow-shine eyebrow-accent">Hire once. No monthly markup.</span>
+            <span className="eyebrow eyebrow-shine">Hire once. No monthly markup.</span>
           </Reveal>
           <Reveal delay={0.1}>
             <h1>Get a vetted remote professional for a fraction of a local hire.</h1>
@@ -38,6 +44,19 @@ export default function Hero() {
               <a href="#how" className="btn-link">
                 See how it works <ArrowDown />
               </a>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.4}>
+            <div className="hero-stats">
+              {heroStats.map((s) => (
+                <div className="hero-stat" key={s.label}>
+                  <div className="hero-stat-value" style={{ color: s.color }}>
+                    {s.value}
+                  </div>
+                  <div className="hero-stat-label">{s.label}</div>
+                </div>
+              ))}
             </div>
           </Reveal>
         </div>

@@ -303,13 +303,40 @@ h2.section-title {
   gap: 14px;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 56px;
+  margin-top: 8px;
 }
 .hero .btn-link {
   color: rgba(255, 255, 255, 0.85);
 }
 .hero .btn-link:hover {
   color: #fff;
+}
+.hero-stats {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  max-width: 480px;
+  margin-top: 44px;
+}
+.hero-stat {
+  flex: 1;
+  padding: 18px 20px;
+  border-right: 1px solid var(--border);
+}
+.hero-stat:last-child {
+  border-right: none;
+}
+.hero-stat-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+.hero-stat-label {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 4px;
 }
 /* Trust strip: the first two points share a row and animate in
    together; the remaining two each get their own full-width row and
@@ -368,15 +395,9 @@ h2.section-title {
     left: 130%;
   }
 }
-/* Green-accent variant, layered on top of .eyebrow-shine — used where a
-   badge should call out the offer itself rather than just read as a
-   neutral label. */
-.eyebrow-accent {
-  background: var(--accent-soft);
-  border-color: rgba(117, 205, 37, 0.4);
-  color: var(--accent);
-  font-weight: 600;
-  letter-spacing: 0.03em;
+/* Extra breathing room under the hero's badge specifically, so the
+   heading below doesn't feel cramped against it. */
+.hero .eyebrow-shine {
   margin-bottom: 40px;
 }
 
@@ -1641,6 +1662,10 @@ h2.section-title {
   }
   .hero-actions {
     justify-content: center;
+  }
+  .hero-stats {
+    margin-left: auto;
+    margin-right: auto;
   }
   .hero-flow {
     flex-direction: column;

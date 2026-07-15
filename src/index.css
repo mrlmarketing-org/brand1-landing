@@ -1663,9 +1663,28 @@ h2.section-title {
   .hero-actions {
     justify-content: center;
   }
+  /* Three cramped columns don't fit a phone width without wrapping
+     ("money-back window" breaking onto its own line) — laid out as
+     rows instead, value and label side by side, divided horizontally. */
   .hero-stats {
+    flex-direction: column;
     margin-left: auto;
     margin-right: auto;
+  }
+  .hero-stat {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-stat:last-child {
+    border-bottom: none;
+  }
+  .hero-stat-label {
+    margin-top: 0;
+    text-align: right;
   }
   .hero-flow {
     flex-direction: column;

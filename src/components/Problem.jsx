@@ -64,7 +64,7 @@ function CostRow({ label, note, value, amountLabel, percent, photo, photoNode, a
               className="cost-bar"
               initial={reduceMotion ? false : { width: 0 }}
               whileInView={{ width: `${resolvedPercent}%` }}
-              viewport={{ once: false, amount: 0.6 }}
+              viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.9, delay: delay + 0.1, ease: [0.22, 1, 0.36, 1] }}
             />
           </div>

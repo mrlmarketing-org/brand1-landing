@@ -21,11 +21,18 @@ const pins = [
   { country: "India", lat: 28.6139, lon: 77.209, dy: 20 },
   { country: "Pakistan", lat: 33.6844, lon: 73.0479 },
   { country: "Nigeria", lat: 9.0765, lon: 7.3986 },
+  { country: "Brazil", lat: -15.7942, lon: -47.8822 },
+  { country: "Colombia", lat: 4.711, lon: -74.0721 },
+  { country: "Nicaragua", lat: 12.1364, lon: -86.2514, dy: 20 },
+  { country: "Argentina", lat: -34.6037, lon: -58.3816 },
 ];
 
-// The point the globe comes to rest on — chosen as the centroid of our
-// network countries, so all of them end up on the visible hemisphere
-// at once.
+// Network countries span more than a hemisphere in longitude (Asia/Africa
+// on one side of the globe, Latin America on the other), so no single
+// fixed orientation can keep all of them on the visible face at once.
+// Instead the globe re-aims itself to face whichever pin is taking its
+// turn (see the pin-cycling effect below). CENTER is just where it comes
+// to rest after the initial spin-in, before that cycling takes over.
 const CENTER = { lon: 80, lat: 15 };
 
 // The globe spins in from this far east of CENTER on mount, then settles.
@@ -38,10 +45,14 @@ const CENTER = { lon: 80, lat: 15 };
 const SPIN_FROM_OFFSET = 130;
 const SPIN_MS = 1400;
 
-// Once settled, exactly one pin is on screen at a time: it pings in
-// (radar-style), holds briefly, then fades out — then the next country
-// takes its turn. Loops through the whole list forever.
-const PIN_TOTAL_MS = 1700;
+// Once settled, exactly one pin is on screen at a time: the globe turns
+// to face it, it pings in (radar-style), holds briefly, then fades out —
+// then the globe turns to the next country. Loops through the whole list
+// forever. Countries live on both sides of the world (Asia/Africa and
+// Latin America), so no fixed orientation could show them all at once —
+// this cycle is what makes every one of them actually visible in turn.
+const ROTATE_MS = 650;
+const PIN_HOLD_MS = 1700;
 const PIN_GAP_MS = 250;
 
 function easeOutCubic(t) {
@@ -49,10 +60,9 @@ function easeOutCubic(t) {
 }
 
 // A d3-geo orthographic-projection globe that spins once into its
-// resting position on mount — pre-aimed so the Philippines, Vietnam,
-// Indonesia, Sri Lanka, India, Pakistan, and Nigeria all sit on the
-// near side once settled. Once it settles, pins take turns — one at a
-// time, radar-ping in, hold, fade out — cycling through the list forever.
+// resting position on mount, then turns to face each network country in
+// turn — pinging it in, holding, fading out, then rotating on to the
+// next — cycling through the whole list forever.
 export default function Globe({ className }) {
   const reduceMotion = useReducedMotion();
   const [rotationLon, setRotationLon] = useState(
@@ -82,27 +92,63 @@ export default function Globe({ className }) {
   }, [reduceMotion]);
 
   useEffect(() => {
-    if (reduceMotion || !spinDone) return;
+    if (!spinDone) return;
     let cancelled = false;
     let idx = 0;
+    let currentLon = rotationLon;
+    let rafId;
     const timers = [];
+
+    // Rotates the globe to targetLon along the shortest path (so it never
+    // spins the "long way" around just because a country's longitude wraps
+    // past ±180°). Reduced motion skips the tween and jumps straight there.
+    function rotateTo(targetLon, onDone) {
+      if (reduceMotion) {
+        currentLon = targetLon;
+        setRotationLon(targetLon);
+        onDone();
+        return;
+      }
+      const from = currentLon;
+      const delta = ((targetLon - from + 540) % 360) - 180;
+      const to = from + delta;
+      const start = performance.now();
+
+      function tick(now) {
+        if (cancelled) return;
+        const t = Math.min(1, (now - start) / ROTATE_MS);
+        const lon = from + (to - from) * easeOutCubic(t);
+        currentLon = lon;
+        setRotationLon(lon);
+        if (t < 1) {
+          rafId = requestAnimationFrame(tick);
+        } else {
+          onDone();
+        }
+      }
+      rafId = requestAnimationFrame(tick);
+    }
 
     function takeTurn() {
       if (cancelled) return;
-      setActiveIndex(idx);
-      timers.push(
-        setTimeout(() => {
-          if (cancelled) return;
-          setActiveIndex(-1);
-          idx = (idx + 1) % pins.length;
-          timers.push(setTimeout(takeTurn, PIN_GAP_MS));
-        }, PIN_TOTAL_MS)
-      );
+      rotateTo(pins[idx].lon, () => {
+        if (cancelled) return;
+        setActiveIndex(idx);
+        timers.push(
+          setTimeout(() => {
+            if (cancelled) return;
+            setActiveIndex(-1);
+            idx = (idx + 1) % pins.length;
+            timers.push(setTimeout(takeTurn, PIN_GAP_MS));
+          }, PIN_HOLD_MS)
+        );
+      });
     }
 
     takeTurn();
     return () => {
       cancelled = true;
+      cancelAnimationFrame(rafId);
       timers.forEach(clearTimeout);
     };
   }, [reduceMotion, spinDone]);
@@ -132,17 +178,14 @@ export default function Globe({ className }) {
     projection.rotate([-rotationLon, -CENTER.lat]);
     const path = geoPath(projection);
 
-    // reduceMotion shows the whole network at once (no motion, nothing
-    // to miss); otherwise only whichever single pin is mid-turn.
-    const candidates = reduceMotion
-      ? pins
-      : spinDone && activeIndex >= 0
-        ? [pins[activeIndex]]
-        : [];
+    // Only whichever single pin is mid-turn is a candidate — the globe
+    // has already rotated to face it by the time it's set active.
+    const candidates = spinDone && activeIndex >= 0 ? [pins[activeIndex]] : [];
 
-    // Only render pins that land on the visible side of the sphere —
-    // a small margin keeps labels off the horizon edge. CENTER is
-    // chosen so all of them pass this check once the globe is at rest.
+    // Only render pins that land on the visible side of the sphere — a
+    // small margin keeps labels off the horizon edge. In practice this
+    // always passes since the globe just rotated to face this pin; it's
+    // a safety net, not load-bearing.
     const visiblePoints = candidates
       .map((p) => {
         const distance = geoDistance([p.lon, p.lat], [rotationLon, CENTER.lat]);
@@ -164,7 +207,7 @@ export default function Globe({ className }) {
       className={className}
       viewBox={`0 0 ${SIZE} ${SIZE}`}
       role="img"
-      aria-label="Globe highlighting the Philippines, Vietnam, Indonesia, Sri Lanka, India, Pakistan, and Nigeria"
+      aria-label="Globe highlighting the Philippines, Vietnam, Indonesia, Sri Lanka, India, Pakistan, Nigeria, Brazil, Colombia, Nicaragua, and Argentina"
     >
       <defs>
         <radialGradient id="globeGradient" cx="35%" cy="30%" r="75%">
@@ -197,7 +240,7 @@ export default function Globe({ className }) {
               reduceMotion
                 ? { duration: 0.35 }
                 : {
-                    duration: PIN_TOTAL_MS / 1000,
+                    duration: PIN_HOLD_MS / 1000,
                     times: [0, 0.15, 0.75, 1],
                     ease: "easeInOut",
                   }

@@ -21,28 +21,17 @@ export default function Hero() {
       <div className="container hero-grid">
         <div className="hero-copy">
           <Reveal>
-            <span className="eyebrow eyebrow-shine">Hire remote. Pay once. Own the relationship.</span>
+            <span className="eyebrow eyebrow-shine eyebrow-accent">Hire once. No monthly markup.</span>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1>
-              Get a vetted remote professional for a fraction of a local hire — pay one flat fee,
-              one time, and own the relationship.
-            </h1>
+            <h1>Get a vetted remote professional for a fraction of a local hire.</h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="subhead">
-              We source, test, and hand you a qualified bookkeeper, developer, sales rep, or admin.
-              You hire them directly. One flat placement fee. No monthly markup on their wage — ever.
-              You get two weeks to ensure a good fit. If not, you get your money back.
+              We source, test, and hand you a qualified pro. Two weeks to be sure it's a fit — or
+              your money back.
             </p>
           </Reveal>
-        </div>
-
-        <div className="hero-side">
-          <Reveal delay={0.1} className="hero-globe-wrap">
-            <Globe className="hero-globe" />
-          </Reveal>
-
           <Reveal delay={0.3}>
             <div className="hero-actions">
               <BookButton large />
@@ -50,6 +39,12 @@ export default function Hero() {
                 See how it works <ArrowDown />
               </a>
             </div>
+          </Reveal>
+        </div>
+
+        <div className="hero-side">
+          <Reveal delay={0.1} className="hero-globe-wrap">
+            <Globe className="hero-globe" />
           </Reveal>
         </div>
       </div>

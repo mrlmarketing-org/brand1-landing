@@ -246,7 +246,7 @@ h2.section-title {
   display: grid;
   grid-template-columns: 1fr 1.3fr;
   gap: 40px;
-  align-items: center;
+  align-items: start;
 }
 .hero-copy {
   position: relative;
@@ -303,6 +303,7 @@ h2.section-title {
   gap: 14px;
   align-items: center;
   flex-wrap: wrap;
+  margin-top: 56px;
 }
 .hero .btn-link {
   color: rgba(255, 255, 255, 0.85);
@@ -367,13 +368,27 @@ h2.section-title {
     left: 130%;
   }
 }
+/* Green-accent variant, layered on top of .eyebrow-shine — used where a
+   badge should call out the offer itself rather than just read as a
+   neutral label. */
+.eyebrow-accent {
+  background: var(--accent-soft);
+  border-color: rgba(117, 205, 37, 0.4);
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: 40px;
+}
 
-/* Hero side column: globe + CTA, stacked on the right */
+/* Hero side column: the globe, on the right. Nudged up a bit relative
+   to the top-aligned text column so it doesn't read as hanging low
+   against the eyebrow badge. */
 .hero-side {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 28px;
+  margin-top: -28px;
 }
 .hero-globe-wrap {
   width: 100%;

@@ -585,54 +585,75 @@ h2.section-title {
   color: var(--ink);
   margin-top: 8px;
 }
-.cost-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  max-width: 720px;
-  margin: 0 auto 40px;
-}
-.cost-card {
+.cost-panel {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 18px;
+  padding: 30px 34px;
+  max-width: 720px;
+  margin: 0 auto 40px;
+}
+.cost-panel-label {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+.cost-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.cost-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.cost-row-photo {
+  flex-shrink: 0;
+  width: 76px;
+  height: 76px;
+  border-radius: 16px;
   overflow: hidden;
-  text-align: center;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.cost-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 34px rgba(11, 48, 73, 0.1);
-}
-.cost-card-photo {
-  width: 100%;
-  height: 120px;
-}
-.cost-card-photo img {
+.cost-row-photo img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.cost-card-body {
-  padding: 20px 20px 24px;
+.cost-row-body {
+  flex: 1;
+  min-width: 0;
 }
-.cost-card .amount {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 28px;
+.cost-row-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.cost-row-label {
+  font-size: 15px;
   color: var(--ink);
-  letter-spacing: -0.02em;
 }
-.cost-card .label {
-  font-size: 14px;
+.cost-row-note {
+  font-size: 13px;
   color: var(--muted);
-  margin-top: 4px;
-  margin-bottom: 16px;
-  min-height: 36px;
+}
+.cost-row-amount {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 .cost-bar-track {
-  height: 6px;
+  height: 8px;
   border-radius: var(--radius-pill);
   background: var(--border-soft);
   overflow: hidden;
@@ -640,6 +661,19 @@ h2.section-title {
 .cost-bar {
   height: 100%;
   border-radius: var(--radius-pill);
+  background: var(--muted);
+}
+.cost-row-highlight {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+.cost-row-highlight .cost-row-label,
+.cost-row-highlight .cost-row-amount {
+  color: var(--accent);
+  font-weight: 700;
+}
+.cost-row-highlight .cost-bar {
+  background: var(--accent);
 }
 .question-chips {
   display: flex;
@@ -1567,12 +1601,14 @@ h2.section-title {
   }
   .role-grid,
   .pillars,
-  .cost-row,
   .form-grid,
   .compare-strip,
   .contact-grid,
   .blog-grid {
     grid-template-columns: 1fr;
+  }
+  .cost-panel {
+    padding: 24px 20px;
   }
   .footer-grid {
     grid-template-columns: 1fr 1fr;

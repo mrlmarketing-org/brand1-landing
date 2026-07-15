@@ -4,7 +4,7 @@ import { BRAND } from "../data/content.js";
 // analytics line zigzagging across the front of it — staffing the
 // right people, and the efficiency/growth that follows. Colors are
 // hardcoded (not theme vars) so this matches /public/favicon.svg exactly.
-export default function Logo({ size = 30 }) {
+export default function Logo({ size = 30, showWord = true }) {
   return (
     <span className="brand">
       <svg
@@ -45,7 +45,7 @@ export default function Logo({ size = 30 }) {
           strokeLinejoin="round"
         />
       </svg>
-      <span className="brand-word">{BRAND}</span>
+      {showWord && <span className="brand-word">{BRAND}</span>}
     </span>
   );
 }

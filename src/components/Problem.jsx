@@ -128,7 +128,9 @@ export default function Problem() {
             </p>
           </Reveal>
           <Reveal delay={0.15}>
-            <p className="transition-line">We charge one flat fee, once. No markup, ever.</p>
+            <p className="transition-line">
+              We charge one flat fee, once. <span className="accent-text">No markup, ever.</span>
+            </p>
           </Reveal>
         </div>
       </div>

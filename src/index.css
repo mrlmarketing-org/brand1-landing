@@ -675,6 +675,9 @@ h2.section-title {
 .cost-row-highlight .cost-bar {
   background: var(--accent);
 }
+.accent-text {
+  color: var(--accent);
+}
 .question-chips {
   display: flex;
   flex-wrap: wrap;
@@ -1578,7 +1581,7 @@ h2.section-title {
     font-size: 17px;
     gap: 8px;
   }
-  .brand-mark {
+  .navbar .brand-mark {
     width: 26px;
     height: 26px;
   }

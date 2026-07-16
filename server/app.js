@@ -1,7 +1,12 @@
 import express from "express";
 import { Resend } from "resend";
 import { BRAND } from "../src/data/content.js";
-import { notificationEmail, confirmationEmail } from "./emailTemplates.js";
+import {
+  roleInquiryNotificationEmail,
+  roleInquiryConfirmationEmail,
+  contactNotificationEmail,
+  contactConfirmationEmail,
+} from "./emailTemplates.js";
 
 // Lazily constructed so it always reads RESEND_API_KEY after env vars
 // are loaded, regardless of which entry point (local server vs. the
@@ -15,14 +20,18 @@ function getResend() {
 const app = express();
 app.use(express.json());
 
-// The role-details form on the landing page posts here. Sends the
+// Both the homepage's secondary CTA (FinalCTA's role-details form,
+// variant="role") and the Contact page's general-inquiry form
+// (variant="subject") post here. `variant` picks which email copy to
+// send — see server/emailTemplates.js — so a general contact message
+// doesn't get mislabeled as a "role inquiry" in the inbox. Sends the
 // submission to CONTACT_TO_EMAIL via Resend (with the visitor's own
 // address set as reply-to), and a confirmation email back to the
 // visitor. Shared as-is between the local server (server/index.js) and
 // the Vercel function wrapper (api/[...all].js) — same code, two ways
 // to run it.
 app.post("/api/contact", async (req, res) => {
-  const { name, email, role, details } = req.body || {};
+  const { name, email, role, details, variant } = req.body || {};
 
   if (!name || !email || !role) {
     return res.status(400).json({ error: "Missing required fields." });
@@ -34,8 +43,14 @@ app.post("/api/contact", async (req, res) => {
   }
 
   const from = process.env.RESEND_FROM_EMAIL || `${BRAND} <onboarding@resend.dev>`;
-  const notification = notificationEmail({ name, email, role, details });
-  const confirmation = confirmationEmail({ name, role });
+  const notification =
+    variant === "subject"
+      ? contactNotificationEmail({ name, email, subject: role, details })
+      : roleInquiryNotificationEmail({ name, email, role, details });
+  const confirmation =
+    variant === "subject"
+      ? contactConfirmationEmail({ name, subject: role })
+      : roleInquiryConfirmationEmail({ name, role });
 
   try {
     const { error } = await getResend().emails.send({

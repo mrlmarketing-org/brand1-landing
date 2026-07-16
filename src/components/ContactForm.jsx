@@ -8,8 +8,9 @@ const emptyForm = { name: "", email: "", role: "", details: "" };
 // Contact page's general-inquiry form — same fields underneath
 // (name/email/role/details), same POST to /api/contact handled by
 // server/index.js. `variant="subject"` swaps the role dropdown for a
-// free-text subject field for the general-contact case; the payload
-// shape server-side stays identical either way.
+// free-text subject field for the general-contact case; `variant` is
+// sent along with the payload so the server can pick the right email
+// copy for each (see server/emailTemplates.js).
 export default function ContactForm({
   variant = "role",
   title,
@@ -31,7 +32,7 @@ export default function ContactForm({
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, variant }),
       });
       if (res.ok) {
         setStatus("success");

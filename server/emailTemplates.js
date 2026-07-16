@@ -102,12 +102,14 @@ function layout({ preheader, eyebrow, heading, bodyHtml, ctaLabel, ctaUrl }) {
 </html>`;
 }
 
-// Case 1 — internal notification sent to CONTACT_TO_EMAIL when someone
-// submits the role-details / contact form. Reply-to is set to the
-// submitter's address by the caller so replying goes straight to them.
-export function notificationEmail({ name, email, role, details }) {
+// Case 1 — the homepage's secondary CTA (FinalCTA's "Or send us the
+// role details" form, variant="role"). Someone is hiring for a
+// specific role, so the copy and the "Role" field are framed that way.
+// Reply-to is set to the submitter's address by the caller so replying
+// goes straight to them.
+export function roleInquiryNotificationEmail({ name, email, role, details }) {
   const bodyHtml = `
-    <p style="margin:0 0 4px;">Someone just submitted the form on the site.</p>
+    <p style="margin:0 0 4px;">Someone just submitted the role-details form on the site.</p>
     ${detailRows([
       ["Name", name],
       ["Email", email],
@@ -138,9 +140,9 @@ export function notificationEmail({ name, email, role, details }) {
   };
 }
 
-// Case 2 — auto-reply sent to the submitter, mirroring the on-page
-// success state in ContactForm.jsx ("Thanks — we've got your details").
-export function confirmationEmail({ name, role }) {
+// Case 2 — auto-reply for the role-details form, mirroring FinalCTA's
+// success copy ("We'll reach out shortly to scope the role with you.").
+export function roleInquiryConfirmationEmail({ name, role }) {
   const firstName = (name || "").trim().split(/\s+/)[0] || "there";
   const bodyHtml = `
     <p style="margin:0 0 14px;">Hi ${escapeHtml(firstName)},</p>
@@ -168,6 +170,71 @@ export function confirmationEmail({ name, role }) {
       "",
       `Thanks for reaching out about ${role}. We've got your details, and someone from our team will follow up shortly.`,
       BOOKING_URL ? `\nBook a call: ${BOOKING_URL}` : "",
+    ].join("\n"),
+  };
+}
+
+// Case 3 — the Contact page's general-inquiry form (variant="subject").
+// Same shell, but framed around a free-text subject/message rather than
+// a role, so it isn't mislabeled as a "role inquiry" in the inbox.
+export function contactNotificationEmail({ name, email, subject, details }) {
+  const bodyHtml = `
+    <p style="margin:0 0 4px;">Someone just submitted the contact form on the site.</p>
+    ${detailRows([
+      ["Name", name],
+      ["Email", email],
+      ["Subject", subject],
+      ["Message", details || "(none provided)"],
+    ])}
+    <p style="margin:12px 0 0; font-size:13px; color:${COLORS.muted};">Reply to this email to respond to ${escapeHtml(name)} directly.</p>
+  `;
+
+  return {
+    subject: `New contact message: ${subject}`,
+    html: layout({
+      preheader: `New message from ${name} — ${subject}`,
+      eyebrow: "New message",
+      heading: "You've got a new message",
+      bodyHtml,
+    }),
+    text: [
+      `New contact message: ${subject}`,
+      "",
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Subject: ${subject}`,
+      "",
+      "Message:",
+      details || "(none provided)",
+    ].join("\n"),
+  };
+}
+
+// Case 4 — auto-reply for the Contact page, mirroring its success copy
+// ("Thanks — your message is in" / one-business-day reply time).
+export function contactConfirmationEmail({ name, subject }) {
+  const firstName = (name || "").trim().split(/\s+/)[0] || "there";
+  const bodyHtml = `
+    <p style="margin:0 0 14px;">Hi ${escapeHtml(firstName)},</p>
+    <p style="margin:0 0 14px;">
+      Thanks for reaching out about <strong style="color:${COLORS.ink};">${escapeHtml(subject)}</strong>.
+      We've got your message, and we'll get back to you within one business day.
+    </p>
+    <p style="margin:0;">In the meantime, feel free to reply to this email with anything else that's useful context.</p>
+  `;
+
+  return {
+    subject: `Thanks — your message is in, ${firstName}`,
+    html: layout({
+      preheader: "Thanks — your message is in. We'll reply within one business day.",
+      eyebrow: "You're all set",
+      heading: "Thanks — your message is in",
+      bodyHtml,
+    }),
+    text: [
+      `Hi ${firstName},`,
+      "",
+      `Thanks for reaching out about ${subject}. We've got your message, and we'll get back to you within one business day.`,
     ].join("\n"),
   };
 }

@@ -27,7 +27,7 @@ export default function Blog() {
         </div>
       </header>
 
-      <section className="section">
+      <section className="section on-light">
         <div className="container">
           <div className="blog-grid">
             {blogPosts.map((post, i) => (

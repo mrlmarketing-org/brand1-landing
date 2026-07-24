@@ -18,7 +18,8 @@ export const BRAND = "StaffBrigade";
 export const BOOKING_URL = "https://calendly.com/admin-staffbrigade"; // e.g. "https://calendly.com/yourname/15min"
 
 // -- SETTING 3: contact details -------------------------------
-// Used on the Contact page and in the footer.
+// Used in the footer (the navbar's "Call Us" link shows a shortened
+// form of this — see Navbar.jsx).
 export const CONTACT_EMAIL = "admin@staffbrigade.com";
 export const CONTACT_PHONE = "+1 313-230-4252";
 export const CONTACT_PHONE_HREF = "+13132304252";
@@ -90,9 +91,22 @@ export const pricing = [
   { role: "Development & Automation", fee: "$4,800" },
 ];
 
-// -- Countries our talent network is based in (see WhyUs pillar 2,
-// the FAQ, and the hero globe) ----------------------------------
-export const locations = ["Philippines", "India", "Nigeria"];
+// -- Countries our talent network spans (see WhyUs pillar 2, the FAQ,
+// the hero globe, and the "Places we source our talent" section) —
+// keep this in sync with Globe.jsx's `pins` list. --------------------
+export const locations = [
+  { name: "Philippines", code: "ph" },
+  { name: "Vietnam", code: "vn" },
+  { name: "Indonesia", code: "id" },
+  { name: "Sri Lanka", code: "lk" },
+  { name: "India", code: "in" },
+  { name: "Pakistan", code: "pk" },
+  { name: "Nigeria", code: "ng" },
+  { name: "Brazil", code: "br" },
+  { name: "Colombia", code: "co" },
+  { name: "Nicaragua", code: "ni" },
+  { name: "Argentina", code: "ar" },
+];
 
 // -- SECTION 8: why us (three pillars) -----------------------
 export const pillars = [
@@ -103,7 +117,7 @@ export const pillars = [
   },
   {
     title: "A vetted network, not an open marketplace",
-    body: "Our candidates come from a private network across our own operations in the Philippines, India, and Nigeria — people who've already proven themselves on real work. You're hiring from a bench, not a stranger pool.",
+    body: "Our candidates come from a private network spanning Southeast Asia, South Asia, West Africa, and Latin America — people who've already proven themselves on real work. You're hiring from a bench, not a stranger pool.",
   },
   {
     title: "We screen for what actually matters",
@@ -115,7 +129,7 @@ export const pillars = [
 export const faqs = [
   {
     q: "Where are your professionals based?",
-    a: "Our network spans the Philippines, India, and Nigeria — regions with deep, skilled, English-fluent talent pools. We match you based on the role, the hours you need, and your communication requirements.",
+    a: "Our network spans the Philippines, Vietnam, Indonesia, Sri Lanka, India, Pakistan, Nigeria, Brazil, Colombia, Nicaragua, and Argentina — regions with deep, skilled, English-fluent talent pools. We match you based on the role, the hours you need, and your communication requirements.",
   },
   {
     q: "How does payment work?",

@@ -5,8 +5,8 @@ import { ArrowRight } from "./icons.jsx";
 // Every "Book a call" button on the page uses this component, so
 // they all behave the same way. If BOOKING_URL is set in content.js,
 // it opens Calendly as an in-page popup (via the widget script loaded
-// in index.html) instead of navigating away. If not, it scrolls down
-// to the role-details form at the bottom of the page.
+// in index.html) instead of navigating away. If not, it sends people
+// to the role-details form on the Start Hiring page.
 export default function BookButton({ label = "Book a call", large = false }) {
   const className = large ? "btn btn-primary btn-lg" : "btn btn-primary";
 
@@ -29,7 +29,7 @@ export default function BookButton({ label = "Book a call", large = false }) {
   }
 
   return (
-    <Link to="/#book" className={className}>
+    <Link to="/start-hiring#book" className={className}>
       {label} <ArrowRight />
     </Link>
   );

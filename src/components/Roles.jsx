@@ -18,15 +18,15 @@ const rolePhotos = [
   { src: adminPhoto, alt: "A weekly planner and phone on a desk" },
 ];
 
-// SECTION 4 — Roles we place
+// SECTION 4 — Roles we staff
 export default function Roles() {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <section className="section" id="roles">
+    <section className="section on-light" id="roles">
       <div className="container">
         <div className="section-head">
-          <span className="eyebrow">Roles we place</span>
+          <span className="eyebrow">Roles we staff</span>
           <h2 className="section-title">
             Where we already have deep bench strength
           </h2>
@@ -86,8 +86,8 @@ export default function Roles() {
         </div>
 
         <p className="roles-note">
-          Don't see your role? If it can be done remotely, we can likely place
-          it. Ask on your call!
+          Don't see your role? If it can be done remotely, we can likely staff
+          it — just ask.
         </p>
       </div>
     </section>

@@ -16,7 +16,7 @@ export default function BlogPost() {
     <>
       <SEO title={post.title} path={`/blog/${post.slug}`} description={post.excerpt} image={post.photo} />
 
-      <article className="section blog-post">
+      <article className="section blog-post on-light">
         <div className="container blog-post-inner">
           <Reveal>
             <Link to="/blog" className="btn-link blog-post-back">

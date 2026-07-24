@@ -174,6 +174,72 @@ export function roleInquiryConfirmationEmail({ name, role }) {
   };
 }
 
+// Case 2b — the Find a Job page's form (variant="candidate"). A job
+// seeker, not a business — the "role" field here is what they're
+// looking to do, not a role someone is hiring for, so the copy and
+// subject line are framed for that audience instead.
+export function candidateNotificationEmail({ name, email, role, details }) {
+  const bodyHtml = `
+    <p style="margin:0 0 4px;">Someone just submitted the Find a Job form on the site.</p>
+    ${detailRows([
+      ["Name", name],
+      ["Email", email],
+      ["Looking to do", role],
+      ["Details", details || "(none provided)"],
+    ])}
+    <p style="margin:12px 0 0; font-size:13px; color:${COLORS.muted};">Reply to this email to respond to ${escapeHtml(name)} directly.</p>
+  `;
+
+  return {
+    subject: `New candidate inquiry: ${role}`,
+    html: layout({
+      preheader: `New candidate inquiry from ${name} — ${role}`,
+      eyebrow: "New candidate",
+      heading: "You've got a new candidate inquiry",
+      bodyHtml,
+    }),
+    text: [
+      `New candidate inquiry: ${role}`,
+      "",
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Looking to do: ${role}`,
+      "",
+      "Details:",
+      details || "(none provided)",
+    ].join("\n"),
+  };
+}
+
+// Case 2c — auto-reply for the Find a Job form. No promise of a role —
+// just confirms receipt, since placement depends on client demand.
+export function candidateConfirmationEmail({ name, role }) {
+  const firstName = (name || "").trim().split(/\s+/)[0] || "there";
+  const bodyHtml = `
+    <p style="margin:0 0 14px;">Hi ${escapeHtml(firstName)},</p>
+    <p style="margin:0 0 14px;">
+      Thanks for telling us about <strong style="color:${COLORS.ink};">${escapeHtml(role)}</strong>.
+      We've got your details on file, and we'll reach out if there's a fit with one of our clients.
+    </p>
+    <p style="margin:0;">In the meantime, feel free to reply to this email with anything else that's useful context.</p>
+  `;
+
+  return {
+    subject: `Thanks — we've got your details, ${firstName}`,
+    html: layout({
+      preheader: "Thanks — we've got your details and will reach out if there's a fit.",
+      eyebrow: "You're all set",
+      heading: "Thanks — we've got your details",
+      bodyHtml,
+    }),
+    text: [
+      `Hi ${firstName},`,
+      "",
+      `Thanks for telling us about ${role}. We've got your details on file, and we'll reach out if there's a fit with one of our clients.`,
+    ].join("\n"),
+  };
+}
+
 // Case 3 — the Contact page's general-inquiry form (variant="subject").
 // Same shell, but framed around a free-text subject/message rather than
 // a role, so it isn't mislabeled as a "role inquiry" in the inbox.

@@ -128,7 +128,7 @@ export default function Terms() {
         </div>
       </header>
 
-      <section className="section">
+      <section className="section on-light">
         <div className="container">
           <div className="legal-body">
             <Reveal>

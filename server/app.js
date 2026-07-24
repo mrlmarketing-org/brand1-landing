@@ -6,6 +6,8 @@ import {
   roleInquiryConfirmationEmail,
   contactNotificationEmail,
   contactConfirmationEmail,
+  candidateNotificationEmail,
+  candidateConfirmationEmail,
 } from "./emailTemplates.js";
 
 // Lazily constructed so it always reads RESEND_API_KEY after env vars
@@ -46,10 +48,14 @@ app.post("/api/contact", async (req, res) => {
   const notification =
     variant === "subject"
       ? contactNotificationEmail({ name, email, subject: role, details })
+      : variant === "candidate"
+      ? candidateNotificationEmail({ name, email, role, details })
       : roleInquiryNotificationEmail({ name, email, role, details });
   const confirmation =
     variant === "subject"
       ? contactConfirmationEmail({ name, subject: role })
+      : variant === "candidate"
+      ? candidateConfirmationEmail({ name, role })
       : roleInquiryConfirmationEmail({ name, role });
 
   try {

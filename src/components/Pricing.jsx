@@ -1,13 +1,13 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { pricing } from "../data/content.js";
-import BookButton from "./BookButton.jsx";
+import StartHiringButton from "./StartHiringButton.jsx";
 
 // SECTION 6 — Pricing
 export default function Pricing() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="section" id="pricing">
+    <section className="section on-light" id="pricing">
       <div className="container">
         <div className="section-head">
           <span className="eyebrow">Pricing</span>
@@ -37,14 +37,8 @@ export default function Pricing() {
         </div>
         <p className="price-note">Fees are flat per placement.</p>
 
-        <p className="value-frame">
-          Compare that to a recruiter's typical 20–25% of first-year salary, an
-          agency's permanent 3–5x wage markup, or the cost of a bad hire you
-          sourced yourself. One flat fee, paid once, and the person is yours.
-        </p>
-
         <div className="pricing-cta">
-          <BookButton label="Book a call and find great talent" />
+          <StartHiringButton label="Start hiring and find great talent" />
         </div>
       </div>
     </section>

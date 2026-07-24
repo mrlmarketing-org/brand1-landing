@@ -1,11 +1,9 @@
-import BookButton from "./BookButton.jsx";
-import ContactForm from "./ContactForm.jsx";
+import StartHiringButton from "./StartHiringButton.jsx";
 
-// SECTION 10 — Final CTA. The id="book" here is where every
-// "Book a call" button scrolls to when no booking link is set.
+// SECTION 10 — Final CTA.
 export default function FinalCTA() {
   return (
-    <section className="final-cta" id="book">
+    <section className="final-cta">
       <div className="container">
         <div className="final-inner">
           <h2>Tell us the role. We'll bring you the person.</h2>
@@ -15,16 +13,8 @@ export default function FinalCTA() {
             fee, paid once.
           </p>
           <div className="final-actions">
-            <BookButton large />
+            <StartHiringButton large />
           </div>
-
-          <ContactForm
-            variant="role"
-            title="Or send us the role details and we'll reach out"
-            subtitle="Prefer not to book yet? Give us the basics and we'll be in touch."
-            submitLabel="Send role details"
-            successBody="We'll reach out shortly to scope the role with you."
-          />
         </div>
       </div>
     </section>

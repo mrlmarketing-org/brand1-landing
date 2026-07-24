@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- [CONFIRM] Replace https://your-domain-here.com with the real production domain before publishing. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://your-domain-here.com/</loc>
+    <loc>https://staffbrigade.com/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://your-domain-here.com/blog</loc>
+    <loc>https://staffbrigade.com/blog</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://your-domain-here.com/contact</loc>
+    <loc>https://staffbrigade.com/find-a-job</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://your-domain-here.com/terms</loc>
+    <loc>https://staffbrigade.com/start-hiring</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://staffbrigade.com/terms</loc>
     <priority>0.2</priority>
   </url>
   <url>
-    <loc>https://your-domain-here.com/privacy</loc>
+    <loc>https://staffbrigade.com/privacy</loc>
     <priority>0.2</priority>
   </url>
 </urlset>

@@ -77,7 +77,7 @@ function CostRow({ label, note, value, amountLabel, percent, photo, photoNode, a
 // SECTION 2 — The problem
 export default function Problem() {
   return (
-    <section className="section">
+    <section className="section on-light">
       <div className="container">
         <div className="section-head">
           <h2 className="section-title">

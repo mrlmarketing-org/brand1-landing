@@ -1,23 +1,15 @@
-import BookButton from "./BookButton.jsx";
-import { CheckIcon, ArrowDown } from "./icons.jsx";
+import StartHiringButton from "./StartHiringButton.jsx";
+import { ArrowDown } from "./icons.jsx";
 import HiringFlowAnimation from "./HiringFlowAnimation.jsx";
 import Globe from "./Globe.jsx";
 import Reveal from "./motion/Reveal.jsx";
-
-const trustPoints = [
-  "Flat one-time fee",
-  "Fluent, skills-tested talent",
-  "You own the relationship",
-  "Built by operators who staff their own companies this way",
-];
-
-// Each point lands on its own line, one after another.
-const trustDelays = [0, 0.2, 0.45, 0.65];
+import CountUp from "./motion/CountUp.jsx";
+import { scrollToTarget } from "../lib/smoothScroll.js";
 
 const heroStats = [
-  { value: "2 weeks", label: "money-back window", color: "var(--accent)" },
-  { value: "$0", label: "monthly markup", color: "var(--accent-blue)" },
-  { value: "100%", label: "pre-vetted talent", color: "var(--accent)" },
+  { value: 2, suffix: " weeks", label: "money-back window", color: "var(--accent)" },
+  { value: 0, prefix: "$", label: "monthly markup", color: "var(--cream)" },
+  { value: 100, suffix: "%", label: "pre-vetted talent", color: "var(--accent)" },
 ];
 
 // SECTION 1 — Hero
@@ -30,7 +22,7 @@ export default function Hero() {
             <span className="eyebrow eyebrow-shine">Hire once. No monthly markup.</span>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1>Get a vetted remote professional for a fraction of a local hire.</h1>
+            <h1>Hire a vetted remote professional for a fraction of a local hire.</h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="subhead">
@@ -40,8 +32,15 @@ export default function Hero() {
           </Reveal>
           <Reveal delay={0.3}>
             <div className="hero-actions">
-              <BookButton large />
-              <a href="#how" className="btn-link">
+              <StartHiringButton large />
+              <a
+                href="#how"
+                className="btn-link"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToTarget("#how");
+                }}
+              >
                 See how it works <ArrowDown />
               </a>
             </div>
@@ -52,7 +51,7 @@ export default function Hero() {
               {heroStats.map((s) => (
                 <div className="hero-stat" key={s.label}>
                   <div className="hero-stat-value" style={{ color: s.color }}>
-                    {s.value}
+                    <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} />
                   </div>
                   <div className="hero-stat-label">{s.label}</div>
                 </div>
@@ -69,17 +68,6 @@ export default function Hero() {
       </div>
 
       <div className="container hero-flow">
-        <div className="trust-strip">
-          {trustPoints.map((point, i) => (
-            <Reveal key={point} delay={trustDelays[i]}>
-              <div className="trust-item">
-                <CheckIcon />
-                <span>{point}</span>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
         {/* Not Reveal-wrapped: its card resizes every couple of seconds as
             its internal demo cycles through stages, which fought with
             whileInView's viewport re-checks and made it look like it was

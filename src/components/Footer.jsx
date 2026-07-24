@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { BRAND, CONTACT_EMAIL, CONTACT_PHONE, CONTACT_PHONE_HREF, CONTACT_ADDRESS, SOCIAL_LINKS } from "../data/content.js";
 import Logo from "./Logo.jsx";
 import { FacebookIcon, InstagramIcon } from "./icons.jsx";
+import { scrollToTarget } from "../lib/smoothScroll.js";
 
 // Adapted from secuby.framer.website's footer: brand blurb + social,
 // a couple of link columns, and a contact block, used on every page.
@@ -38,7 +39,6 @@ export default function Footer() {
         <div className="footer-col">
           <span className="footer-col-label">Support</span>
           <Link to="/#faq">FAQ</Link>
-          <Link to="/contact">Contact us</Link>
           <Link to="/terms">Terms &amp; Conditions</Link>
           <Link to="/privacy">Privacy Policy</Link>
         </div>
@@ -58,7 +58,7 @@ export default function Footer() {
         <button
           type="button"
           className="footer-top-link"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          onClick={() => scrollToTarget(0)}
         >
           Back to top ↑
         </button>

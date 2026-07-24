@@ -3,6 +3,13 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 import { pushEvent } from "../lib/analytics.js";
+import { initSmoothScroll, scrollToTarget } from "../lib/smoothScroll.js";
+
+// Lenis takes over wheel/touch scrolling for the whole app for the
+// life of the tab, so it's started once here rather than per-route.
+function useSmoothScroll() {
+  useEffect(() => initSmoothScroll(), []);
+}
 
 // GTM's built-in triggers don't see React Router navigations (no real
 // page load happens), so each route change is pushed as a custom
@@ -56,14 +63,14 @@ function useScrollOnNavigate() {
 
   useEffect(() => {
     if (!hash) {
-      window.scrollTo({ top: 0 });
+      scrollToTarget(0, { immediate: true });
       return;
     }
 
     const el = document.querySelector(hash);
     if (!el) return;
 
-    const scrollToEl = () => el.scrollIntoView({ behavior: "smooth", block: "start" });
+    const scrollToEl = () => scrollToTarget(el);
     scrollToEl();
 
     let lastTop = el.getBoundingClientRect().top;
@@ -86,6 +93,7 @@ function useScrollOnNavigate() {
 }
 
 export default function Layout() {
+  useSmoothScroll();
   useScrollOnNavigate();
   useDataLayerPageview();
   useCalendlyConversion();

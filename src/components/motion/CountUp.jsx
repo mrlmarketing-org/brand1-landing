@@ -25,7 +25,7 @@ export default function CountUp({ value, prefix = "", suffix = "", duration = 1.
       duration,
       ease: [0.22, 1, 0.36, 1],
       onUpdate: (v) => {
-        digitsRef.current.textContent = Math.round(v).toLocaleString("en-US");
+        if (digitsRef.current) digitsRef.current.textContent = Math.round(v).toLocaleString("en-US");
       },
     });
     return () => controls.stop();

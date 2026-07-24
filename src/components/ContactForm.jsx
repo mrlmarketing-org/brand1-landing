@@ -4,13 +4,14 @@ import { pushEvent } from "../lib/analytics.js";
 
 const emptyForm = { name: "", email: "", role: "", details: "" };
 
-// Powers both the homepage's "role details" form (FinalCTA) and the
-// Contact page's general-inquiry form — same fields underneath
-// (name/email/role/details), same POST to /api/contact handled by
-// server/index.js. `variant="subject"` swaps the role dropdown for a
-// free-text subject field for the general-contact case; `variant` is
-// sent along with the payload so the server can pick the right email
-// copy for each (see server/emailTemplates.js).
+// Powers the homepage's "role details" form (FinalCTA), the Start Hiring
+// page, the Contact page's general-inquiry form, and the Find a Job page
+// — same fields underneath (name/email/role/details), same POST to
+// /api/contact handled by server/index.js. `variant` swaps the role
+// dropdown for a free-text field (and relabels the surrounding copy) for
+// the "subject" (general contact) and "candidate" (job seeker) cases;
+// `variant` is sent along with the payload so the server can pick the
+// right email copy for each (see server/emailTemplates.js).
 export default function ContactForm({
   variant = "role",
   title,
@@ -51,7 +52,7 @@ export default function ContactForm({
       <div className="role-form">
         <div className="form-success">
           <h3>{successTitle}</h3>
-          <p style={{ color: "rgba(255,255,255,0.7)", marginTop: 8 }}>{successBody}</p>
+          <p style={{ color: "var(--muted)", marginTop: 8 }}>{successBody}</p>
         </div>
       </div>
     );
@@ -101,6 +102,18 @@ export default function ContactForm({
                   <option>Something else</option>
                 </select>
               </>
+            ) : variant === "candidate" ? (
+              <>
+                <label htmlFor="role">What are you looking to do?</label>
+                <input
+                  id="role"
+                  name="role"
+                  value={form.role}
+                  onChange={handleChange}
+                  placeholder="e.g. Bookkeeping, sales, admin support, development"
+                  required
+                />
+              </>
             ) : (
               <>
                 <label htmlFor="role">Subject</label>
@@ -116,7 +129,9 @@ export default function ContactForm({
             )}
           </div>
           <div className="field full">
-            <label htmlFor="details">{variant === "role" ? "A little about the role" : "Message"}</label>
+            <label htmlFor="details">
+              {variant === "role" ? "A little about the role" : variant === "candidate" ? "Tell us about yourself" : "Message"}
+            </label>
             <textarea
               id="details"
               name="details"
@@ -125,6 +140,8 @@ export default function ContactForm({
               placeholder={
                 variant === "role"
                   ? "Hours per week, key skills or software, and anything else that helps us understand what you need."
+                  : variant === "candidate"
+                  ? "Your skills, experience, availability, and English level."
                   : "Tell us a bit more about what you need."
               }
             />
@@ -136,7 +153,7 @@ export default function ContactForm({
         </button>
 
         {status === "error" && (
-          <p className="form-note" style={{ color: "#f0a0a0" }}>
+          <p className="form-note" style={{ color: "#e5484d" }}>
             Something went wrong. Please email us instead.
           </p>
         )}

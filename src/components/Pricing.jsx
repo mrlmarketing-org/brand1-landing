@@ -7,7 +7,7 @@ export default function Pricing() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="section on-light" id="pricing">
+    <section className="section" id="pricing">
       <div className="container">
         <div className="section-head">
           <span className="eyebrow">Pricing</span>
@@ -27,7 +27,7 @@ export default function Pricing() {
               key={row.role}
               initial={reduceMotion ? false : { opacity: 0, x: -24 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, amount: 0.6 }}
+              viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.45, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
             >
               <span className="role-name">{row.role}</span>

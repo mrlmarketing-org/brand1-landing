@@ -1,4 +1,3 @@
-import { motion, useReducedMotion } from "framer-motion";
 import Reveal from "./motion/Reveal.jsx";
 import CountUp from "./motion/CountUp.jsx";
 import Logo from "./Logo.jsx";
@@ -15,17 +14,17 @@ const questions = [
   "Can I trust a stranger?",
 ];
 
-const MAX = 120000;
-// Ordered tallest to shortest so the bars read as a descending staircase,
-// same as the reference comp — StaffBrigade's flat fee lands last as the
-// payoff, not a value to compare 1:1 against a salary.
-const costs = [
-  {
-    value: 120000,
-    label: "Developer",
-    photo: developerPhoto,
-    alt: "A laptop screen showing program code",
-  },
+// The developer role leads as the big, photo-led moment — highest number,
+// strongest anchor for "local hiring is expensive." The other two stay as
+// smaller supporting stats beside it rather than repeating the same
+// treatment three times over.
+const featured = {
+  value: 120000,
+  label: "A developer costs you",
+  photo: developerPhoto,
+  alt: "A laptop screen showing program code",
+};
+const supportingCosts = [
   {
     value: 55000,
     label: "US bookkeeper",
@@ -41,65 +40,45 @@ const costs = [
   },
 ];
 
-function CostRow({ label, note, value, amountLabel, percent, photo, photoNode, alt, highlight, delay }) {
-  const reduceMotion = useReducedMotion();
-  const resolvedPercent = percent ?? Math.round((value / MAX) * 100);
-
-  return (
-    <Reveal delay={delay}>
-      <div className={highlight ? "cost-row cost-row-highlight" : "cost-row"}>
-        <div className="cost-row-photo">{photoNode || <img src={photo} alt={alt} />}</div>
-        <div className="cost-row-body">
-          <div className="cost-row-head">
-            <span className="cost-row-label">
-              {label}
-              {note && <span className="cost-row-note"> ({note})</span>}
-            </span>
-            <span className="cost-row-amount">
-              {value != null ? <CountUp value={value} prefix="$" suffix="+" /> : amountLabel}
-            </span>
-          </div>
-          <div className="cost-bar-track">
-            <motion.div
-              className="cost-bar"
-              initial={reduceMotion ? false : { width: 0 }}
-              whileInView={{ width: `${resolvedPercent}%` }}
-              viewport={{ once: true, amount: 0.6 }}
-              transition={{ duration: 0.9, delay: delay + 0.1, ease: [0.22, 1, 0.36, 1] }}
-            />
-          </div>
-        </div>
-      </div>
-    </Reveal>
-  );
-}
-
 // SECTION 2 — The problem
 export default function Problem() {
   return (
-    <section className="section on-light">
+    <section className="section">
       <div className="container">
-        <div className="section-head">
-          <h2 className="section-title">
-            Local hiring is expensive. Remote is smart — we do the finding, vetting, and testing
-            for you.
-          </h2>
-        </div>
+        <div className="problem-before">
+          <Reveal className="problem-before-media">
+            <img src={featured.photo} alt={featured.alt} />
+            <div className="problem-before-overlay">
+              <span className="problem-before-eyebrow">{featured.label}</span>
+              <span className="problem-before-figure">
+                <CountUp value={featured.value} prefix="$" suffix="+/yr" />
+              </span>
+            </div>
+          </Reveal>
 
-        <div className="cost-panel">
-          <div className="cost-panel-label">What one local hire costs you per year</div>
-          <div className="cost-list">
-            {costs.map((c, i) => (
-              <CostRow key={c.label} {...c} delay={i * 0.08} />
-            ))}
-            <CostRow
-              label="StaffBrigade — one flat fee"
-              amountLabel="a fraction"
-              percent={9}
-              photoNode={<Logo size={76} showWord={false} />}
-              highlight
-              delay={costs.length * 0.08}
-            />
+          <div className="problem-before-copy">
+            <Reveal>
+              <h2 className="section-title">
+                Local hiring in the US is expensive. Remote is smart — we do the finding, vetting,
+                and testing for you.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="problem-stat-list">
+                {supportingCosts.map((c) => (
+                  <div className="problem-stat-row" key={c.label}>
+                    <img src={c.photo} alt={c.alt} />
+                    <span className="problem-stat-label">
+                      {c.label}
+                      {c.note && <span className="problem-stat-note"> ({c.note})</span>}
+                    </span>
+                    <span className="problem-stat-amount">
+                      <CountUp value={c.value} prefix="$" suffix="+" />
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
           </div>
         </div>
 
@@ -127,12 +106,23 @@ export default function Problem() {
               can't see into.
             </p>
           </Reveal>
-          <Reveal delay={0.15}>
-            <p className="transition-line">
-              We charge one flat fee, once. <span className="accent-text">No markup, ever.</span>
-            </p>
-          </Reveal>
         </div>
+
+        <Reveal delay={0.15}>
+          <div className="problem-after">
+            <Logo size={56} showWord={false} />
+            <div className="problem-after-copy">
+              <p className="problem-after-lead">
+                We give you direct access to vetted professionals across Southeast Asia, South
+                Asia, West Africa, and Latin America — the same caliber of work, for a fraction of
+                a US salary.
+              </p>
+              <p className="problem-after-fee">
+                One flat fee, once. <span className="accent-text">No markup, ever.</span>
+              </p>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

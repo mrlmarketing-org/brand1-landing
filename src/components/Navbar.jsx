@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Logo from "./Logo.jsx";
+import { GatedStartHiringLink } from "./StartHiringGate.jsx";
 import { MenuIcon, CloseIcon, ArrowRight } from "./icons.jsx";
 import { CONTACT_PHONE, CONTACT_PHONE_HREF } from "../data/content.js";
 
@@ -65,9 +66,9 @@ export default function Navbar() {
             <Link to="/find-a-job" className="btn btn-secondary">
               Find a job
             </Link>
-            <Link to="/start-hiring" className="btn btn-primary">
+            <GatedStartHiringLink to="/start-hiring" className="btn btn-primary">
               Start hiring <ArrowRight />
-            </Link>
+            </GatedStartHiringLink>
           </div>
           <button
             type="button"
@@ -106,9 +107,9 @@ export default function Navbar() {
               <Link to="/find-a-job" className="btn btn-secondary btn-lg">
                 Find a job
               </Link>
-              <Link to="/start-hiring" className="btn btn-primary btn-lg">
+              <GatedStartHiringLink to="/start-hiring" className="btn btn-primary btn-lg">
                 Start hiring <ArrowRight />
-              </Link>
+              </GatedStartHiringLink>
             </div>
           </motion.div>
         )}

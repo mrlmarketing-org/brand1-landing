@@ -39,6 +39,11 @@
          navigating away. See https://help.calendly.com/hc/en-us/articles/223147027 -->
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+    <!-- reCAPTCHA v3 — invisible bot check for ContactForm submissions.
+         Loaded with the site key so grecaptcha.execute() can run from
+         src/lib/recaptcha.js without a page reload. -->
+    <script src="https://www.google.com/recaptcha/api.js?render=%VITE_RECAPTCHA_SITE_KEY%" async defer></script>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->

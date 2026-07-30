@@ -1,5 +1,4 @@
 import SEO from "../components/SEO.jsx";
-import Reveal from "../components/motion/Reveal.jsx";
 import Hero from "../components/Hero.jsx";
 import TrustMarquee from "../components/TrustMarquee.jsx";
 import Problem from "../components/Problem.jsx";
@@ -13,11 +12,6 @@ import WhyUs from "../components/WhyUs.jsx";
 import FAQ from "../components/FAQ.jsx";
 import FinalCTA from "../components/FinalCTA.jsx";
 
-// Every section below (after the hero) fades in as it scrolls into
-// view and fades back out as it leaves — `once={false}` is what makes
-// Reveal replay on every pass instead of just the first.
-const sectionRevealProps = { once: false, amount: 0.15, y: 40 };
-
 export default function Home() {
   return (
     <>
@@ -27,36 +21,23 @@ export default function Home() {
       />
       <Hero /> {/* Section 1 — has its own entrance choreography already */}
       <TrustMarquee />
-      <Reveal {...sectionRevealProps}>
-        <Problem /> {/* Section 2 */}
-      </Reveal>
-      <Reveal {...sectionRevealProps}>
-        <Solution /> {/* Section 3 */}
-      </Reveal>
-      <Reveal {...sectionRevealProps}>
-        <Roles /> {/* Section 4 */}
-      </Reveal>
-      <Reveal {...sectionRevealProps}>
-        <TalentNetwork />
-      </Reveal>
-      <Reveal {...sectionRevealProps}>
-        <HowItWorks /> {/* Section 5 */}
-      </Reveal>
-      <Reveal {...sectionRevealProps}>
-        <Pricing /> {/* Section 6 */}
-      </Reveal>
-      <Reveal {...sectionRevealProps}>
-        <Guarantee /> {/* Section 7 */}
-      </Reveal>
-      <Reveal {...sectionRevealProps}>
-        <WhyUs /> {/* Section 8 */}
-      </Reveal>
-      <Reveal {...sectionRevealProps}>
-        <FAQ /> {/* Section 9 */}
-      </Reveal>
-      <Reveal {...sectionRevealProps}>
-        <FinalCTA /> {/* Section 10 */}
-      </Reveal>
+      {/* Sections render with their background always opaque — each one
+          already fades its own inner content (cards, rows, paragraphs) in
+          via its own <Reveal> usage. An earlier version also wrapped the
+          whole section in a fading/translating Reveal, which meant the
+          section's own colored background was invisible for the first
+          ~15% it scrolled into view — exposing the dark page background
+          underneath, most visible right at a dark-to-light seam. */}
+      <Problem /> {/* Section 2 */}
+      <Solution /> {/* Section 3 */}
+      <Roles /> {/* Section 4 */}
+      <TalentNetwork />
+      <HowItWorks /> {/* Section 5 */}
+      <Pricing /> {/* Section 6 */}
+      <Guarantee /> {/* Section 7 */}
+      <WhyUs /> {/* Section 8 */}
+      <FAQ /> {/* Section 9 */}
+      <FinalCTA /> {/* Section 10 */}
     </>
   );
 }

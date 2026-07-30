@@ -109,19 +109,17 @@ export const locations = [
 ];
 
 // -- SECTION 8: why us (three pillars) -----------------------
+// Just one pillar on purpose — the other two used to restate facts
+// already covered by Problem/Solution/TalentNetwork (the vetted regional
+// network, the skills/interview/communication screening) almost
+// verbatim. This one is the section's only genuinely distinct claim:
+// not a numbers-backed stat (early-stage startup, nothing to point to
+// yet), but a credibility angle nothing else on the page makes.
 export const pillars = [
   {
     title: "We run our own companies on this model",
     body: "was built by operators who've hired, tested, and managed remote professionals to run real, profitable businesses. We depend on ours every day — we're not guessing.",
     leadWithBrand: true,
-  },
-  {
-    title: "A vetted network, not an open marketplace",
-    body: "Our candidates come from a private network spanning Southeast Asia, South Asia, West Africa, and Latin America — people who've already proven themselves on real work. You're hiring from a bench, not a stranger pool.",
-  },
-  {
-    title: "We screen for what actually matters",
-    body: "Skills tests. Structured interviews. English and communication screening. We calibrate every search to your definition of great before a single candidate reaches you.",
   },
 ];
 

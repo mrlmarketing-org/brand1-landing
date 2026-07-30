@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
+import { StartHiringGateProvider } from "./StartHiringGate.jsx";
 import { pushEvent } from "../lib/analytics.js";
 import { initSmoothScroll, scrollToTarget } from "../lib/smoothScroll.js";
 
@@ -99,10 +100,10 @@ export default function Layout() {
   useCalendlyConversion();
 
   return (
-    <>
+    <StartHiringGateProvider>
       <Navbar />
       <Outlet />
       <Footer />
-    </>
+    </StartHiringGateProvider>
   );
 }

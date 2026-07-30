@@ -22,6 +22,44 @@ function getResend() {
 const app = express();
 app.use(express.json());
 
+// Skips the check entirely if RECAPTCHA_API_KEY isn't set, so the
+// feature is opt-in rather than breaking submissions before it's
+// configured. Uses reCAPTCHA Enterprise's createAssessment endpoint —
+// Google's recommended replacement for the legacy siteverify API, same
+// site key, richer response. 0.5 is Google's own suggested cutoff for
+// "likely human"; tune it down if real submissions start getting
+// rejected, up if spam still gets through.
+async function verifyRecaptcha(token, expectedAction) {
+  if (!process.env.RECAPTCHA_API_KEY) return true;
+  if (!token) return false;
+
+  const url = `https://recaptchaenterprise.googleapis.com/v1/projects/${process.env.GOOGLE_CLOUD_PROJECT_ID}/assessments?key=${process.env.RECAPTCHA_API_KEY}`;
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        event: {
+          token,
+          siteKey: process.env.VITE_RECAPTCHA_SITE_KEY,
+          expectedAction,
+        },
+      }),
+    });
+    const data = await res.json();
+
+    if (!data.tokenProperties?.valid) {
+      console.error("reCAPTCHA token invalid:", data.tokenProperties?.invalidReason);
+      return false;
+    }
+    return data.tokenProperties.action === expectedAction && data.riskAnalysis?.score >= 0.5;
+  } catch (err) {
+    console.error("reCAPTCHA assessment request failed:", err);
+    return false;
+  }
+}
+
 // Both the homepage's secondary CTA (FinalCTA's role-details form,
 // variant="role") and the Contact page's general-inquiry form
 // (variant="subject") post here. `variant` picks which email copy to
@@ -33,10 +71,14 @@ app.use(express.json());
 // the Vercel function wrapper (api/[...all].js) — same code, two ways
 // to run it.
 app.post("/api/contact", async (req, res) => {
-  const { name, email, role, details, variant } = req.body || {};
+  const { name, email, role, details, variant, recaptchaToken } = req.body || {};
 
   if (!name || !email || !role) {
     return res.status(400).json({ error: "Missing required fields." });
+  }
+
+  if (!(await verifyRecaptcha(recaptchaToken, "contact_form"))) {
+    return res.status(400).json({ error: "Failed spam verification." });
   }
 
   if (!process.env.RESEND_API_KEY || !process.env.CONTACT_TO_EMAIL) {

@@ -171,6 +171,21 @@ export default function ContactForm({
           {status === "sending" ? "Sending…" : submitLabel}
         </button>
 
+        {/* Required by Google's reCAPTCHA terms whenever the badge is
+            hidden (see .grecaptcha-badge in index.css) — this text
+            substitutes for it. */}
+        <p className="form-note recaptcha-note">
+          This site is protected by reCAPTCHA and the Google{" "}
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+            Privacy Policy
+          </a>{" "}
+          and{" "}
+          <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">
+            Terms of Service
+          </a>{" "}
+          apply.
+        </p>
+
         {status === "error" && (
           <p className="form-note" style={{ color: "#e5484d" }}>
             Something went wrong. Please email us instead.

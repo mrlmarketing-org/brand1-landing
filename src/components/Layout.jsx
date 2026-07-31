@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
@@ -102,7 +102,13 @@ export default function Layout() {
   return (
     <StartHiringGateProvider>
       <Navbar />
-      <Outlet />
+      {/* Pages are lazy-loaded (see App.jsx) so a visitor only downloads
+          the page they're actually on — Navbar/Footer stay outside this
+          boundary so they render immediately rather than blanking out
+          with the page content while its chunk loads. */}
+      <Suspense fallback={null}>
+        <Outlet />
+      </Suspense>
       <Footer />
     </StartHiringGateProvider>
   );

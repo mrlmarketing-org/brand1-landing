@@ -1,35 +1,41 @@
-import { BRAND } from "../data/content.js";
 import Reveal from "./motion/Reveal.jsx";
-import { ShieldIcon, ListCheckIcon, HeartIcon } from "./icons.jsx";
-import teamPhoto from "../assets/photos/team-analytics-2.jpg";
+import { GlobeIcon, ShieldIcon, ListCheckIcon, HeartIcon } from "./icons.jsx";
+import teamPhoto from "../assets/photos/remote-video-call.jpg";
 
-const steps = [
+// Framed as parallel services (what we do for you), not sequential steps —
+// the actual step-by-step process already lives in HowItWorks further down
+// the page. No numbering here on purpose: these aren't a sequence, they're
+// four things we handle so you don't have to.
+const services = [
   {
-    num: "01",
+    icon: GlobeIcon,
+    title: "Talent sourcing",
+    body: "Every candidate comes from a private network we've built and tested across our own companies — not a cold resume pile.",
+  },
+  {
     icon: ShieldIcon,
-    title: "We vet them",
-    body: `Sourced from a private network ${BRAND} has built and tested across our own companies.`,
+    title: "Skills & vetting",
+    body: "Skills tests, structured interviews, and English/communication screening — every candidate clears the bar before you ever see them.",
   },
   {
-    num: "02",
     icon: ListCheckIcon,
-    title: "You pick who fits",
-    body: "You get a shortlist of people who've already cleared the bar. Choose your person.",
+    title: "Shortlist & direct hire",
+    body: "You interview a shortlist of finalists and hire your pick directly — no leasing, no staffing markup.",
   },
   {
-    num: "03",
     icon: HeartIcon,
     title: "You own it",
-    body: "Hired, paid, and managed directly — like anyone on your team. No middleman, no leash back to us.",
+    body: "They're paid by you, managed by you, on your team like anyone else. No middleman, no leash back to us.",
   },
 ];
 
 // SECTION 3 — The solution
 export default function Solution() {
   return (
-    <section className="section section-alt">
+    <section className="section on-light" id="how-we-help">
       <div className="container">
         <div className="section-head">
+          <span className="eyebrow">How we help</span>
           <h2 className="section-title">
             We find your person. You own the relationship.
           </h2>
@@ -40,14 +46,11 @@ export default function Solution() {
         </div>
 
         <div className="solution-grid">
-          {steps.map((s, i) => (
-            <Reveal key={s.title} delay={i * 0.1}>
+          {services.map((s, i) => (
+            <Reveal key={s.title} delay={i * 0.08}>
               <div className="solution-card">
-                <div className="solution-card-head">
-                  <span className="solution-card-num">{s.num}</span>
-                  <div className="solution-card-icon">
-                    <s.icon size={20} />
-                  </div>
+                <div className="solution-card-icon">
+                  <s.icon size={20} />
                 </div>
                 <h3>{s.title}</h3>
                 <p>{s.body}</p>
@@ -58,7 +61,14 @@ export default function Solution() {
 
         <Reveal>
           <div className="solution-photo">
-            <img src={teamPhoto} alt="Workers reviewing an upward-trending analytics chart together" />
+            <img src={teamPhoto} alt="A man on a video call with several remote teammates" />
+            <div className="solution-photo-overlay">
+              <span className="solution-photo-eyebrow">What "you own it" looks like</span>
+              <span className="solution-photo-caption">
+                They join your stand-ups, use your tools, and report to you — like anyone else
+                you've hired.
+              </span>
+            </div>
           </div>
         </Reveal>
       </div>

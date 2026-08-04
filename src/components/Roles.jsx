@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { roles } from "../data/content.js";
 import { people } from "../data/people.js";
 import Reveal from "./motion/Reveal.jsx";
+import { GatedStartHiringLink } from "./StartHiringGate.jsx";
 import bookkeepingPhoto from "../assets/photos/bookkeeping-desk.jpg";
 import developerPhoto from "../assets/photos/developer-code-screen.jpg";
 import salesPhoto from "../assets/photos/sales-outreach-call.jpg";
@@ -87,7 +88,11 @@ export default function Roles() {
 
         <p className="roles-note">
           Don't see your role? If it can be done remotely, we can likely staff
-          it — just ask.
+          it —{" "}
+          <GatedStartHiringLink to="/start-hiring#role-form" className="btn-link">
+            just ask
+          </GatedStartHiringLink>
+          .
         </p>
       </div>
     </section>

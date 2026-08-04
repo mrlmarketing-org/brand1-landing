@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { roles } from "../data/content.js";
 import { pushEvent } from "../lib/analytics.js";
+import { getRecaptchaToken } from "../lib/recaptcha.js";
 
-const emptyForm = { name: "", email: "", role: "", details: "" };
+const emptyForm = { name: "", email: "", role: "", roleOther: "", details: "" };
 
 // Powers the homepage's "role details" form (FinalCTA), the Start Hiring
 // page, the Contact page's general-inquiry form, and the Find a Job page
@@ -30,10 +31,14 @@ export default function ContactForm({
     setStatus("sending");
 
     try {
+      const recaptchaToken = await getRecaptchaToken("contact_form");
+      // When "Something else" is picked, send the specific role the visitor
+      // typed instead of the literal placeholder option.
+      const role = form.role === "Something else" ? form.roleOther : form.role;
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, variant }),
+        body: JSON.stringify({ ...form, role, variant, recaptchaToken }),
       });
       if (res.ok) {
         setStatus("success");
@@ -128,6 +133,19 @@ export default function ContactForm({
               </>
             )}
           </div>
+          {variant === "role" && form.role === "Something else" && (
+            <div className="field full">
+              <label htmlFor="roleOther">What's the role?</label>
+              <input
+                id="roleOther"
+                name="roleOther"
+                value={form.roleOther}
+                onChange={handleChange}
+                placeholder="e.g. Social media management"
+                required
+              />
+            </div>
+          )}
           <div className="field full">
             <label htmlFor="details">
               {variant === "role" ? "A little about the role" : variant === "candidate" ? "Tell us about yourself" : "Message"}
@@ -137,6 +155,7 @@ export default function ContactForm({
               name="details"
               value={form.details}
               onChange={handleChange}
+              required={variant === "role"}
               placeholder={
                 variant === "role"
                   ? "Hours per week, key skills or software, and anything else that helps us understand what you need."
@@ -151,6 +170,21 @@ export default function ContactForm({
         <button type="submit" className="btn btn-primary" disabled={status === "sending"}>
           {status === "sending" ? "Sending…" : submitLabel}
         </button>
+
+        {/* Required by Google's reCAPTCHA terms whenever the badge is
+            hidden (see .grecaptcha-badge in index.css) — this text
+            substitutes for it. */}
+        <p className="form-note recaptcha-note">
+          This site is protected by reCAPTCHA and the Google{" "}
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+            Privacy Policy
+          </a>{" "}
+          and{" "}
+          <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">
+            Terms of Service
+          </a>{" "}
+          apply.
+        </p>
 
         {status === "error" && (
           <p className="form-note" style={{ color: "#e5484d" }}>

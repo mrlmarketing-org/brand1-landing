@@ -5,7 +5,7 @@ import Reveal from "./motion/Reveal.jsx";
 // SECTION 7 — The guarantee (standalone dark trust block)
 export default function Guarantee() {
   return (
-    <section className="guarantee">
+    <section className="guarantee" id="guarantee">
       <div className="container">
         <Reveal>
           <div className="inner">
@@ -13,7 +13,7 @@ export default function Guarantee() {
               <span className="badge-glow" />
               <ShieldIcon size={30} />
             </motion.div>
-            <h2>Two weeks to be sure. Or your money back.</h2>
+            <h2>A 2-week trial period. No lock-in.</h2>
             <p>
               We're confident in our people because we vet them the same way we vet
               talent for our own companies. So your placement is protected: if your

@@ -8,6 +8,7 @@
     "dev:client": "vite",
     "dev:server": "node server/index.js",
     "build": "vite build",
+    "build:globe-data": "node scripts/build-globe-data.mjs",
     "start": "node server/index.js",
     "preview": "vite preview"
   },
@@ -22,12 +23,13 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.18.1",
     "resend": "^6.17.1",
-    "topojson-client": "^3.1.0",
-    "world-atlas": "^2.0.2"
+    "topojson-client": "^3.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
     "concurrently": "^9.2.3",
-    "vite": "^5.4.8"
+    "topojson-simplify": "^3.0.3",
+    "vite": "^5.4.8",
+    "world-atlas": "^2.0.2"
   }
 }

@@ -6,7 +6,7 @@ export default function FindAJob() {
   return (
     <>
       <SEO
-        title="Find a job"
+        title="Find a remote job"
         path="/find-a-job"
         description="Looking for remote work? Tell us what you're looking to do and we'll reach out if there's a fit."
       />
@@ -15,7 +15,7 @@ export default function FindAJob() {
         <div className="container">
           <Reveal>
             <span className="eyebrow eyebrow-shine">For job seekers</span>
-            <h1>Find a job</h1>
+            <h1>Find a remote job</h1>
             <p className="subhead">
               Tell us what you're looking to do. If there's a fit with one of
               our clients, we'll reach out.
@@ -29,6 +29,8 @@ export default function FindAJob() {
           <Reveal x={0} y={16}>
             <ContactForm
               variant="candidate"
+              title="Looking to join our talent pool?"
+              subtitle="Tell us a bit about yourself and we'll reach out if there's a fit with one of our clients."
               submitLabel="Submit"
               successTitle="Thanks — we've got your details"
               successBody="We'll be in touch if there's a fit with one of our clients."

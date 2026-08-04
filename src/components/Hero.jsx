@@ -3,19 +3,15 @@ import { ArrowDown } from "./icons.jsx";
 import HiringFlowAnimation from "./HiringFlowAnimation.jsx";
 import Globe from "./Globe.jsx";
 import Reveal from "./motion/Reveal.jsx";
-import CountUp from "./motion/CountUp.jsx";
 import { scrollToTarget } from "../lib/smoothScroll.js";
-
-const heroStats = [
-  { value: 2, suffix: " weeks", label: "money-back window", color: "var(--accent)" },
-  { value: 0, prefix: "$", label: "monthly markup", color: "var(--cream)" },
-  { value: 100, suffix: "%", label: "pre-vetted talent", color: "var(--accent)" },
-];
 
 // SECTION 1 — Hero
 export default function Hero() {
   return (
     <header className="hero" id="top">
+      <div className="hero-pattern-mask" aria-hidden="true">
+        <div className="hero-pattern" />
+      </div>
       <div className="container hero-grid">
         <div className="hero-copy">
           <Reveal>
@@ -45,26 +41,17 @@ export default function Hero() {
               </a>
             </div>
           </Reveal>
-
-          <Reveal delay={0.4}>
-            <div className="hero-stats">
-              {heroStats.map((s) => (
-                <div className="hero-stat" key={s.label}>
-                  <div className="hero-stat-value" style={{ color: s.color }}>
-                    <CountUp value={s.value} prefix={s.prefix} suffix={s.suffix} />
-                  </div>
-                  <div className="hero-stat-label">{s.label}</div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
         </div>
+      </div>
 
-        <div className="hero-side">
-          <Reveal delay={0.1} className="hero-globe-wrap">
-            <Globe className="hero-globe" />
-          </Reveal>
-        </div>
+      {/* Comes after hero-copy in source order so mobile (.hero-side
+          reverts to position:static there) stacks text above globe;
+          on desktop the absolute positioning puts it behind the text
+          regardless of DOM order. */}
+      <div className="hero-side">
+        <Reveal delay={0.1} className="hero-globe-wrap">
+          <Globe className="hero-globe" />
+        </Reveal>
       </div>
 
       <div className="container hero-flow">

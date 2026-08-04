@@ -1,5 +1,5 @@
 // One-time setup: registers a Calendly webhook subscription so Calendly
-// notifies /api/webhooks/calendly whenever someone books a call (see
+// notifies /api/calendly-webhook whenever someone books a call (see
 // server/calendlyWebhook.js). Requires the Standard plan or above —
 // webhook access isn't available on Calendly's free tier.
 //
@@ -46,7 +46,7 @@ const res = await fetch("https://api.calendly.com/webhook_subscriptions", {
   method: "POST",
   headers: authHeaders,
   body: JSON.stringify({
-    url: `${siteUrl.replace(/\/$/, "")}/api/webhooks/calendly`,
+    url: `${siteUrl.replace(/\/$/, "")}/api/calendly-webhook`,
     events: ["invitee.created"],
     organization: me.resource.current_organization,
     scope: "organization",

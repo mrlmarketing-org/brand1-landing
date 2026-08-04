@@ -25,7 +25,12 @@ const app = express();
 // Registered before the global express.json() below so this route gets
 // the untouched raw body — signature verification needs the exact bytes
 // Calendly signed, not JSON re-serialized by another parser.
-app.post("/api/webhooks/calendly", express.raw({ type: "application/json" }), calendlyWebhookHandler);
+//
+// Single path segment deliberately (not /api/webhooks/calendly) — this
+// Vercel project's vercel.json SPA-fallback rewrite has an unresolved bug
+// where any /api/* path with 2+ segments gets swallowed by the rewrite
+// before reaching this app at all, while single-segment paths work fine.
+app.post("/api/calendly-webhook", express.raw({ type: "application/json" }), calendlyWebhookHandler);
 
 app.use(express.json());
 

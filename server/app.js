@@ -9,6 +9,7 @@ import {
   candidateNotificationEmail,
   candidateConfirmationEmail,
 } from "./emailTemplates.js";
+import { calendlyWebhookHandler } from "./calendlyWebhook.js";
 
 // Lazily constructed so it always reads RESEND_API_KEY after env vars
 // are loaded, regardless of which entry point (local server vs. the
@@ -20,6 +21,12 @@ function getResend() {
 }
 
 const app = express();
+
+// Registered before the global express.json() below so this route gets
+// the untouched raw body — signature verification needs the exact bytes
+// Calendly signed, not JSON re-serialized by another parser.
+app.post("/api/webhooks/calendly", express.raw({ type: "application/json" }), calendlyWebhookHandler);
+
 app.use(express.json());
 
 // Skips the check entirely if RECAPTCHA_API_KEY isn't set, so the

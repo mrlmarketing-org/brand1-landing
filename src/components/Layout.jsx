@@ -4,6 +4,7 @@ import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 import { StartHiringGateProvider } from "./StartHiringGate.jsx";
 import { pushEvent } from "../lib/analytics.js";
+import { captureGclid } from "../lib/gclid.js";
 import { initSmoothScroll, scrollToTarget } from "../lib/smoothScroll.js";
 
 // Lenis takes over wheel/touch scrolling for the whole app for the
@@ -26,6 +27,13 @@ function useDataLayerPageview() {
       page_location: window.location.href,
     });
   }, [pathname, search]);
+}
+
+// Runs on every navigation (not just the first) since an ad could land
+// someone on any route, not only the homepage.
+function useGclidCapture() {
+  const { search } = useLocation();
+  useEffect(() => captureGclid(), [search]);
 }
 
 // Calendly's popup widget (loaded in index.html, opened from
@@ -97,6 +105,7 @@ export default function Layout() {
   useSmoothScroll();
   useScrollOnNavigate();
   useDataLayerPageview();
+  useGclidCapture();
   useCalendlyConversion();
 
   return (

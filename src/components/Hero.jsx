@@ -18,7 +18,7 @@ export default function Hero() {
             <span className="eyebrow eyebrow-shine">Hire once. No monthly markup.</span>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1>Hire A players with a powerful impact for 90% less than US based companies.</h1>
+            <h1>Hire A-players with a powerful impact for 90% less than US based companies.</h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="subhead">

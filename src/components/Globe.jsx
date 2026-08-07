@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { geoOrthographic, geoPath, geoDistance } from "d3-geo";
 import { feature } from "topojson-client";
@@ -35,21 +35,11 @@ const pins = [
 // on one side of the globe, Latin America on the other), so no single
 // fixed orientation can keep all of them on the visible face at once.
 // Instead the globe re-aims itself to face whichever pin is taking its
-// turn (see the pin-cycling effect below). CENTER is just where it comes
-// to rest after the initial spin-in, before that cycling takes over.
+// turn (see the pin-cycling effect below). CENTER is just where it sits
+// before that cycling takes over on mount.
 const CENTER = { lon: 80, lat: 15 };
 
-// The globe spins in from this far east of CENTER on mount, then settles.
-// Longitude-only so it reads as the sphere turning on its polar axis
-// rather than tilting. One-time cost: a perpetual spin would mean
-// recomputing the ~180-country landmass path every frame forever, which
-// is real (if small) CPU/battery drain for a decorative element —
-// spinning once into place gets the same "it turned to show us" feel
-// for a bounded, one-off cost instead of an ongoing one.
-const SPIN_FROM_OFFSET = 130;
-const SPIN_MS = 1400;
-
-// Once settled, exactly one pin is on screen at a time: the globe turns
+// Once mounted, exactly one pin is on screen at a time: the globe turns
 // to face it, it pings in (radar-style), holds briefly, then fades out —
 // then the globe turns to the next country. Loops through the whole list
 // forever. Countries live on both sides of the world (Asia/Africa and
@@ -63,41 +53,16 @@ function easeOutCubic(t) {
   return 1 - Math.pow(1 - t, 3);
 }
 
-// A d3-geo orthographic-projection globe that spins once into its
-// resting position on mount, then turns to face each network country in
-// turn — pinging it in, holding, fading out, then rotating on to the
-// next — cycling through the whole list forever.
+// A d3-geo orthographic-projection globe that turns to face each network
+// country in turn from mount — pinging it in, holding, fading out, then
+// rotating on to the next — cycling through the whole list forever.
 export default function Globe({ className }) {
   const reduceMotion = useReducedMotion();
-  const [rotationLon, setRotationLon] = useState(
-    reduceMotion ? CENTER.lon : CENTER.lon + SPIN_FROM_OFFSET
-  );
+  const [rotationLon, setRotationLon] = useState(CENTER.lon);
   const [rotationLat, setRotationLat] = useState(CENTER.lat);
-  const [spinDone, setSpinDone] = useState(reduceMotion);
   const [activeIndex, setActiveIndex] = useState(-1);
-  const frameRef = useRef();
 
   useEffect(() => {
-    if (reduceMotion) return;
-    const from = CENTER.lon + SPIN_FROM_OFFSET;
-    const to = CENTER.lon;
-    const start = performance.now();
-
-    function tick(now) {
-      const t = Math.min(1, (now - start) / SPIN_MS);
-      setRotationLon(from + (to - from) * easeOutCubic(t));
-      if (t < 1) {
-        frameRef.current = requestAnimationFrame(tick);
-      } else {
-        setSpinDone(true);
-      }
-    }
-    frameRef.current = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frameRef.current);
-  }, [reduceMotion]);
-
-  useEffect(() => {
-    if (!spinDone) return;
     let cancelled = false;
     let idx = 0;
     let currentLon = rotationLon;
@@ -171,7 +136,7 @@ export default function Globe({ className }) {
       cancelAnimationFrame(rafId);
       timers.forEach(clearTimeout);
     };
-  }, [reduceMotion, spinDone]);
+  }, [reduceMotion]);
 
   // The projection only needs fitExtent (which depends on the Sphere
   // outline, not rotation) computed once; rotating it and re-walking
@@ -198,7 +163,7 @@ export default function Globe({ className }) {
 
     // Only whichever single pin is mid-turn is a candidate — the globe
     // has already rotated to face it by the time it's set active.
-    const candidates = spinDone && activeIndex >= 0 ? [pins[activeIndex]] : [];
+    const candidates = activeIndex >= 0 ? [pins[activeIndex]] : [];
 
     // Only render pins that land on the visible side of the sphere — a
     // small margin keeps labels off the horizon edge. In practice this
@@ -217,7 +182,7 @@ export default function Globe({ className }) {
       outlinePath: path({ type: "Sphere" }),
       points: visiblePoints,
     };
-  }, [projection, countries, rotationLon, rotationLat, spinDone, activeIndex, reduceMotion]);
+  }, [projection, countries, rotationLon, rotationLat, activeIndex, reduceMotion]);
 
   return (
     <svg

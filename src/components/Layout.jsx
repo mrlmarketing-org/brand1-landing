@@ -3,7 +3,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 import ChatWidget from "./ChatWidget.jsx";
-import { StartHiringGateProvider } from "./StartHiringGate.jsx";
 import { pushEvent } from "../lib/analytics.js";
 import { captureGclid } from "../lib/gclid.js";
 import { initSmoothScroll, scrollToTarget } from "../lib/smoothScroll.js";
@@ -110,7 +109,7 @@ export default function Layout() {
   useCalendlyConversion();
 
   return (
-    <StartHiringGateProvider>
+    <>
       <Navbar />
       {/* Pages are lazy-loaded (see App.jsx) so a visitor only downloads
           the page they're actually on — Navbar/Footer stay outside this
@@ -121,6 +120,6 @@ export default function Layout() {
       </Suspense>
       <Footer />
       <ChatWidget />
-    </StartHiringGateProvider>
+    </>
   );
 }

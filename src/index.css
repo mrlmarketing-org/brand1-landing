@@ -260,6 +260,19 @@ h2.section-title {
 .nav-call:hover {
   color: var(--ink);
 }
+/* Job seekers used to get filtered out by a "are you an employer?"
+   popup on Start hiring; now that's gone, so this needs to read as its
+   own real option in the header rather than a muted afterthought next
+   to the primary CTA. */
+.nav-find-job {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.nav-find-job:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent-dark);
+  color: var(--accent);
+}
 .nav-toggle {
   display: none;
   align-items: center;
@@ -678,7 +691,8 @@ h2.section-title {
 }
 
 /* ============================================================
-   TRUST MARQUEE — between Hero and Problem
+   TRUST STRIP — between Hero and Problem. Static row, not a scrolling
+   marquee (see TrustMarquee.jsx).
    ============================================================ */
 .marquee {
   overflow: hidden;
@@ -688,13 +702,10 @@ h2.section-title {
 }
 .marquee-track {
   display: flex;
-  width: max-content;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 14px;
   padding: 0 7px;
-  animation: marquee-scroll 34s linear infinite;
-}
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
 }
 .marquee-card {
   display: flex;
@@ -722,20 +733,6 @@ h2.section-title {
   color: var(--accent);
   flex-shrink: 0;
 }
-@keyframes marquee-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
-}
-
 /* ============================================================
    PROBLEM (section 2)
    ============================================================ */
@@ -2051,47 +2048,6 @@ h2.section-title {
   .section {
     padding: 60px 0;
   }
-}
-
-/* ============================================================
-   START HIRING GATE
-   ============================================================ */
-/* See StartHiringGate.jsx. Dim backdrop + a small centered card rather
-   than a full lightbox — this is one question, not a document. */
-.gate-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: rgba(4, 20, 28, 0.55);
-  backdrop-filter: blur(2px);
-}
-.gate-toast {
-  width: 100%;
-  max-width: 380px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 26px 24px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-}
-.gate-toast p {
-  margin: 0 0 20px;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--ink);
-  text-align: center;
-}
-.gate-actions {
-  display: flex;
-  gap: 12px;
-}
-.gate-actions .btn {
-  flex: 1;
-  justify-content: center;
 }
 
 /* ============================================================

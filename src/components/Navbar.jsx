@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Logo from "./Logo.jsx";
-import { GatedStartHiringLink } from "./StartHiringGate.jsx";
 import { MenuIcon, CloseIcon, ArrowRight } from "./icons.jsx";
 import { CONTACT_PHONE, CONTACT_PHONE_HREF } from "../data/content.js";
 
@@ -28,6 +27,11 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const reduceMotion = useReducedMotion();
+  // Don't show a page's own CTA in the header while you're already on
+  // it — "Find a job" on /find-a-job and "Start hiring" on /start-hiring
+  // are both redundant with the page you're looking at.
+  const onFindAJob = location.pathname === "/find-a-job";
+  const onStartHiring = location.pathname === "/start-hiring";
 
   // Close the mobile menu on every navigation, including in-page
   // section jumps (those only change the hash, not the pathname).
@@ -63,12 +67,16 @@ export default function Navbar() {
             Call Us {navPhone}
           </a>
           <div className="nav-cta-group">
-            <Link to="/find-a-job" className="btn btn-secondary">
-              Find a job
-            </Link>
-            <GatedStartHiringLink to="/start-hiring" className="btn btn-primary">
-              Start hiring <ArrowRight />
-            </GatedStartHiringLink>
+            {!onFindAJob && (
+              <Link to="/find-a-job" className="btn btn-secondary nav-find-job">
+                Find a job
+              </Link>
+            )}
+            {!onStartHiring && (
+              <Link to="/start-hiring" className="btn btn-primary">
+                Start hiring <ArrowRight />
+              </Link>
+            )}
           </div>
           <button
             type="button"
@@ -104,12 +112,16 @@ export default function Navbar() {
               Call Us {navPhone}
             </a>
             <div className="mobile-menu-cta">
-              <Link to="/find-a-job" className="btn btn-secondary btn-lg">
-                Find a job
-              </Link>
-              <GatedStartHiringLink to="/start-hiring" className="btn btn-primary btn-lg">
-                Start hiring <ArrowRight />
-              </GatedStartHiringLink>
+              {!onFindAJob && (
+                <Link to="/find-a-job" className="btn btn-secondary nav-find-job btn-lg">
+                  Find a job
+                </Link>
+              )}
+              {!onStartHiring && (
+                <Link to="/start-hiring" className="btn btn-primary btn-lg">
+                  Start hiring <ArrowRight />
+                </Link>
+              )}
             </div>
           </motion.div>
         )}

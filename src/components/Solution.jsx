@@ -5,8 +5,10 @@ import teamPhoto from "../assets/photos/remote-video-call.jpg";
 // Framed as parallel services (what we do for you), not sequential steps —
 // the actual step-by-step process already lives in HowItWorks further down
 // the page. No numbering here on purpose: these aren't a sequence, they're
-// four things we handle so you don't have to.
-const services = [
+// four things we handle so you don't have to. Exported (not just local)
+// so the chat widget's "services" reply can quote this section directly
+// instead of drifting out of sync with its own copy of the same list.
+export const howWeHelp = [
   {
     icon: GlobeIcon,
     title: "Talent sourcing",
@@ -46,7 +48,7 @@ export default function Solution() {
         </div>
 
         <div className="solution-grid">
-          {services.map((s, i) => (
+          {howWeHelp.map((s, i) => (
             <Reveal key={s.title} delay={i * 0.08}>
               <div className="solution-card">
                 <div className="solution-card-icon">

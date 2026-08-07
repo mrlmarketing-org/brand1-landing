@@ -276,39 +276,45 @@ export function contactNotificationEmail({ name, email, subject, details }) {
   };
 }
 
-// Case 5 — handoff from the chat widget (variant="chat"). `reason` is
-// the escalate_to_human tool's one-line summary of why the bot punted;
-// `transcript` is the conversation so far, so whoever picks this up
-// doesn't have to ask the visitor to repeat themselves.
-export function chatEscalationNotificationEmail({ name, email, reason, transcript }) {
+// Case 5 — handoff from the chat widget (variant="chat"), currently
+// reached only via the "Other" option in the "Looking to hire someone"
+// menu (see src/components/ChatWidget.jsx) — `reason` is a fixed label
+// for that path today, but kept as its own field rather than folded
+// into the subject since the widget's guided flow will grow more
+// branches, each able to pass its own reason without touching this
+// template. Subject is deliberately its own fixed line (not built from
+// `reason`) so it reads distinctly from the other four templates in
+// this file ("New role inquiry: X" / "New candidate inquiry: X" /
+// "New contact message: X") at a glance in an inbox.
+export function chatEscalationNotificationEmail({ name, email, reason, message }) {
   const bodyHtml = `
-    <p style="margin:0 0 4px;">The chat widget handed off a conversation.</p>
+    <p style="margin:0 0 4px;">Someone just reached out through the chat widget.</p>
     ${detailRows([
       ["Name", name],
       ["Email", email],
       ["Reason", reason],
-      ["Transcript", transcript || "(none)"],
+      ["Message", message || "(none provided)"],
     ])}
     <p style="margin:12px 0 0; font-size:13px; color:${COLORS.muted};">Reply to this email to respond to ${escapeHtml(name)} directly.</p>
   `;
 
   return {
-    subject: `Chat handoff: ${reason}`,
+    subject: "New message from the chat widget",
     html: layout({
-      preheader: `${name} was handed off from the chat widget — ${reason}`,
-      eyebrow: "Chat handoff",
-      heading: "A chat conversation needs a human",
+      preheader: `${name} reached out through the chat widget — ${reason}`,
+      eyebrow: "Chat widget",
+      heading: "New message from the chat widget",
       bodyHtml,
     }),
     text: [
-      `Chat handoff: ${reason}`,
+      "New message from the chat widget",
       "",
       `Name: ${name}`,
       `Email: ${email}`,
       `Reason: ${reason}`,
       "",
-      "Transcript:",
-      transcript || "(none)",
+      "Message:",
+      message || "(none provided)",
     ].join("\n"),
   };
 }

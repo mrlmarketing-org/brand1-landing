@@ -120,7 +120,7 @@ app.post("/api/contact", async (req, res) => {
       : variant === "candidate"
       ? candidateNotificationEmail({ name, email, role, details })
       : variant === "chat"
-      ? chatEscalationNotificationEmail({ name, email, reason: role, transcript: details })
+      ? chatEscalationNotificationEmail({ name, email, reason: role, message: details })
       : roleInquiryNotificationEmail({ name, email, role, details });
   const confirmation =
     variant === "subject"

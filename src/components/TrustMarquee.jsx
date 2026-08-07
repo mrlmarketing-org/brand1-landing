@@ -1,11 +1,13 @@
 import { DollarIcon, CalendarOffIcon, ShieldIcon, ListCheckIcon, GlobeIcon, HeartIcon } from "./icons.jsx";
 
 // A logo marquee needs real client logos, which a new business doesn't
-// have yet — so this scrolls the value props instead (flat fee, no
+// have yet — so this shows the value props instead (flat fee, no
 // markup, guarantee, talent network). Swap for real client logos once
 // there are some worth showing. Each point gets its own icon + color
 // (rather than a repeated checkmark) so the row reads as a set of
-// distinct claims instead of one undifferentiated checklist.
+// distinct claims instead of one undifferentiated checklist. Static,
+// not auto-scrolling — it sits right under the hero's globe, which is
+// already the busiest thing on the page.
 const points = [
   { text: "Flat one-time fee", Icon: DollarIcon, color: "#f5b942" },
   { text: "No monthly markup", Icon: CalendarOffIcon, color: "#ff6b5e" },
@@ -16,13 +18,11 @@ const points = [
 ];
 
 export default function TrustMarquee() {
-  const items = [...points, ...points];
-
   return (
     <div className="marquee">
       <div className="marquee-track">
-        {items.map(({ text, Icon, color }, i) => (
-          <div className="marquee-card" key={`${text}-${i}`}>
+        {points.map(({ text, Icon, color }) => (
+          <div className="marquee-card" key={text}>
             <span
               className="marquee-icon"
               style={{ color, background: `${color}24` }}

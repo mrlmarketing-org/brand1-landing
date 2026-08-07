@@ -1,5 +1,4 @@
 import Reveal from "./motion/Reveal.jsx";
-import CountUp from "./motion/CountUp.jsx";
 import Logo from "./Logo.jsx";
 import bookkeepingPhoto from "../assets/photos/bookkeeping-desk.jpg";
 import customerServicePhoto from "../assets/photos/customer-service-agent.jpg";
@@ -51,7 +50,7 @@ export default function Problem() {
             <div className="problem-before-overlay">
               <span className="problem-before-eyebrow">{featured.label}</span>
               <span className="problem-before-figure">
-                <CountUp value={featured.value} prefix="$" suffix="+/yr" />
+                ${featured.value.toLocaleString("en-US")}+/yr
               </span>
             </div>
           </Reveal>
@@ -73,7 +72,7 @@ export default function Problem() {
                       {c.note && <span className="problem-stat-note"> ({c.note})</span>}
                     </span>
                     <span className="problem-stat-amount">
-                      <CountUp value={c.value} prefix="$" suffix="+" />
+                      ${c.value.toLocaleString("en-US")}+
                     </span>
                   </div>
                 ))}

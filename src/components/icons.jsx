@@ -120,6 +120,23 @@ export function GlobeIcon({ size = 18 }) {
   );
 }
 
+export function ChatBubbleIcon({ size = 24 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 5h16v11H8l-4 4V5z" />
+    </svg>
+  );
+}
+
+export function SendIcon({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="21" y1="3" x2="10" y2="14" />
+      <polygon points="21 3 14 21 10 14 3 10 21 3" />
+    </svg>
+  );
+}
+
 export function PersonIcon({ size = 18 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

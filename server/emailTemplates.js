@@ -276,6 +276,76 @@ export function contactNotificationEmail({ name, email, subject, details }) {
   };
 }
 
+// Case 5 — handoff from the chat widget (variant="chat"). `reason` is
+// the escalate_to_human tool's one-line summary of why the bot punted;
+// `transcript` is the conversation so far, so whoever picks this up
+// doesn't have to ask the visitor to repeat themselves.
+export function chatEscalationNotificationEmail({ name, email, reason, transcript }) {
+  const bodyHtml = `
+    <p style="margin:0 0 4px;">The chat widget handed off a conversation.</p>
+    ${detailRows([
+      ["Name", name],
+      ["Email", email],
+      ["Reason", reason],
+      ["Transcript", transcript || "(none)"],
+    ])}
+    <p style="margin:12px 0 0; font-size:13px; color:${COLORS.muted};">Reply to this email to respond to ${escapeHtml(name)} directly.</p>
+  `;
+
+  return {
+    subject: `Chat handoff: ${reason}`,
+    html: layout({
+      preheader: `${name} was handed off from the chat widget — ${reason}`,
+      eyebrow: "Chat handoff",
+      heading: "A chat conversation needs a human",
+      bodyHtml,
+    }),
+    text: [
+      `Chat handoff: ${reason}`,
+      "",
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Reason: ${reason}`,
+      "",
+      "Transcript:",
+      transcript || "(none)",
+    ].join("\n"),
+  };
+}
+
+// Case 5b — auto-reply for the chat handoff. Short, since they were
+// just talking to the bot a moment ago and already know the context.
+export function chatEscalationConfirmationEmail({ name }) {
+  const firstName = (name || "").trim().split(/\s+/)[0] || "there";
+  const bodyHtml = `
+    <p style="margin:0 0 14px;">Hi ${escapeHtml(firstName)},</p>
+    <p style="margin:0 0 14px;">
+      Thanks — we've got your details from the chat, and someone from our team will follow up shortly.
+    </p>
+    <p style="margin:0;">
+      ${BOOKING_URL ? "In the meantime, feel free to grab a time on our calendar so we can talk through what you need." : "In the meantime, feel free to reply to this email with anything else that's useful context."}
+    </p>
+  `;
+
+  return {
+    subject: `Thanks — we've got your details, ${firstName}`,
+    html: layout({
+      preheader: "Thanks — we've got your details and will be in touch shortly.",
+      eyebrow: "You're all set",
+      heading: "Thanks — we've got your details",
+      bodyHtml,
+      ctaLabel: BOOKING_URL ? "Book a call" : undefined,
+      ctaUrl: BOOKING_URL || undefined,
+    }),
+    text: [
+      `Hi ${firstName},`,
+      "",
+      "Thanks — we've got your details from the chat, and someone from our team will follow up shortly.",
+      BOOKING_URL ? `\nBook a call: ${BOOKING_URL}` : "",
+    ].join("\n"),
+  };
+}
+
 // Case 4 — auto-reply for the Contact page, mirroring its success copy
 // ("Thanks — your message is in" / one-business-day reply time).
 export function contactConfirmationEmail({ name, subject }) {

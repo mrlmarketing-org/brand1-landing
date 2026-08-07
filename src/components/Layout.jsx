@@ -2,6 +2,7 @@ import { Suspense, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
+import ChatWidget from "./ChatWidget.jsx";
 import { StartHiringGateProvider } from "./StartHiringGate.jsx";
 import { pushEvent } from "../lib/analytics.js";
 import { captureGclid } from "../lib/gclid.js";
@@ -119,6 +120,7 @@ export default function Layout() {
         <Outlet />
       </Suspense>
       <Footer />
+      <ChatWidget />
     </StartHiringGateProvider>
   );
 }

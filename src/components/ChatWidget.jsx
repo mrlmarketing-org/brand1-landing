@@ -25,6 +25,27 @@ function loadMessages() {
   return [GREETING];
 }
 
+// Guided shortcuts shown only before the first real exchange (see
+// `messages.length === 1` below) — mirrors the quick-reply pattern on
+// sites like hirewithnear.com's chat widget. Each maps to phrasing
+// chosen to reliably hit a specific bucket in server/chatDemoMode.js
+// (and reads naturally to the real Claude-backed path too, once that's
+// live), so clicking one is guaranteed to land a solid answer instead
+// of depending on freeform typing.
+const QUICK_REPLIES = [
+  { label: "💰 Pricing", text: "What's your pricing?" },
+  { label: "🧑‍💼 Roles we place", text: "What roles do you place?" },
+  { label: "⚙️ How it works", text: "How does it work?" },
+  { label: "💬 Talk to sales", text: "I'd like to talk to your team" },
+];
+
+// A live model call already takes a second or so and feels like it's
+// "thinking"; the keyword-matched demo-mode fallback (server/
+// chatDemoMode.js) resolves in milliseconds, which reads as broken/
+// instant rather than helpful. Padding every response to a minimum
+// delay keeps the typing indicator meaningful either way.
+const MIN_RESPONSE_MS = 700;
+
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState(loadMessages);
@@ -48,9 +69,7 @@ export default function ChatWidget() {
     listRef.current.scrollTop = listRef.current.scrollHeight;
   }, [messages, open, sending, escalate]);
 
-  const handleSend = async (e) => {
-    e.preventDefault();
-    const text = input.trim();
+  const sendText = async (text) => {
     if (!text || sending) return;
 
     const nextMessages = [...messages, { role: "user", content: text }];
@@ -58,6 +77,7 @@ export default function ChatWidget() {
     setInput("");
     setSending(true);
 
+    const startedAt = Date.now();
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
@@ -65,6 +85,11 @@ export default function ChatWidget() {
         body: JSON.stringify({ messages: nextMessages.slice(1) }),
       });
       const data = await res.json();
+
+      const elapsed = Date.now() - startedAt;
+      if (elapsed < MIN_RESPONSE_MS) {
+        await new Promise((resolve) => setTimeout(resolve, MIN_RESPONSE_MS - elapsed));
+      }
 
       if (!res.ok) {
         setMessages((m) => [
@@ -84,6 +109,11 @@ export default function ChatWidget() {
     } finally {
       setSending(false);
     }
+  };
+
+  const handleSend = (e) => {
+    e.preventDefault();
+    sendText(input.trim());
   };
 
   const handleHandoffSubmit = async (e) => {
@@ -149,6 +179,15 @@ export default function ChatWidget() {
                   {m.content}
                 </div>
               ))}
+              {messages.length === 1 && !sending && !escalate && (
+                <div className="chat-quick-replies">
+                  {QUICK_REPLIES.map((q) => (
+                    <button key={q.label} type="button" onClick={() => sendText(q.text)}>
+                      {q.label}
+                    </button>
+                  ))}
+                </div>
+              )}
               {sending && (
                 <div className="chat-bubble chat-bubble-assistant chat-typing">
                   <span />

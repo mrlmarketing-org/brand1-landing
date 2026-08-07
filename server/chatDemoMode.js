@@ -52,9 +52,28 @@ export function getDemoReply(messages) {
   }
 
   const q = keywords(text);
-  if (q.length === 0) {
+  // Fully anchored (^...$), not just a prefix match — "hello" alone is
+  // a bare greeting, but "hello what services do you offer" has a real
+  // question after it and should fall through to the buckets below
+  // instead of getting short-circuited into the generic greeting menu.
+  if (q.length === 0 || /^(hi|hey|hello|sup|yo)[\s!.,]*$/.test(text.trim())) {
     return {
       reply: `Hi! I can help with pricing, the roles we place, how the process works, or our guarantee. What would you like to know?${buildBookingNudge()}`,
+      escalate: false,
+    };
+  }
+
+  // Top-of-funnel "what do you even do" question — checked first since
+  // it's the most likely opener in a live demo and shouldn't fall
+  // through to the low-confidence escalate fallback.
+  if (
+    ["service", "services", "offer", "offers", "offering", "provide", "do you do", "help with", "assist", "about you", "who are you", "what is staffbrigade", "tell me about"].some(
+      (w) => text.includes(w)
+    )
+  ) {
+    const list = roles.map((r) => r.title).join(", ");
+    return {
+      reply: `We find and vet remote professionals for you to hire directly — one flat fee, no monthly markup. We place people across ${list}. Want pricing, or how the process works?${buildBookingNudge()}`,
       escalate: false,
     };
   }

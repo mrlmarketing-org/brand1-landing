@@ -2190,6 +2190,27 @@ h2.section-title {
   color: #08170d;
   border-bottom-right-radius: 4px;
 }
+.chat-quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chat-quick-replies button {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.chat-quick-replies button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
 .chat-typing {
   display: flex;
   gap: 4px;

@@ -14,6 +14,7 @@ import {
 } from "./emailTemplates.js";
 import { calendlyWebhookHandler } from "./calendlyWebhook.js";
 import { buildSystemPrompt, escalateToHumanTool } from "./chatKnowledgeBase.js";
+import { getDemoReply } from "./chatDemoMode.js";
 
 // Lazily constructed so it always reads RESEND_API_KEY after env vars
 // are loaded, regardless of which entry point (local server vs. the
@@ -211,9 +212,14 @@ app.post("/api/chat", async (req, res) => {
     return res.status(400).json({ error: "Invalid message." });
   }
 
+  // No API key configured yet — answer from the same knowledge base via
+  // keyword matching instead of a live model call (see
+  // chatDemoMode.js). Same request/response shape as the real path
+  // below, so the widget can't tell the difference; once
+  // ANTHROPIC_API_KEY is set, this branch stops being hit automatically
+  // — no other code changes needed to go live.
   if (!process.env.ANTHROPIC_API_KEY) {
-    console.error("Anthropic is not configured — set ANTHROPIC_API_KEY.");
-    return res.status(500).json({ error: "Chat is not configured yet." });
+    return res.json(getDemoReply(messages));
   }
 
   try {

@@ -1825,7 +1825,7 @@ h2.section-title {
     grid-template-columns: 1fr 1fr;
   }
   .hero {
-    padding: 48px 0 72px;
+    padding: 48px 0 32px;
   }
   /* The behind-the-text overlap only works with the room a wide
      desktop hero has — on narrow screens the globe goes back to
@@ -1904,6 +1904,18 @@ h2.section-title {
   }
   .flag-card-name {
     font-size: 11.5px;
+  }
+  /* Wrapping variable-width pills (justify-content:center) staggers
+     each row's edges against the next since every row centers on its
+     own content width independently — stacking one pill per row keeps
+     every edge aligned instead. */
+  .marquee {
+    padding: 18px 0;
+  }
+  .marquee-track {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 }
 

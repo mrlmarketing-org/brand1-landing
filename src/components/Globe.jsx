@@ -193,18 +193,18 @@ export default function Globe({ className }) {
     >
       <defs>
         <radialGradient id="globeGradient" cx="35%" cy="30%" r="75%">
-          <stop offset="0%" stopColor="rgba(117,205,37,0.22)" />
-          <stop offset="55%" stopColor="rgba(13,30,40,0.9)" />
-          <stop offset="100%" stopColor="rgba(4,20,28,1)" />
+          <stop offset="0%" stopColor="rgba(37,99,235,0.16)" />
+          <stop offset="55%" stopColor="rgba(9,19,33,0.92)" />
+          <stop offset="100%" stopColor="rgba(4,10,19,1)" />
         </radialGradient>
       </defs>
-      {/* Solid opaque base — the gradient above it starts at only 22%
+      {/* Solid opaque base — the gradient above it starts at only 16%
           opacity near its highlight, which on its own let the hero's
           background pattern show through the sphere. This backs it
           with a guaranteed-opaque fill so the gradient is purely a
           translucent highlight layered on top, not the only thing
           standing between the globe and whatever's behind it. */}
-      <path d={outlinePath} fill="rgb(4,20,28)" />
+      <path d={outlinePath} fill="rgb(4,10,19)" />
       <path d={outlinePath} fill="url(#globeGradient)" />
       <path d={landPath} className="map-land" />
       <path d={outlinePath} className="globe-outline" />

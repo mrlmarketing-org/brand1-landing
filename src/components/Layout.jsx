@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 import ChatWidget from "./ChatWidget.jsx";
+import { EmployerGateProvider } from "./EmployerGate.jsx";
 import { pushEvent } from "../lib/analytics.js";
 import { captureGclid } from "../lib/gclid.js";
 import { initSmoothScroll, scrollToTarget } from "../lib/smoothScroll.js";
@@ -61,8 +62,7 @@ function useCalendlyConversion() {
 // the new page.
 //
 // Google Fonts load with display=swap (index.html), so headings above
-// the target can still reflow — and the hero's animated flow-card
-// resizes on its own timer — after this fires. A single scrollIntoView
+// the target can still reflow after this fires. A single scrollIntoView
 // call can end up targeting a position that then shifts out from under
 // it. Rather than guess a timeout long enough to cover every case, this
 // watches the page for layout shifts with a ResizeObserver and
@@ -109,7 +109,7 @@ export default function Layout() {
   useCalendlyConversion();
 
   return (
-    <>
+    <EmployerGateProvider>
       <Navbar />
       {/* Pages are lazy-loaded (see App.jsx) so a visitor only downloads
           the page they're actually on — Navbar/Footer stay outside this
@@ -120,6 +120,6 @@ export default function Layout() {
       </Suspense>
       <Footer />
       <ChatWidget />
-    </>
+    </EmployerGateProvider>
   );
 }

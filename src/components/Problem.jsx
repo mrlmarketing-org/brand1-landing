@@ -1,5 +1,4 @@
 import Reveal from "./motion/Reveal.jsx";
-import Logo from "./Logo.jsx";
 import bookkeepingPhoto from "../assets/photos/bookkeeping-desk.jpg";
 import customerServicePhoto from "../assets/photos/customer-service-agent.jpg";
 import developerPhoto from "../assets/photos/developer-code-screen.jpg";
@@ -109,7 +108,6 @@ export default function Problem() {
 
         <Reveal delay={0.15}>
           <div className="problem-after">
-            <Logo size={56} showWord={false} />
             <div className="problem-after-copy">
               <p className="problem-after-lead">
                 We give you direct access to vetted professionals across Southeast Asia, South

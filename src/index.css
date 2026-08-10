@@ -1922,62 +1922,6 @@ h2.section-title {
 }
 
 /* ============================================================
-   EMPLOYER GATE — a compact confirm popup in front of the two actions
-   meant only for employers (Book a call, Send role details). See
-   EmployerGate.jsx. Deliberately small and dialog-like (a real modal
-   the visitor has to act on) rather than a toast that just appears and
-   can be ignored.
-   ============================================================ */
-.gate-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 300;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: rgba(8, 25, 44, 0.6);
-  backdrop-filter: blur(3px);
-}
-.gate-modal {
-  width: 100%;
-  max-width: 280px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 20px 18px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
-  text-align: center;
-  animation: gate-modal-in 0.16s ease-out;
-}
-@keyframes gate-modal-in {
-  from {
-    opacity: 0;
-    transform: scale(0.94);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-.gate-modal p {
-  margin: 0 0 16px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--ink);
-}
-.gate-actions {
-  display: flex;
-  gap: 8px;
-}
-.gate-actions .btn {
-  flex: 1;
-  justify-content: center;
-  padding: 10px 14px;
-  font-size: 14px;
-}
-
-/* ============================================================
    CHAT WIDGET — fixed bottom-right, present on every page (mounted
    once in Layout.jsx). Dark surface regardless of the underlying
    section's theme (dark or on-light) so it reads consistently no

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { BOOKING_URL } from "../data/content.js";
 import { openCalendlyPopup } from "../lib/calendly.js";
-import { useEmployerGate } from "./EmployerGate.jsx";
 import { ArrowRight } from "./icons.jsx";
 
 // Every "Book a call" button on the page uses this component, so
@@ -11,15 +10,10 @@ import { ArrowRight } from "./icons.jsx";
 // to the role-details form on the Start Hiring page.
 export default function BookButton({ label = "Book a call", large = false }) {
   const className = large ? "btn btn-primary btn-lg" : "btn btn-primary";
-  const confirmEmployer = useEmployerGate();
 
   if (BOOKING_URL) {
     return (
-      <button
-        type="button"
-        onClick={() => confirmEmployer(openCalendlyPopup)}
-        className={className}
-      >
+      <button type="button" onClick={openCalendlyPopup} className={className}>
         {label} <ArrowRight />
       </button>
     );

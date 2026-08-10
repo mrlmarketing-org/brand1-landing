@@ -2,7 +2,6 @@ import { useState } from "react";
 import { roles } from "../data/content.js";
 import { pushEvent } from "../lib/analytics.js";
 import { getRecaptchaToken } from "../lib/recaptcha.js";
-import { useEmployerGate } from "./EmployerGate.jsx";
 
 const emptyForm = { name: "", email: "", role: "", roleOther: "", details: "" };
 
@@ -24,23 +23,11 @@ export default function ContactForm({
 }) {
   const [form, setForm] = useState(emptyForm);
   const [status, setStatus] = useState("idle");
-  const confirmEmployer = useEmployerGate();
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  // The "role" variant is the only one meant for employers (see
-  // StartHiring.jsx's "Or send us the role details") — "candidate" and
-  // "subject" are open to anyone, so they skip the confirm step.
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (variant === "role") {
-      confirmEmployer(submit);
-    } else {
-      submit();
-    }
-  };
-
-  const submit = async () => {
     setStatus("sending");
 
     try {

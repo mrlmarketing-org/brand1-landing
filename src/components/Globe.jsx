@@ -193,7 +193,7 @@ export default function Globe({ className }) {
     >
       <defs>
         <radialGradient id="globeGradient" cx="35%" cy="30%" r="75%">
-          <stop offset="0%" stopColor="rgba(37,99,235,0.16)" />
+          <stop offset="0%" stopColor="rgba(29,78,216,0.16)" />
           <stop offset="55%" stopColor="rgba(9,19,33,0.92)" />
           <stop offset="100%" stopColor="rgba(4,10,19,1)" />
         </radialGradient>

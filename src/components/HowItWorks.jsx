@@ -8,7 +8,7 @@ import Reveal from "./motion/Reveal.jsx";
 // Recruitify all show every step statically instead.
 export default function HowItWorks() {
   return (
-    <section className="section section-alt" id="how">
+    <section className="section" id="how">
       <div className="container">
         <div className="section-head">
           <span className="eyebrow">How it works</span>

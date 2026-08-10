@@ -9,9 +9,9 @@
   --navy: #08192c;
   --body: #b7c2d6;
   --muted: #7c8aa3;
-  --accent: #2563eb;
-  --accent-dark: #1d4ed8;
-  --accent-soft: rgba(37, 99, 235, 0.14);
+  --accent: #1d4ed8;
+  --accent-dark: #1739a8;
+  --accent-soft: rgba(29, 78, 216, 0.14);
   --accent-glow: #60a5fa;
   --highlight: #eaf2ff;
   --border: rgba(255, 255, 255, 0.12);
@@ -339,8 +339,8 @@ h2.section-title {
   height: 620px;
   background: radial-gradient(
     closest-side,
-    rgba(37, 99, 235, 0.26),
-    rgba(37, 99, 235, 0.06) 60%,
+    rgba(29, 78, 216, 0.26),
+    rgba(29, 78, 216, 0.06) 60%,
     transparent 78%
   );
   filter: blur(6px);
@@ -381,7 +381,7 @@ h2.section-title {
 .hero-pattern {
   position: absolute;
   inset: -60%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='8' y='8' width='84' height='84' rx='16' ry='16' fill='none' stroke='rgba(37,99,235,0.12)' stroke-width='1.4'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='8' y='8' width='84' height='84' rx='16' ry='16' fill='none' stroke='rgba(29,78,216,0.12)' stroke-width='1.4'/%3E%3C/svg%3E");
   background-size: 170px 170px;
   transform: rotate(45deg);
 }
@@ -518,7 +518,7 @@ h2.section-title {
   width: 100%;
   max-width: 820px;
   height: auto;
-  filter: drop-shadow(0 0 44px rgba(37, 99, 235, 0.14));
+  filter: drop-shadow(0 0 44px rgba(29, 78, 216, 0.14));
 }
 /* ============================================================
    TRUST STRIP — between Hero and Problem. Static row, not a scrolling
@@ -527,7 +527,6 @@ h2.section-title {
 .marquee {
   overflow: hidden;
   background: var(--navy);
-  border-bottom: 1px solid var(--border);
   padding: 22px 0;
 }
 .marquee-track {
@@ -955,11 +954,12 @@ h2.section-title {
   max-width: 1080px;
   margin: 0 auto;
 }
-/* This section is a section-alt band (background: var(--surface)) — cards
-   use --bg instead so they read as inset panels against it rather than
-   blending into the same surface tone. */
+/* This section now shares Pricing's plain --bg background (no more
+   section-alt band/border between them) — cards use --ink-deep instead
+   of --bg so they still read as inset panels rather than blending into
+   the section behind them. */
 .step-card {
-  background: var(--bg);
+  background: var(--ink-deep);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 24px 22px;
@@ -1099,7 +1099,7 @@ h2.section-title {
   width: 68px;
   height: 68px;
   border-radius: 50%;
-  background: rgba(37, 99, 235, 0.16);
+  background: rgba(29, 78, 216, 0.16);
   color: var(--accent);
   display: flex;
   align-items: center;
@@ -1111,7 +1111,7 @@ h2.section-title {
   position: absolute;
   inset: -10px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.35), transparent 70%);
+  background: radial-gradient(circle, rgba(29, 78, 216, 0.35), transparent 70%);
   opacity: 0;
   transition: opacity 0.25s ease;
 }
@@ -1505,8 +1505,8 @@ h2.section-title {
   height: 420px;
   background: radial-gradient(
     closest-side,
-    rgba(37, 99, 235, 0.24),
-    rgba(37, 99, 235, 0.05) 60%,
+    rgba(29, 78, 216, 0.24),
+    rgba(29, 78, 216, 0.05) 60%,
     transparent 78%
   );
   pointer-events: none;
@@ -1590,13 +1590,13 @@ h2.section-title {
 }
 @keyframes role-form-glow {
   0% {
-    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+    box-shadow: 0 0 0 0 rgba(29, 78, 216, 0);
   }
   15% {
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.55);
+    box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.55);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+    box-shadow: 0 0 0 0 rgba(29, 78, 216, 0);
   }
 }
 .form-page {
@@ -1907,15 +1907,17 @@ h2.section-title {
   }
   /* Wrapping variable-width pills (justify-content:center) staggers
      each row's edges against the next since every row centers on its
-     own content width independently — stacking one pill per row keeps
-     every edge aligned instead. */
+     own content width independently — stacking one pill per row and
+     left-aligning the stack keeps every edge aligned instead. */
   .marquee {
     padding: 18px 0;
   }
   .marquee-track {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
+    width: fit-content;
+    margin: 0 auto;
   }
 }
 

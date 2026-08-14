@@ -13,6 +13,7 @@ const Blog = lazy(() => import("./pages/Blog.jsx"));
 const BlogPost = lazy(() => import("./pages/BlogPost.jsx"));
 const FindAJob = lazy(() => import("./pages/FindAJob.jsx"));
 const StartHiring = lazy(() => import("./pages/StartHiring.jsx"));
+const Pricing = lazy(() => import("./pages/Pricing.jsx"));
 const Terms = lazy(() => import("./pages/Terms.jsx"));
 const Privacy = lazy(() => import("./pages/Privacy.jsx"));
 const NotFound = lazy(() => import("./pages/NotFound.jsx"));
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/find-a-job" element={<FindAJob />} />
         <Route path="/start-hiring" element={<StartHiring />} />
+        <Route path="/pricing" element={<Pricing />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="*" element={<NotFound />} />

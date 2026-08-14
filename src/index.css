@@ -527,66 +527,51 @@ h2.section-title {
   filter: drop-shadow(0 0 44px rgba(29, 78, 216, 0.14));
 }
 /* ============================================================
-   TRUST STRIP — between Hero and Problem. Static row, not a scrolling
-   marquee (see TrustMarquee.jsx).
+   TRUST STRIP — client logo row, right under the hero on both the
+   homepage and the pricing page (see TrustMarquee.jsx). Static, not
+   an auto-scrolling marquee — the class name predates the logos.
    ============================================================ */
 .marquee {
   overflow: hidden;
   background: var(--navy);
-  padding: 22px 0;
+  padding: 30px 0;
+  text-align: center;
 }
-.marquee-track {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 14px;
-  padding: 0 7px;
-}
-.marquee-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 18px 8px 8px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
+.marquee-label {
+  display: block;
   font-family: var(--font-ui);
   font-weight: 600;
-  font-size: 14px;
-  color: var(--body);
-  white-space: nowrap;
-  flex-shrink: 0;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 18px;
 }
-.marquee-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--accent-soft);
-  color: var(--accent);
-  flex-shrink: 0;
-}
-/* ============================================================
-   PARTNERS — client logo row (businesses we've helped staff)
-   ============================================================ */
-.partners-row {
+.trust-logos {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 48px;
+  gap: 32px;
 }
-.partner-logo {
+/* A soft card behind each logo, not just a bare image — some of these
+   (e.g. a black wordmark with a transparent background) are otherwise
+   unreadable against the dark strip. Keeps every logo on equal footing
+   regardless of what background it was originally exported with. Uses
+   the --highlight token (a soft blue-white) rather than solid white,
+   so it doesn't read as a stark cutout against the navy. */
+.trust-logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 56px;
+  height: 72px;
+  padding: 0 34px;
+  background: var(--highlight);
+  border-radius: 12px;
 }
-.partner-logo img {
-  max-width: 260px;
-  max-height: 100%;
+.trust-logo img {
+  max-width: 220px;
+  max-height: 42px;
   width: auto;
   height: auto;
   object-fit: contain;
@@ -1066,48 +1051,79 @@ h2.section-title {
 }
 
 /* ============================================================
-   PRICING (section 6)
+   PRICING PAGE (src/pages/Pricing.jsx)
    ============================================================ */
-.price-table {
-  max-width: 640px;
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.pricing-media {
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.pricing-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.rate-card {
+  max-width: 560px;
   margin: 0 auto;
+  padding: 44px 40px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 18px;
-  overflow: hidden;
+  text-align: center;
 }
-.price-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 28px;
-  border-bottom: 1px solid var(--border-soft);
+.rate-figure {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(44px, 6vw, 64px);
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
-.price-row:last-child {
-  border-bottom: none;
-}
-.price-row .role-name {
+.rate-label {
+  display: block;
   font-family: var(--font-ui);
   font-weight: 600;
-  font-size: 16px;
-  color: var(--ink);
-}
-.price-row .fee {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 22px;
-  color: var(--ink);
-}
-.price-note {
-  text-align: center;
   color: var(--muted);
-  font-size: 14px;
-  margin: 18px auto 0;
-  max-width: 640px;
+  margin-top: 4px;
 }
-.pricing-cta {
-  text-align: center;
-  margin-top: 32px;
+.rate-note {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 420px;
+  margin: 20px auto 24px;
+}
+.rate-points {
+  list-style: none;
+  max-width: 560px;
+  margin: 36px auto 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.rate-points li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: var(--body);
+}
+.rate-point-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 /* ============================================================
@@ -1821,18 +1837,20 @@ h2.section-title {
   .compare-strip,
   .contact-grid,
   .blog-grid,
-  .solution-grid {
+  .solution-grid,
+  .pricing-grid {
     grid-template-columns: 1fr;
   }
   .hiring-cta {
     position: static;
     top: auto;
   }
-  .problem-before {
-    grid-template-columns: 1fr;
+  .problem-before,
+  .pricing-grid {
     gap: 28px;
   }
-  .problem-before-media {
+  .problem-before-media,
+  .pricing-media {
     aspect-ratio: 16 / 10;
     max-width: 420px;
     margin: 0 auto;

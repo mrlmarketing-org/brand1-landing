@@ -6,9 +6,7 @@ import Solution from "../components/Solution.jsx";
 import Roles from "../components/Roles.jsx";
 import TalentNetwork from "../components/TalentNetwork.jsx";
 import WhoWeServe from "../components/WhoWeServe.jsx";
-import Partners from "../components/Partners.jsx";
 import HowItWorks from "../components/HowItWorks.jsx";
-import Pricing from "../components/Pricing.jsx";
 import Guarantee from "../components/Guarantee.jsx";
 import WhyUs from "../components/WhyUs.jsx";
 import FAQ from "../components/FAQ.jsx";
@@ -35,9 +33,10 @@ export default function Home() {
       <Roles /> {/* Section 4 */}
       <TalentNetwork />
       <WhoWeServe />
-      <Partners />
       <HowItWorks /> {/* Section 5 */}
-      <Pricing /> {/* Section 6 */}
+      {/* Pricing moved to its own page — see src/pages/Pricing.jsx —
+          since the direct-hire rate model needs more room to explain
+          than a homepage section allows. Linked from Navbar/Footer. */}
       <Guarantee /> {/* Section 7 */}
       <WhyUs /> {/* Section 8 */}
       <FAQ /> {/* Section 9 */}

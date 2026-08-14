@@ -8,7 +8,7 @@ import { CONTACT_PHONE, CONTACT_PHONE_HREF } from "../data/content.js";
 const navLinks = [
   { to: "/#how", label: "How it works" },
   { to: "/#roles", label: "Roles" },
-  { to: "/#pricing", label: "Pricing" },
+  { to: "/pricing", label: "Pricing" },
   { to: "/blog", label: "Blog" },
 ];
 

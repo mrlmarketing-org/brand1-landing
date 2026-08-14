@@ -33,7 +33,7 @@ export default function Footer() {
           <Link to="/#how-we-help">How we help</Link>
           <Link to="/#roles">Roles</Link>
           <Link to="/#how">How it works</Link>
-          <Link to="/#pricing">Pricing</Link>
+          <Link to="/pricing">Pricing</Link>
           <Link to="/#why-us">Why us</Link>
           <Link to="/blog">Blog</Link>
         </div>

@@ -14,11 +14,11 @@ export default function Logo({ size = 30, showWord = true }) {
         viewBox="0 0 32 32"
         fill="none"
       >
-        <rect width="32" height="32" rx="9" fill="#071b24" />
+        <rect width="32" height="32" rx="9" fill="#08192c" />
 
         {/* Access card outline */}
         <rect x="5" y="9" width="17" height="16" rx="2.6" stroke="#eef2f0" strokeWidth="1.5" />
-        <rect x="11.5" y="6.6" width="7" height="3" rx="1.2" fill="#071b24" stroke="#eef2f0" strokeWidth="1.4" />
+        <rect x="11.5" y="6.6" width="7" height="3" rx="1.2" fill="#08192c" stroke="#eef2f0" strokeWidth="1.4" />
         <circle cx="10" cy="14.6" r="2" stroke="#eef2f0" strokeWidth="1.3" />
         <path
           d="M7.4 19.4c0-1.9 1.5-2.8 2.6-2.8s2.6 0.9 2.6 2.8"
@@ -32,14 +32,14 @@ export default function Logo({ size = 30, showWord = true }) {
         {/* Upward analytics line, layered in front of the card */}
         <polyline
           points="4.5,25.5 10,19.5 14,22.5 19,14.5 24.5,8"
-          stroke="#d3ed05"
+          stroke="#1d4ed8"
           strokeWidth="2.6"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
         <path
           d="M20.6 8h3.9v3.9"
-          stroke="#d3ed05"
+          stroke="#1d4ed8"
           strokeWidth="2.6"
           strokeLinecap="round"
           strokeLinejoin="round"

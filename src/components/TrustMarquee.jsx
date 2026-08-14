@@ -1,4 +1,4 @@
-import { DollarIcon, CalendarOffIcon, ShieldIcon, ListCheckIcon, GlobeIcon, HeartIcon } from "./icons.jsx";
+import { DollarIcon, CalendarOffIcon, ListCheckIcon, HeartIcon } from "./icons.jsx";
 
 // A logo marquee needs real client logos, which a new business doesn't
 // have yet — so this shows the value props instead (flat fee, no
@@ -11,9 +11,7 @@ import { DollarIcon, CalendarOffIcon, ShieldIcon, ListCheckIcon, GlobeIcon, Hear
 const points = [
   { text: "Flat one-time fee", Icon: DollarIcon, color: "#f5b942" },
   { text: "No monthly markup", Icon: CalendarOffIcon, color: "#ff6b5e" },
-  { text: "2-week money-back guarantee", Icon: ShieldIcon, color: "#2f9bff" },
   { text: "Skills-tested talent", Icon: ListCheckIcon, color: "#b18bff" },
-  { text: "A vetted network across 11 countries", Icon: GlobeIcon, color: "#33d1c9" },
   { text: "You own the relationship", Icon: HeartIcon, color: "#ff6fa5" },
 ];
 

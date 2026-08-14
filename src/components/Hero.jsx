@@ -1,6 +1,5 @@
 import StartHiringButton from "./StartHiringButton.jsx";
 import { ArrowDown } from "./icons.jsx";
-import HiringFlowAnimation from "./HiringFlowAnimation.jsx";
 import Globe from "./Globe.jsx";
 import Reveal from "./motion/Reveal.jsx";
 import { scrollToTarget } from "../lib/smoothScroll.js";
@@ -52,14 +51,6 @@ export default function Hero() {
         <Reveal delay={0.1} className="hero-globe-wrap">
           <Globe className="hero-globe" />
         </Reveal>
-      </div>
-
-      <div className="container hero-flow">
-        {/* Not Reveal-wrapped: its card resizes every couple of seconds as
-            its internal demo cycles through stages, which fought with
-            whileInView's viewport re-checks and made it look like it was
-            constantly popping/resizing. */}
-        <HiringFlowAnimation />
       </div>
     </header>
   );

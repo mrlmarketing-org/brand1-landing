@@ -113,8 +113,11 @@ export default function Layout() {
       {/* Pages are lazy-loaded (see App.jsx) so a visitor only downloads
           the page they're actually on — Navbar/Footer stay outside this
           boundary so they render immediately rather than blanking out
-          with the page content while its chunk loads. */}
-      <Suspense fallback={null}>
+          with the page content while its chunk loads. The fallback
+          reserves a full viewport of empty space (rather than null) so
+          Footer can't ride up under Navbar while that chunk is still
+          downloading. */}
+      <Suspense fallback={<div className="route-loading" />}>
         <Outlet />
       </Suspense>
       <Footer />

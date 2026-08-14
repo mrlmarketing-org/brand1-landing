@@ -212,6 +212,12 @@ h2.section-title {
   justify-content: space-between;
   height: 68px;
 }
+/* Suspense fallback while a route's lazy chunk downloads (see
+   Layout.jsx) — holds a full viewport of space so Footer doesn't
+   briefly ride up under Navbar before the real content mounts. */
+.route-loading {
+  min-height: calc(100vh - 68px);
+}
 .brand {
   display: flex;
   align-items: center;
@@ -561,6 +567,29 @@ h2.section-title {
   background: var(--accent-soft);
   color: var(--accent);
   flex-shrink: 0;
+}
+/* ============================================================
+   PARTNERS — client logo row (businesses we've helped staff)
+   ============================================================ */
+.partners-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+}
+.partner-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+}
+.partner-logo img {
+  max-width: 260px;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 /* ============================================================
    PROBLEM (section 2)

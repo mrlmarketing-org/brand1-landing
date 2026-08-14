@@ -6,6 +6,7 @@ import Solution from "../components/Solution.jsx";
 import Roles from "../components/Roles.jsx";
 import TalentNetwork from "../components/TalentNetwork.jsx";
 import WhoWeServe from "../components/WhoWeServe.jsx";
+import Partners from "../components/Partners.jsx";
 import HowItWorks from "../components/HowItWorks.jsx";
 import Pricing from "../components/Pricing.jsx";
 import Guarantee from "../components/Guarantee.jsx";
@@ -34,6 +35,7 @@ export default function Home() {
       <Roles /> {/* Section 4 */}
       <TalentNetwork />
       <WhoWeServe />
+      <Partners />
       <HowItWorks /> {/* Section 5 */}
       <Pricing /> {/* Section 6 */}
       <Guarantee /> {/* Section 7 */}

@@ -11,9 +11,12 @@ const partners = [
 ];
 
 // Sits right under the hero on both the homepage and the pricing page.
-export default function TrustMarquee() {
+// `compact` sizes the logos down a step — used on Pricing, where the
+// page-hero above is much shorter than the homepage's, so the strip's
+// full-size logos read as oversized relative to it.
+export default function TrustMarquee({ compact = false }) {
   return (
-    <div className="marquee">
+    <div className={`marquee${compact ? " marquee-compact" : ""}`}>
       <div className="container">
         <span className="marquee-label">Businesses that trust us</span>
         <div className="trust-logos">

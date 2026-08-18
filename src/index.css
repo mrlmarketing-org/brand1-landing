@@ -513,6 +513,20 @@ h2.section-title {
   max-width: 330px;
   max-height: 76px;
 }
+/* Pricing's page-hero is much shorter than the homepage's, so the same
+   full-size logos read as oversized directly under it — see the
+   `compact` prop on TrustMarquee.jsx. */
+.marquee-compact .trust-logo {
+  height: 56px;
+}
+.marquee-compact .trust-logo img {
+  max-width: 200px;
+  max-height: 40px;
+}
+.marquee-compact .trust-logo-lg img {
+  max-width: 240px;
+  max-height: 52px;
+}
 /* ============================================================
    PROBLEM (section 2)
    ============================================================ */
@@ -1033,14 +1047,19 @@ h2.section-title {
   max-width: 420px;
   margin: 20px auto 24px;
 }
+/* A 2x2 grid rather than a single narrow column — the card above it
+   fills the full 560px width, but a one-column list of four short
+   items only used a fraction of that, leaving the list looking like
+   it was floating in leftover space rather than composed with the
+   card above it. */
 .rate-points {
   list-style: none;
   max-width: 560px;
   margin: 36px auto 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 28px;
 }
 .rate-points li {
   display: flex;
@@ -1741,7 +1760,8 @@ h2.section-title {
   .blog-grid,
   .solution-grid,
   .pricing-grid,
-  .problem-before {
+  .problem-before,
+  .rate-points {
     grid-template-columns: 1fr;
   }
   .hiring-cta {
@@ -1764,6 +1784,9 @@ h2.section-title {
     text-align: center;
   }
   .problem-stat-row {
+    justify-content: center;
+  }
+  .rate-points li {
     justify-content: center;
   }
   .problem-after {

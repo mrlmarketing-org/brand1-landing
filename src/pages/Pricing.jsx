@@ -45,7 +45,7 @@ export default function Pricing() {
         </div>
       </header>
 
-      <TrustMarquee />
+      <TrustMarquee compact />
 
       <section className="section" id="rate">
         <div className="container pricing-grid">

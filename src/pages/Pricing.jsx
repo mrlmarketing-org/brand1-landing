@@ -47,7 +47,7 @@ export default function Pricing() {
 
       <TrustMarquee />
 
-      <section className="section on-light" id="rate">
+      <section className="section" id="rate">
         <div className="container pricing-grid">
           <Reveal>
             <div>

@@ -34,7 +34,7 @@ export const howWeHelp = [
 // SECTION 3 — The solution
 export default function Solution() {
   return (
-    <section className="section on-light" id="how-we-help">
+    <section className="section" id="how-we-help">
       <div className="container">
         <div className="section-head">
           <span className="eyebrow">How we help</span>

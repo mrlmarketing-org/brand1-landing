@@ -7,7 +7,7 @@ import famousParkingLogo from "../assets/logos/famousparking-logo.svg";
 // Add more entries here as new placements come in.
 const partners = [
   { name: "YourSpotRented.com", logo: yourSpotRentedLogo, alt: "YourSpotRented.com logo" },
-  { name: "Famous Parking", logo: famousParkingLogo, alt: "Famous Parking logo" },
+  { name: "Famous Parking", logo: famousParkingLogo, alt: "Famous Parking logo", className: "trust-logo-lg" },
 ];
 
 // Sits right under the hero on both the homepage and the pricing page.
@@ -19,7 +19,7 @@ export default function TrustMarquee() {
         <div className="trust-logos">
           {partners.map((p) => (
             <div className="trust-logo" key={p.name}>
-              <img src={p.logo} alt={p.alt} loading="lazy" />
+              <img src={p.logo} alt={p.alt} loading="lazy" className={p.className} />
             </div>
           ))}
         </div>

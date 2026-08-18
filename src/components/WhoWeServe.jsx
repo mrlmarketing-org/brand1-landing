@@ -31,7 +31,7 @@ const audiences = [
 // SECTION — Who we serve
 export default function WhoWeServe() {
   return (
-    <section className="section on-light section-alt" id="who-we-serve">
+    <section className="section section-alt" id="who-we-serve">
       <div className="container">
         <div className="section-head">
           <span className="eyebrow">Who we serve</span>

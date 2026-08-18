@@ -192,19 +192,22 @@ export default function Globe({ className }) {
       aria-label="Globe highlighting the Philippines, Vietnam, Indonesia, Sri Lanka, India, Pakistan, Nigeria, Brazil, Colombia, Nicaragua, and Argentina"
     >
       <defs>
+        {/* Light-themed sphere, inverted from the first pass — the ocean
+            (this gradient) is now the grey tone, land (.map-land below)
+            is white, rather than the other way around. Dark text sitting
+            over the globe (see .hero-copy) still reads the same way it
+            does over the rest of the hero — no shadow/halo trick needed
+            on the text either way. */}
         <radialGradient id="globeGradient" cx="35%" cy="30%" r="75%">
-          <stop offset="0%" stopColor="rgba(29,78,216,0.16)" />
-          <stop offset="55%" stopColor="rgba(9,19,33,0.92)" />
-          <stop offset="100%" stopColor="rgba(4,10,19,1)" />
+          <stop offset="0%" stopColor="#eceff4" />
+          <stop offset="55%" stopColor="#d8dde6" />
+          <stop offset="100%" stopColor="#c2cad6" />
         </radialGradient>
       </defs>
-      {/* Solid opaque base — the gradient above it starts at only 16%
-          opacity near its highlight, which on its own let the hero's
-          background pattern show through the sphere. This backs it
-          with a guaranteed-opaque fill so the gradient is purely a
-          translucent highlight layered on top, not the only thing
-          standing between the globe and whatever's behind it. */}
-      <path d={outlinePath} fill="rgb(4,10,19)" />
+      {/* Solid base matching the gradient's own mid tone, as a fallback
+          backing so the sphere is guaranteed opaque regardless of the
+          gradient rendering. */}
+      <path d={outlinePath} fill="#d8dde6" />
       <path d={outlinePath} fill="url(#globeGradient)" />
       <path d={landPath} className="map-land" />
       <path d={outlinePath} className="globe-outline" />

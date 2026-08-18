@@ -8,9 +8,6 @@ import { scrollToTarget } from "../lib/smoothScroll.js";
 export default function Hero() {
   return (
     <header className="hero" id="top">
-      <div className="hero-pattern-mask" aria-hidden="true">
-        <div className="hero-pattern" />
-      </div>
       <div className="container hero-grid">
         <div className="hero-copy">
           <Reveal>

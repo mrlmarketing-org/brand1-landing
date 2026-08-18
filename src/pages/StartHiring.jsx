@@ -43,7 +43,7 @@ export default function StartHiring() {
         </div>
       </header>
 
-      <section className="section on-light" id="book">
+      <section className="section" id="book">
         <div className="container contact-grid">
           <Reveal className="hiring-cta">
             <h3>Prefer to talk it through?</h3>

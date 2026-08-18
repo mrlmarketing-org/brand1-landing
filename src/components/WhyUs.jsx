@@ -10,7 +10,7 @@ const usPoints = ["One flat fee, paid once", "Direct hire, no markup", "You own 
 // SECTION 8 — Why us (three pillars)
 export default function WhyUs() {
   return (
-    <section className="section section-alt on-light" id="why-us">
+    <section className="section section-alt" id="why-us">
       <div className="container">
         <div className="section-head">
           <span className="eyebrow">Why Us</span>

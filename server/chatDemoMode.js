@@ -1,4 +1,4 @@
-import { BOOKING_URL, roles, steps, pricing, locations, faqs } from "../src/data/content.js";
+import { BOOKING_URL, roles, steps, PRICING_RATE_LOW, PRICING_RATE_HIGH, locations, faqs } from "../src/data/content.js";
 
 // Keyword-matched stand-in for the real Claude-backed /api/chat, used
 // when ANTHROPIC_API_KEY isn't set (see server/app.js). Exists so the
@@ -81,9 +81,8 @@ export function getDemoReply(messages) {
   // Topic buckets checked before the generic FAQ match — these cover the
   // questions most likely to come up in a live walkthrough.
   if (["price", "pricing", "cost", "fee", "fees", "much", "charge"].some((w) => text.includes(w))) {
-    const rows = pricing.map((p) => `${p.role}: ${p.fee}`).join(", ");
     return {
-      reply: `We charge one flat, one-time placement fee — no monthly markup, ever: ${rows}. You pay your hire's wage directly.${buildBookingNudge()}`,
+      reply: `We charge one flat, one-time placement fee — no monthly markup, ever: ${PRICING_RATE_LOW}–${PRICING_RATE_HIGH}% of your hire's first-year salary, paid once. You pay your hire's wage directly; exact rate depends on role and seniority.${buildBookingNudge()}`,
       escalate: false,
     };
   }

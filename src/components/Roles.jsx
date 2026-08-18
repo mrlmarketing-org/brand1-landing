@@ -24,7 +24,7 @@ export default function Roles() {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <section className="section on-light" id="roles">
+    <section className="section" id="roles">
       <div className="container">
         <div className="section-head">
           <span className="eyebrow">Roles we staff</span>

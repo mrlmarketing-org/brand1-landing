@@ -24,7 +24,7 @@ export default function FindAJob() {
         </div>
       </header>
 
-      <section className="section on-light">
+      <section className="section">
         <div className="container form-page">
           <Reveal x={0} y={16}>
             <ContactForm

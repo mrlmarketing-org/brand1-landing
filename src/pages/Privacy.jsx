@@ -25,7 +25,7 @@ export default function Privacy() {
         </div>
       </header>
 
-      <section className="section on-light">
+      <section className="section">
         <div className="container">
           <div className="legal-body">
             <Reveal>

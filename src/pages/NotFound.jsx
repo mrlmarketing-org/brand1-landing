@@ -3,7 +3,7 @@ import SEO from "../components/SEO.jsx";
 
 export default function NotFound() {
   return (
-    <section className="section not-found on-light">
+    <section className="section not-found">
       <SEO title="Page not found" path="/404" description="This page doesn't exist." />
       <div className="container">
         <div className="section-head">

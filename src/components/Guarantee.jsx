@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ShieldIcon } from "./icons.jsx";
 import Reveal from "./motion/Reveal.jsx";
 
-// SECTION 7 — The guarantee (standalone dark trust block)
+// SECTION 7 — The guarantee (standalone trust block)
 export default function Guarantee() {
   return (
     <section className="guarantee" id="guarantee">

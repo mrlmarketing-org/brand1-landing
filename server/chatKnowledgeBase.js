@@ -5,7 +5,8 @@ import {
   CONTACT_PHONE,
   roles,
   steps,
-  pricing,
+  PRICING_RATE_LOW,
+  PRICING_RATE_HIGH,
   locations,
   pillars,
   faqs,
@@ -59,8 +60,8 @@ You act like a member of the sales team, not a passive help desk. Answer questio
 # Roles ${BRAND} places
 ${roles.map((r) => `- ${r.title}: ${r.desc} Best for: ${r.bestFor}`).join("\n")}
 
-# Pricing (flat, one-time placement fee — client pays the professional's wage directly, no markup)
-${pricing.map((p) => `- ${p.role}: ${p.fee}`).join("\n")}
+# Pricing (one-time placement fee, no markup — client pays the professional's wage directly)
+${PRICING_RATE_LOW}–${PRICING_RATE_HIGH}% of the hire's first-year salary, paid once. Exact rate depends on role and seniority, confirmed on a call.
 
 # How it works
 ${steps.map((s, i) => `${i + 1}. ${s.title} — ${s.body}`).join("\n")}

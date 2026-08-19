@@ -6,7 +6,7 @@ import Logo from "./Logo.jsx";
 import { getRecaptchaToken } from "../lib/recaptcha.js";
 import { openCalendlyPopup } from "../lib/calendly.js";
 import { howWeHelp } from "./Solution.jsx";
-import { BRAND, pricing, locations } from "../data/content.js";
+import { BRAND, PRICING_RATE_LOW, PRICING_RATE_HIGH, locations } from "../data/content.js";
 
 const STORAGE_KEY = "chat_state";
 // After choosing to go to the form, the widget navigates immediately
@@ -184,9 +184,8 @@ export default function ChatWidget() {
     }
 
     if (option.value === "pricing") {
-      const rows = pricing.map((p) => `• ${p.role} — ${p.fee}`).join("\n");
       const reply = [
-        `One flat, one-time placement fee — no monthly markup, ever. You pay your hire's wage directly:\n${rows}`,
+        `A one-time placement fee — typically ${PRICING_RATE_LOW}–${PRICING_RATE_HIGH}% of your hire's first-year salary, depending on the role. No monthly markup, ever. You pay your hire's wage directly.`,
         "Plus, if it's not a fit in the first two weeks, you get your money back.",
         BOOK_A_CALL_NUDGE,
       ].join("\n\n");

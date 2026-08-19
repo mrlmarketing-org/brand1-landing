@@ -83,13 +83,12 @@ export const steps = [
 ];
 
 // -- SECTION 6: pricing --------------------------------------
-// [CONFIRM] Final fees before publishing.
-export const pricing = [
-  { role: "General Admin & Support", fee: "$2,250" },
-  { role: "Sales & Outreach", fee: "$2,700" },
-  { role: "Accounting & Bookkeeping", fee: "$3,300" },
-  { role: "Development & Automation", fee: "$4,800" },
-];
+// One-time placement fee, quoted as a percentage of the hire's
+// first-year salary rather than a flat dollar amount — the exact
+// rate within this range depends on the role and seniority, and gets
+// confirmed on a call rather than shown as a single fixed number.
+export const PRICING_RATE_LOW = 10;
+export const PRICING_RATE_HIGH = 15;
 
 // -- Countries our talent network spans (see WhyUs pillar 2, the FAQ,
 // the hero globe, and the "Places we source our talent" section) —
@@ -131,7 +130,15 @@ export const faqs = [
   },
   {
     q: "How does payment work?",
-    a: "You pay your professional their wage directly — we take no cut of it and never mark it up. You pay us one flat placement fee for finding and vetting them. That's the entire cost.",
+    a: "You pay your professional their wage directly — we take no cut of it and never mark it up. You pay us a one-time placement fee, typically 10–15% of their first-year salary, for finding and vetting them. That's the entire cost — no subscriptions, no monthly markup.",
+  },
+  {
+    q: "Why isn't there one fixed price?",
+    a: "Your exact rate depends on the role, seniority, and how specialized the search is. Rather than quote a number that doesn't fit your situation, we confirm your actual rate on a quick call — no obligation, and it's free either way.",
+  },
+  {
+    q: "Do I pay anything before I hire someone?",
+    a: "No. You can meet as many candidates as you need — the placement fee is only due once you actually hire someone.",
   },
   {
     q: "Who manages the person day-to-day?",

@@ -34,7 +34,7 @@ const flagByCode = {
 // `locations` in content.js).
 export default function TalentNetwork() {
   return (
-    <section className="section on-light" id="talent-network">
+    <section className="section" id="talent-network">
       <div className="container">
         <div className="section-head">
           <span className="eyebrow">Where we source</span>

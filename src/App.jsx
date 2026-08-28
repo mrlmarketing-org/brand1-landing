@@ -8,6 +8,7 @@ import Layout from "./components/Layout.jsx";
 // land on. Layout itself (Navbar/Footer) stays a normal import since
 // it's needed on every page anyway. See the Suspense boundary in
 // Layout.jsx for the loading-state handling.
+// Just a dummy line
 const Home = lazy(() => import("./pages/Home.jsx"));
 const Blog = lazy(() => import("./pages/Blog.jsx"));
 const BlogPost = lazy(() => import("./pages/BlogPost.jsx"));

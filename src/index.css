@@ -351,41 +351,13 @@ h2.section-title {
   flex-wrap: wrap;
   margin-top: 8px;
 }
-/* Eyebrow "shine" badge — reused across Hero and every page-hero. */
+/* Eyebrow badge — reused across Hero and every page-hero. */
 .eyebrow-shine {
-  position: relative;
-  overflow: hidden;
   background: var(--accent-soft);
   border: 1px solid var(--border);
   border-radius: var(--radius-pill);
   padding: 8px 18px;
   color: var(--ink);
-}
-.eyebrow-shine::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -60%;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(
-    100deg,
-    transparent,
-    rgba(255, 255, 255, 0.55),
-    transparent
-  );
-  animation: eyebrow-shine 3.2s ease-in-out infinite;
-}
-@keyframes eyebrow-shine {
-  0% {
-    left: -60%;
-  }
-  55% {
-    left: 130%;
-  }
-  100% {
-    left: 130%;
-  }
 }
 /* Extra breathing room under the hero's badge specifically, so the
    heading below doesn't feel cramped against it. */
